@@ -1,3 +1,12 @@
+import LobbyForm from "./LobbyForm";
+
 export default function LobbyScreen() {
-  return <section></section>;
+  return (
+    <section
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
+      style={{ backgroundImage: "url('/images/haunted_mansion.png')" }}
+    >
+      <LobbyForm />
+    </section>
+  );
 }
