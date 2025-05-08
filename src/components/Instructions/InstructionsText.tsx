@@ -1,6 +1,6 @@
 export default function InstructionsText() {
   return (
-    <article className="space-y-4 text-sm text-foreground">
+    <article className="space-y-4 text-sm">
       <p>
         <strong>Welcome to The Haunted Escape.</strong>
         <br />
@@ -27,7 +27,7 @@ export default function InstructionsText() {
         you.
       </p>
 
-      <p className="italic text-xs text-muted-foreground">
+      <p className="italic text-xs">
         (You can access instructions anytime by clicking the "Instructions"
         button.)
       </p>
