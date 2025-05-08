@@ -1,3 +1,3 @@
 export default function ComputerPuzzleScreen() {
-  return;
+  return <section></section>;
 }
