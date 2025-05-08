@@ -1,3 +1,27 @@
+import Button from "@/elements/Button";
+import { useState } from "react";
+import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
+import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
+
 export default function BasementRoom() {
-  return <section></section>;
+  const [showComputer, setShowComputer] = useState(false);
+  const [showOddOut, setShowOddOut] = useState(false);
+
+  return (
+    <section
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
+      style={{ backgroundImage: "url('/images/haunted_basement.png')" }}
+    >
+      <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
+      <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
+      <ComputerPuzzleModal
+        isOpen={showComputer}
+        onClose={() => setShowComputer(false)}
+      />
+      <OddOutPuzzleModal
+        isOpen={showOddOut}
+        onClose={() => setShowOddOut(false)}
+      />
+    </section>
+  );
 }
