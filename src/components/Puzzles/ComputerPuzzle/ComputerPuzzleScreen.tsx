@@ -55,7 +55,7 @@ export default function ComputerPuzzleScreen({
               Password:
             </label>
             <input
-              name="password"
+              id="password"
               type="text"
               placeholder="Enter password"
               value={password}
@@ -70,7 +70,7 @@ export default function ComputerPuzzleScreen({
         {error && <p>{error}</p>}
         <button
           type="submit"
-          className="border-1 rounded-sm p-0.5 w-30 bg-white hover:border-blue-500 transition-all duration-150 hover:bg-gray-200"
+          className="border-1 rounded-sm p-0.5 w-30 bg-white cursor-pointer hover:border-[#3f72b7] transition-all duration-150 hover:bg-gray-100"
         >
           OK
         </button>
