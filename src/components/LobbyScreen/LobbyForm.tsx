@@ -3,8 +3,11 @@
 import Button from "@/elements/Button";
 import InputField from "@/elements/InputField";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import InstructionsModal from "../Instructions/InstructionsModal";
 
 export default function LobbyForm() {
+  const [showInstructions, setShowInstructions] = useState(false);
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +28,7 @@ export default function LobbyForm() {
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <p className="text-lg">Ticket Price: 2€</p>
-        <Button className="bg-purple-600 hover:bg-purple-700">
+        <Button type="button" className="bg-purple-600 hover:bg-purple-700">
           Buy Ticket
         </Button>
       </div>
@@ -34,7 +37,17 @@ export default function LobbyForm() {
         Start Game
       </Button>
 
-      <Button className="bg-gray-600 hover:bg-gray-700">Instructions</Button>
+      <Button
+        type="button"
+        className="bg-gray-600 hover:bg-gray-700"
+        onClick={() => setShowInstructions(true)}
+      >
+        Instructions
+      </Button>
+      <InstructionsModal
+        isOpen={showInstructions}
+        onClose={() => setShowInstructions(false)}
+      />
     </form>
   );
 }
