@@ -28,7 +28,7 @@ export default function ComputerPuzzleScreen({
       <div className="bg-[#0161fc] text-white px-4 py-2 text-sm font-bold w-full">
         Log On to Windows
       </div>
-      <div className="bg-gradient-to-r from-[#688ae4] via-[#9cb9f5] from-20% via-60% to-[#799be9] to-90% w-full h-30 flex items-center justify-center border-b-[#ef5b25] border-b-2">
+      <div className="bg-gradient-to-r from-[#688ae4] via-[#9cb9f5] from-20% via-60% to-[#799be9] to-90% w-full p-10 flex items-center justify-center border-b-[#ef5b25] border-b-2">
         <p className="text-white flex flex-col">
           <span className="text-sm font-thin">Microsoft©</span>
           <span className="text-4xl/6 flex font-semibold">
@@ -41,7 +41,7 @@ export default function ComputerPuzzleScreen({
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-5 items-center h-50 justify-center bg-[#ede9d8] w-full"
+        className="flex flex-col gap-5 items-center justify-center bg-[#ede9d8] w-full p-10 pb-5"
       >
         <div className="flex justify-between w-100 flex-col gap-2">
           <div className="flex justify-between w-100">
@@ -67,7 +67,7 @@ export default function ComputerPuzzleScreen({
         <p className="text-center w-100 text-xs text-gray-700">
           Password hint: <span className="italic">{riddle?.question}</span>
         </p>
-        {error && <p>{error}</p>}
+        {error && <p className="text-xs">{error}</p>}
         <button
           type="submit"
           className="border-1 rounded-sm p-0.5 w-30 bg-white cursor-pointer hover:border-[#3f72b7] transition-all duration-150 hover:bg-gray-100"
