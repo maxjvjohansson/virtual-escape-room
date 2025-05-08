@@ -26,11 +26,6 @@ export default function InstructionsText() {
         Don’t forget: some elements are there just to spook you... or distract
         you.
       </p>
-
-      <p className="italic text-xs">
-        (You can access instructions anytime by clicking the "Instructions"
-        button.)
-      </p>
     </article>
   );
 }
