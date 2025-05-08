@@ -1,5 +1,7 @@
 import Modal from "@/elements/Modal";
 import ComputerPuzzleScreen from "./ComputerPuzzleScreen";
+import getRandomRiddle, { Riddle } from "./ComputerPuzzleRiddle";
+import { useState, useEffect } from "react";
 
 type Props = {
   isOpen: boolean;
@@ -7,10 +9,23 @@ type Props = {
 };
 
 export default function ComputerPuzzleModal({ isOpen, onClose }: Props) {
+  const [riddle, setRiddle] = useState<Riddle | null>(null);
+
+  useEffect(() => {
+    if (isOpen && !riddle) {
+      setRiddle(getRandomRiddle);
+    }
+  }, [isOpen, riddle]);
+
+  const handleSuccess = () => {
+    onClose();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      {/* Gamecomponents goes in between section tags */}
-      <ComputerPuzzleScreen />
+      {riddle && (
+        <ComputerPuzzleScreen riddle={riddle} onSuccess={handleSuccess} />
+      )}
     </Modal>
   );
 }
