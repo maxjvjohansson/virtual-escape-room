@@ -1,9 +1,22 @@
+"use client";
+
 import Button from "@/elements/Button";
 import InputField from "@/elements/InputField";
+import { useRouter } from "next/navigation";
 
 export default function LobbyForm() {
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // TODO: Validate/Charge user, also generate the code for codelock
+    router.push("/basement");
+  };
   return (
-    <form className="bg-black/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-black/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+    >
       <InputField
         id="playerName"
         placeholder="Enter your name"
