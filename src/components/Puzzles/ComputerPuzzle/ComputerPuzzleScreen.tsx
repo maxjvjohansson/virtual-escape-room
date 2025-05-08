@@ -25,10 +25,10 @@ export default function ComputerPuzzleScreen({
 
   return (
     <section className="flex items-center flex-col justify-center border-[#0161fc] border-2">
-      <div className="bg-[#0161fc] text-white px-4 py-2 text-sm font-bold w-full">
+      <div className="bg-[#0161fc] text-white px-2 py-2 text-sm font-bold w-full">
         Log On to Windows
       </div>
-      <div className="bg-gradient-to-r from-[#688ae4] via-[#9cb9f5] from-20% via-60% to-[#799be9] to-90% w-full p-10 flex items-center justify-center border-b-[#ef5b25] border-b-2">
+      <div className="bg-gradient-to-r from-[#688ae4] via-[#9cb9f5] from-20% via-60% to-[#799be9] to-90% w-full p-5 flex items-center justify-center border-b-[#ef5b25] border-b-2">
         <p className="text-white flex flex-col">
           <span className="text-sm font-thin">Microsoft©</span>
           <span className="text-4xl/6 flex font-semibold">
@@ -41,30 +41,28 @@ export default function ComputerPuzzleScreen({
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-5 items-center justify-center bg-[#ede9d8] w-full p-10 pb-5"
+        className="flex flex-col gap-5 items-center justify-center bg-[#ede9d8] w-full p-5 pb-5"
       >
-        <div className="flex justify-between w-100 flex-col gap-2">
-          <div className="flex justify-between w-100">
-            <p className="self-start">User name:</p>
-            <p className="w-70 border-1 border-gray-400 pl-2 bg-white">
+        <div className="flex justify-between w-full flex-col gap-2">
+          <div className="flex justify-between w-full items-center">
+            <p>User name:</p>
+            <p className="w-40 border-1 border-gray-400 pl-2 bg-white md:w-70">
               Michael Myers
             </p>
           </div>
-          <div className="flex justify-between w-100">
-            <label htmlFor="password" className="self-start">
-              Password:
-            </label>
+          <div className="flex gap-2 w-full items-center justify-between">
+            <label htmlFor="password">Password:</label>
             <input
               id="password"
               type="text"
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-1 border-gray-400 pl-2 w-70 bg-white"
+              className="border-1 border-gray-400 pl-2 w-40 bg-white md:w-70"
             />
           </div>
         </div>
-        <p className="text-center w-100 text-xs text-gray-700">
+        <p className="text-center w-full text-xs text-gray-700">
           Password hint: <span className="italic">{riddle?.question}</span>
         </p>
         {error && <p className="text-xs">{error}</p>}
