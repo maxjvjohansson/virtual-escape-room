@@ -46,7 +46,7 @@ export default function ComputerPuzzleScreen({
         <div className="flex justify-between w-full flex-col gap-2">
           <div className="flex justify-between w-full items-center">
             <p>User name:</p>
-            <p className="w-40 border-1 border-gray-400 pl-2 bg-white md:w-70">
+            <p className="w-40 border-1 border-gray-400 pl-2 bg-white md:w-80">
               Michael Myers
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function ComputerPuzzleScreen({
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-1 border-gray-400 pl-2 w-40 bg-white md:w-70"
+              className="border-1 border-gray-400 pl-2 w-40 bg-white md:w-80"
             />
           </div>
         </div>
