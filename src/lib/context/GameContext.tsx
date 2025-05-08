@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useReducer, useContext, ReactNode } from "react";
-import type { PuzzleKey, CodeKey, GameState, Action } from "./game-types";
+import type { GameState, Action } from "./game-types";
 
 const initialState: GameState = {
   puzzles: {
