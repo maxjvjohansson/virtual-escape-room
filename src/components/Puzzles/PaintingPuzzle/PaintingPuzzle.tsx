@@ -17,7 +17,6 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     Array(6).fill(null)
   );
   const [inventory, setInventory] = useState<Piece[]>([]);
-  const [cluePiece, setCluePiece] = useState<Piece | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
 
   function shuffle<T>(array: T[]): T[] {
@@ -38,7 +37,6 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
     setPainting(newPainting);
     setInventory(mixedInventory);
-    setCluePiece(CluePiece);
   }, []);
 
   function handlePlacePiece(index: number) {
