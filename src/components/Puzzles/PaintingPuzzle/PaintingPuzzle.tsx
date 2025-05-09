@@ -6,6 +6,7 @@ import {
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import PaintingPuzzlePieces from "./PaintingPuzzlePieces";
+import { CluePiece } from "./paintingPuzzleData";
 
 type PaintingPuzzleProps = {
   onSolved?: () => void;
@@ -27,23 +28,18 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }
 
   useEffect(() => {
-    if (cluePiece === null) {
-      const clueIndex = Math.floor(Math.random() * MyersCorrectPieces.length);
-      const cluePiece = MyersCorrectPieces[clueIndex];
+    const newPainting = Array(6).fill(null);
+    newPainting[CluePiece.correctIndex!] = CluePiece;
 
-      const newPainting = Array(6).fill(null);
-      newPainting[clueIndex] = cluePiece;
+    const remaining = MyersCorrectPieces.filter(
+      (piece) => piece.id !== CluePiece.id
+    );
+    const mixedInventory = shuffle([...remaining, ...MyersFakePieces]);
 
-      const remaining = MyersCorrectPieces.filter(
-        (piece) => piece.id !== cluePiece.id
-      );
-      const mixedInventory = shuffle([...remaining, ...MyersFakePieces]);
-
-      setPainting(newPainting);
-      setInventory(mixedInventory);
-      setCluePiece(cluePiece);
-    }
-  }, [cluePiece]);
+    setPainting(newPainting);
+    setInventory(mixedInventory);
+    setCluePiece(CluePiece);
+  }, []);
 
   function handlePlacePiece(index: number) {
     if (!selectedPiece) {

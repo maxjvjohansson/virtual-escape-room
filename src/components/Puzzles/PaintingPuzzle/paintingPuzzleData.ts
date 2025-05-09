@@ -25,3 +25,6 @@ export const MyersFakePieces: Piece[] = [
     correctIndex: null,
   },
 ];
+
+const randomIndex = Math.floor(Math.random() * MyersCorrectPieces.length);
+export const CluePiece: Piece = MyersCorrectPieces[randomIndex];
