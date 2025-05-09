@@ -85,8 +85,6 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
       newPainting[index] = piece;
 
-      checkIfSolved(newPainting);
-
       return newPainting;
     });
 
@@ -94,6 +92,10 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
       prevPainting.filter((p) => p.id !== piece.id)
     );
   }
+
+  useEffect(() => {
+    checkIfSolved(painting);
+  }, [painting]);
 
   return (
     <section className="flex flex-col items-center gap-8 p-4">
