@@ -61,7 +61,8 @@ export default function OddOutPuzzleModal({ isOpen, onClose, onSolve }: OddOutPu
         
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
           {currentOddOutSet.images.map((image: OddOutImage) => (
-            <button
+            <Button
+              key={image.id}
               onClick={() => handleImageClick(image)}
               className={`border-2 rounded-lg overflow-hidden transition-all duration-200 ${
                 isSolved && image.isOddOne
@@ -80,17 +81,9 @@ export default function OddOutPuzzleModal({ isOpen, onClose, onSolve }: OddOutPu
                   sizes="(max-width: 768px) 50vw, 33vw"
                 />
               </div>
-            </button>
+            </Button>
           ))}
         </div>
-        
-        {isSolved && (
-          <div className="text-center">
-            <Button onClick={onClose} className="bg-black text-white hover:bg-gray-800">
-            ←
-            </Button>
-          </div>
-        )}
       </div>
     </Modal>
   );

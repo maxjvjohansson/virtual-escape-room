@@ -1,4 +1,5 @@
 export type OddOutImage = {
+    id: string;
     src: string;
     alt: string;
     isOddOne: boolean;
@@ -15,27 +16,32 @@ export const OddOutSets : OddOutImageSet[] = [
         theme: 'Nocturnal animals',
         images: [
             {
-                src: '/public/images/OddOut/bat.jpeg',
+                id: "bat",
+                src: "/images/OddOut/bat.jpeg",
                 alt: "Bat",
                 isOddOne: false
             },
             {
-                src: '/public/images/OddOut/hedgehog.jpeg',
+                id: "hedgehog",
+                src: "/images/OddOut/hedgehog.jpeg",
                 alt: "Hedgehog",
                 isOddOne: false
             },
             {
-                src: '/public/images/OddOut/owl.jpeg',
+                id: "owl",
+                src: "/images/OddOut/owl.jpeg",
                 alt: "Owl",
                 isOddOne: false
             },
             {
-                src: '/public/images/OddOut/fox.jpeg',
+                id: "fox",
+                src: "/images/OddOut/fox.jpeg",
                 alt: "Fox",
                 isOddOne: false
             },
             {
-                src: '/public/images/OddOut/crow.jpeg',
+                id: "crow",
+                src: "/images/OddOut/crow.jpeg",
                 alt: "crow",
                 isOddOne: true
             }
