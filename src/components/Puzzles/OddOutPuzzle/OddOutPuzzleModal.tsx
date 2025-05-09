@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Modal from '@/elements/Modal';
 import Button from '@/elements/Button';
-import { OddOutImage, OddOutImageSet, getRandomOddOutSet } from '@/components/Puzzles/OddOutPuzzle/OddOutPuzzleData';
+import { OddOutImage, OddOutImageSet, getRandomOddOutSet } from '@/data/OddOutPuzzleData';
 
 
 type OddOutPuzzleModalProps = {
