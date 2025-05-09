@@ -41,6 +41,13 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }, []);
 
   function handleDrop(index: number, piece: Piece) {
+    if (
+      painting[index]?.id ===
+      MyersCorrectPieces.find((piece) => piece.correctIndex === index)?.id
+    ) {
+      return;
+    }
+
     setPainting((prevPainting) => {
       const newPainting = [...prevPainting];
 
