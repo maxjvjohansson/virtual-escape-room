@@ -41,12 +41,26 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }, []);
 
   function handleDrop(index: number, piece: Piece) {
-    setPainting((prev) => {
-      const newPainting = [...prev];
+    setPainting((prevPainting) => {
+      const newPainting = [...prevPainting];
+
+      const currentPiece = newPainting[index];
+
+      if (currentPiece) {
+        setInventory((prevInventory) => {
+          const newInventory = prevInventory.filter(
+            (p) => p.id !== currentPiece.id
+          );
+          return [...newInventory, currentPiece];
+        });
+      }
+
       newPainting[index] = piece;
       return newPainting;
     });
-    setInventory((prev) => prev.filter((p) => p.id !== piece.id));
+    setInventory((prevPainting) =>
+      prevPainting.filter((p) => p.id !== piece.id)
+    );
   }
 
   return (
