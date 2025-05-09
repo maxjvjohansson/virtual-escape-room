@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { GameProvider } from "@/lib/context/GameContext";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        <main>{children}</main>
+        <GameProvider>
+          <main>{children}</main>
+        </GameProvider>
       </body>
     </html>
   );
