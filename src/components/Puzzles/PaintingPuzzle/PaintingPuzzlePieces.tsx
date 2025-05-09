@@ -18,7 +18,7 @@ export default function PaintingPuzzlePieces({
         <Image
           key={piece.id}
           src={piece.image}
-          alt={`Piece: ${piece.id}`}
+          alt={`Painting Piece`}
           onClick={() => onSelect(piece)}
           className={`border-1 ${
             selectedPiece?.id === piece.id
