@@ -45,11 +45,11 @@ export default function OddOutPuzzleModal({ isOpen, onClose, onSolve }: OddOutPu
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="p-2">
         <h2 className="text-2xl mb-4 font-bold text-center">Find the odd one out!</h2>
-        <p>Which card doesn't belong?</p>
+        <p>Which card doesn&apos;t belong?</p>
         
         {isSolved && (
           <div className="bg-green-100 text-green-800 p-3 mb-4 rounded">
-            Well done! You've found the odd one out.
+            Well done! You&apos;ve found the odd one out.
           </div>
         )}
         
