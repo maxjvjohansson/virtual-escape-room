@@ -53,6 +53,18 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     setSelectedPiece(null);
   }
 
+  function checkIfSolved(painting: (Piece | null)[]) {
+    const isSolved = MyersCorrectPieces.every((correctPiece) => {
+      if (correctPiece.correctIndex === null) return false;
+      const placedPiece = painting[correctPiece.correctIndex];
+      return placedPiece?.id === correctPiece.id;
+    });
+
+    if (isSolved && onSolved) {
+      onSolved();
+    }
+  }
+
   function handleDrop(index: number, piece: Piece) {
     if (
       painting[index]?.id ===
@@ -76,8 +88,12 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
       }
 
       newPainting[index] = piece;
+
+      checkIfSolved(newPainting);
+
       return newPainting;
     });
+
     setInventory((prevPainting) =>
       prevPainting.filter((p) => p.id !== piece.id)
     );
