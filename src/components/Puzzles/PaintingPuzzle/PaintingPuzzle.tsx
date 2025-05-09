@@ -16,6 +16,8 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     Array(6).fill(null)
   );
   const [inventory, setInventory] = useState<Piece[]>([]);
+  const [cluePiece, setCluePiece] = useState<Piece | null>(null);
+  const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
 
   function shuffle<T>(array: T[]): T[] {
     return [...array]
@@ -25,20 +27,31 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }
 
   useEffect(() => {
-    const clueIndex = Math.floor(Math.random() * MyersCorrectPieces.length);
-    const cluePiece = MyersCorrectPieces[clueIndex];
+    if (cluePiece === null) {
+      const clueIndex = Math.floor(Math.random() * MyersCorrectPieces.length);
+      const cluePiece = MyersCorrectPieces[clueIndex];
 
-    const newPainting = Array(6).fill(null);
-    newPainting[clueIndex] = cluePiece;
+      const newPainting = Array(6).fill(null);
+      newPainting[clueIndex] = cluePiece;
 
-    const remaining = MyersCorrectPieces.filter(
-      (piece) => piece.id !== cluePiece.id
-    );
-    const mixedInventory = shuffle([...remaining, ...MyersFakePieces]);
+      const remaining = MyersCorrectPieces.filter(
+        (piece) => piece.id !== cluePiece.id
+      );
+      const mixedInventory = shuffle([...remaining, ...MyersFakePieces]);
 
-    setPainting(newPainting);
-    setInventory(mixedInventory);
-  }, []);
+      setPainting(newPainting);
+      setInventory(mixedInventory);
+      setCluePiece(cluePiece);
+    }
+  }, [cluePiece]);
+
+  function handlePlacePiece(index: number) {
+    if (!selectedPiece) {
+      return;
+    }
+    handleDrop(index, selectedPiece);
+    setSelectedPiece(null);
+  }
 
   function handleDrop(index: number, piece: Piece) {
     if (
@@ -80,9 +93,10 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
             onDrop={(e) => {
               const data = e.dataTransfer.getData("piece");
               if (!data) return;
-              const droppedPiece: Piece = JSON.parse(data); // fixade stavningen här också
+              const droppedPiece: Piece = JSON.parse(data);
               handleDrop(index, droppedPiece);
             }}
+            onClick={() => handlePlacePiece(index)}
             className="w-32 h-32 border-1 border-dashed border-gray-400 items-center bg-gray-200"
           >
             {piece ? (
@@ -91,6 +105,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
                 alt={`Piece ${piece.id}`}
                 width={128}
                 height={128}
+                data-piece={piece.id}
                 className="object-cover"
               />
             ) : null}
@@ -98,7 +113,11 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
         ))}
       </div>
 
-      <PaintingPuzzlePieces pieces={inventory}></PaintingPuzzlePieces>
+      <PaintingPuzzlePieces
+        pieces={inventory}
+        onSelect={(piece) => setSelectedPiece(piece)}
+        selectedPiece={selectedPiece}
+      ></PaintingPuzzlePieces>
     </section>
   );
 }
