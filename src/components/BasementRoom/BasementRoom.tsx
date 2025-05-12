@@ -13,10 +13,6 @@ export default function BasementRoom() {
   const [showPainting, setShowPainting] = useState(false);
   const [showCodeLock, setShowCodeLock] = useState(false);
 
-  useEffect(() => {
-    console.log("Escape Code is:", state.code);
-  }, [state.code]);
-
   return (
     <section
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"

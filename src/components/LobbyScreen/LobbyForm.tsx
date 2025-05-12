@@ -20,9 +20,6 @@ export default function LobbyForm() {
     dispatch({ type: "GENERATE_ESCAPE_CODE" });
     dispatch({ type: "START_GAME" });
 
-    console.log("Game Started");
-    console.log(playerName);
-
     router.push("/basement");
   };
   return (
