@@ -18,4 +18,5 @@ export type Action =
   | { type: "GENERATE_ESCAPE_CODE" }
   | { type: "SET_PLAYER_NAME"; payload: string }
   | { type: "START_GAME" }
-  | { type: "END_GAME" };
+  | { type: "END_GAME" }
+  | { type: "RESET_GAME" };

@@ -1,13 +1,21 @@
 import Button from "@/elements/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
 import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
 import PaintingPuzzleModal from "../Puzzles/PaintingPuzzle/PaintingPuzzleModal";
+import { useGameContext } from "@/lib/context/GameContext";
+import CodeLockModal from "../CodeLock/CodeLockModal";
 
 export default function BasementRoom() {
+  const { state } = useGameContext();
   const [showComputer, setShowComputer] = useState(false);
   const [showOddOut, setShowOddOut] = useState(false);
   const [showPainting, setShowPainting] = useState(false);
+  const [showCodeLock, setShowCodeLock] = useState(false);
+
+  useEffect(() => {
+    console.log(state.code);
+  }, [state.code]);
 
   return (
     <section
@@ -17,6 +25,7 @@ export default function BasementRoom() {
       <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
       <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
       <Button onClick={() => setShowPainting(true)}>Painting Puzzle</Button>
+      <Button onClick={() => setShowCodeLock(true)}>Code Lock</Button>
       <ComputerPuzzleModal
         isOpen={showComputer}
         onClose={() => setShowComputer(false)}
@@ -29,6 +38,10 @@ export default function BasementRoom() {
         isOpen={showPainting}
         onClose={() => setShowPainting(false)}
       ></PaintingPuzzleModal>
+      <CodeLockModal
+        isOpen={showCodeLock}
+        onClose={() => setShowCodeLock(false)}
+      ></CodeLockModal>
     </section>
   );
 }

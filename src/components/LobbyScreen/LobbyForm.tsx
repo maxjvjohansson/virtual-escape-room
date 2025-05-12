@@ -4,15 +4,22 @@ import Button from "@/elements/Button";
 import InputField from "@/elements/InputField";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useGameContext } from "@/lib/context/GameContext";
 import InstructionsModal from "../Instructions/InstructionsModal";
 
 export default function LobbyForm() {
+  const { dispatch } = useGameContext();
+  const [playerName, setPlayerName] = useState("");
   const [showInstructions, setShowInstructions] = useState(false);
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: Validate/Charge user, also generate the code for codelock
+
+    dispatch({ type: "SET_PLAYER_NAME", payload: playerName });
+    dispatch({ type: "GENERATE_ESCAPE_CODE" });
+    dispatch({ type: "START_GAME" });
+
     router.push("/basement");
   };
   return (
@@ -23,7 +30,10 @@ export default function LobbyForm() {
       <InputField
         id="playerName"
         placeholder="Enter your name"
+        value={playerName}
+        onChange={(e) => setPlayerName(e.target.value)}
         className="w-full"
+        required
       />
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
