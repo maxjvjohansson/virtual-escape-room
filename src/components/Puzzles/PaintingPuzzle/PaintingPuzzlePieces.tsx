@@ -5,15 +5,28 @@ type PaintingPuzzlePiecesProps = {
   pieces: Piece[];
   onSelect: (piece: Piece) => void;
   selectedPiece: Piece | null;
+  onDropToInventory: (piece: Piece, fromIndex?: number) => void;
 };
 
 export default function PaintingPuzzlePieces({
   pieces,
   onSelect,
   selectedPiece,
+  onDropToInventory,
 }: PaintingPuzzlePiecesProps) {
   return (
-    <section className="flex flex-wrap gap-2 items-center justify-center">
+    <section
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => {
+        const data = e.dataTransfer.getData("piece");
+        const fromIndexStr = e.dataTransfer.getData("fromIndex");
+        const fromIndex = fromIndexStr ? parseInt(fromIndexStr, 10) : undefined;
+        if (!data) return;
+        const piece: Piece = JSON.parse(data);
+        onDropToInventory(piece, fromIndex);
+      }}
+      className="flex flex-wrap gap-2 items-center justify-center"
+    >
       {pieces.map((piece) => (
         <Image
           key={piece.id}
@@ -30,6 +43,7 @@ export default function PaintingPuzzlePieces({
           draggable
           onDragStart={(e) => {
             e.dataTransfer.setData("piece", JSON.stringify(piece));
+            e.dataTransfer.setData("source", "inventory");
           }}
         />
       ))}
