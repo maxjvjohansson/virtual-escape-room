@@ -6,7 +6,7 @@ import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
 
 export default function EndGameScreen() {
-  const { state } = useGameContext();
+  const { state, dispatch } = useGameContext();
   const router = useRouter();
 
   const timeTaken =
@@ -15,6 +15,7 @@ export default function EndGameScreen() {
       : "Unknown";
 
   const handlePlayAgain = () => {
+    dispatch({ type: "RESET_GAME" });
     router.push("/lobby");
   };
 
