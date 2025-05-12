@@ -59,11 +59,13 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     }
   }
 
-  function handleDrop(index: number, piece: Piece) {
-    if (
-      painting[index]?.id ===
-      MyersCorrectPieces.find((piece) => piece.correctIndex === index)?.id
-    ) {
+  function handleDrop(
+    index: number,
+    piece: Piece,
+    fromIndex?: number,
+    from?: string
+  ) {
+    if (painting[index]?.id === CluePiece.id) {
       return;
     }
 
@@ -72,13 +74,17 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
       const currentPiece = newPainting[index];
 
-      if (currentPiece) {
+      if (currentPiece && currentPiece.id !== piece.id) {
         setInventory((prevInventory) => {
-          const newInventory = prevInventory.filter(
-            (p) => p.id !== currentPiece.id
-          );
-          return [...newInventory, currentPiece];
+          if (!prevInventory.some((p) => p.id === currentPiece.id)) {
+            return [...prevInventory, currentPiece];
+          }
+          return prevInventory;
         });
+      }
+
+      if (from === "painting" && typeof fromIndex === "number") {
+        newPainting[fromIndex] = null;
       }
 
       newPainting[index] = piece;
@@ -86,9 +92,11 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
       return newPainting;
     });
 
-    setInventory((prevPainting) =>
-      prevPainting.filter((p) => p.id !== piece.id)
-    );
+    if (from !== "painting") {
+      setInventory((prevPainting) =>
+        prevPainting.filter((p) => p.id !== piece.id)
+      );
+    }
   }
 
   useEffect(() => {
@@ -104,9 +112,14 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               const data = e.dataTransfer.getData("piece");
+              const source = e.dataTransfer.getData("source");
+              const fromIndex = parseInt(
+                e.dataTransfer.getData("fromIndex"),
+                10
+              );
               if (!data) return;
               const droppedPiece: Piece = JSON.parse(data);
-              handleDrop(index, droppedPiece);
+              handleDrop(index, droppedPiece, fromIndex, source);
             }}
             onClick={() => handlePlacePiece(index)}
             className="w-32 h-32 border-1 border-dashed border-gray-400 items-center bg-gray-200"
@@ -118,6 +131,12 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
                 width={128}
                 height={128}
                 data-piece={piece.id}
+                draggable={piece.id !== CluePiece.id}
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("piece", JSON.stringify(piece));
+                  e.dataTransfer.setData("source", "painting");
+                  e.dataTransfer.setData("fromIndex", index.toString());
+                }}
                 className="object-cover"
               />
             ) : null}
