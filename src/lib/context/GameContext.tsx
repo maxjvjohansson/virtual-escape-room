@@ -69,6 +69,9 @@ function gameReducer(state: GameState, action: Action): GameState {
     case "END_GAME":
       return { ...state, finishedAt: Date.now() };
 
+    case "RESET_GAME":
+      return { ...initialState };
+
     default:
       return state;
   }
