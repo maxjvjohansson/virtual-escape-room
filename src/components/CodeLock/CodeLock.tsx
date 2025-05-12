@@ -37,10 +37,12 @@ export default function CodeLock() {
           finishedAt: Date.now(),
         };
 
-        if (startedAt) {
-          const elapsedMs = finishedAt - startedAt;
-          const formattedTime = formatTime(elapsedMs);
-        }
+        // if (startedAt) {
+        //   const elapsedMs = finishedAt - startedAt;
+        //   const formattedTime = formatTime(elapsedMs);
+
+        //   console.log(`Escaped in ${formattedTime}`);
+        // }
 
         router.push("/endgame");
       }, 100);
