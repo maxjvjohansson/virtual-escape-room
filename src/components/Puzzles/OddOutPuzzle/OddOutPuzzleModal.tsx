@@ -89,7 +89,7 @@ export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModal
               Well done! You&apos;ve found the odd one out.
             </p>
             <p className="text-xl mb-4">
-              You've discovered code digit: <span className="font-bold text-2xl">B{solutionDigit}</span>
+              You&apos;ve discovered code digit: <span className="font-bold text-2xl">B{solutionDigit}</span>
             </p>
           </div>
         )}
