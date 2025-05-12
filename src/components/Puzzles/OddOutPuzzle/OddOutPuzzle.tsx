@@ -1,48 +1,38 @@
-import { useState } from 'react';
+/* import { useState } from 'react';
 import OddOutPuzzleModal from './OddOutPuzzleModal';
 import Button from '@/elements/Button';
+import { usePuzzle } from '@/hooks/usePuzzle';
 
-type OddOutPuzzleProps = {
-  onSolve: () => void;
-  alreadySolved?: boolean;
-};
-
-export default function OddOutPuzzle({ onSolve, alreadySolved = false }: OddOutPuzzleProps) {
+export default function OddOutPuzzle() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isPuzzleSolved, setIsPuzzleSolved] = useState(alreadySolved);
-  
-  const handleSolve = () => {
-    setIsPuzzleSolved(true);
-    onSolve();
-  };
-  
+  const { isSolved, solutionDigit } = usePuzzle("oddOneOut", "B");
+
   const handleOpenModal = () => {
-    if (!isPuzzleSolved) {
+    if (!isSolved) {
       setIsModalOpen(true);
     }
   };
-  
+
   return (
     <div className="flex flex-col items-center">
-      <Button 
+      <Button
         onClick={handleOpenModal}
         className={`
           px-4 py-2 rounded
-          ${isPuzzleSolved 
-            ? 'bg-green-600 text-white cursor-default' 
+          ${isSolved
+            ? 'bg-green-600 text-white cursor-default'
             : 'bg-purple-600 text-white hover:bg-purple-700'}
         `}
-        disabled={isPuzzleSolved}
-        aria-label={isPuzzleSolved ? "Puzzle already solved" : "Open the Odd One Out Challenge"}
+        disabled={isSolved}
+        aria-label={isSolved ? "Puzzle already solved" : "Open the Odd One Out Challenge"}
       >
-        {isPuzzleSolved ? 'Puzzle Solved ✓' : 'Odd One Out Challenge'}
+        {isSolved ? `Puzzle Solved ✓ (Code: B${solutionDigit})` : 'Odd One Out Challenge'}
       </Button>
       
       <OddOutPuzzleModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSolve={handleSolve}
       />
     </div>
   );
-}
+} */
