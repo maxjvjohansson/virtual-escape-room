@@ -148,6 +148,26 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
         pieces={inventory}
         onSelect={(piece) => setSelectedPiece(piece)}
         selectedPiece={selectedPiece}
+        onDropToInventory={(piece: Piece, fromIndex?: Number) => {
+          if (piece.id === CluePiece.id) return;
+
+          if (typeof fromIndex === "number") {
+            setPainting((prevPainting) => {
+              const newPainting = [...prevPainting];
+              if (newPainting[fromIndex]?.id === piece.id) {
+                newPainting[fromIndex] = null;
+              }
+              return newPainting;
+            });
+          }
+
+          setInventory((prevInventory) => {
+            if (!prevInventory.some((p) => p.id === piece.id)) {
+              return [...prevInventory, piece];
+            }
+            return prevInventory;
+          });
+        }}
       ></PaintingPuzzlePieces>
     </section>
   );
