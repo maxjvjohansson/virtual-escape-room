@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { formatTime } from "@/utils/formatTime";
-import { finished } from "stream";
 
 type TimerProps = {
   startedAt: number | null;
@@ -22,7 +21,7 @@ export default function Timer({
 
     const interval = setInterval(() => {
       setNow(Date.now());
-    }, 1000);
+    }, 10); //  <-- Adjust ms refresh rate
 
     return () => clearInterval(interval);
   }, [startedAt, finishedAt]);
@@ -33,6 +32,11 @@ export default function Timer({
   const remaining = Math.max(durationMs - elapsed, 0);
 
   return (
-    <div className="text-lg font-mono">Time left: {formatTime(remaining)}</div>
+    <div
+      className="fixed bottom-24 w-auto h-16 bg-black bg-opacity-80 text-yellow-300 text-3xl px-4 flex items-center justify-center rounded-lg shadow-lg border border-yellow-500 tracking-widest"
+      style={{ fontFamily: "monospace" }}
+    >
+      {formatTime(remaining)}
+    </div>
   );
 }

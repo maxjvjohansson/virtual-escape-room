@@ -5,6 +5,7 @@ import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
 import PaintingPuzzleModal from "../Puzzles/PaintingPuzzle/PaintingPuzzleModal";
 import { useGameContext } from "@/lib/context/GameContext";
 import CodeLockModal from "../CodeLock/CodeLockModal";
+import Timer from "../Timer/Timer";
 
 export default function BasementRoom() {
   const { state } = useGameContext();
@@ -42,6 +43,11 @@ export default function BasementRoom() {
         isOpen={showCodeLock}
         onClose={() => setShowCodeLock(false)}
       ></CodeLockModal>
+      <Timer
+        startedAt={state.startedAt}
+        finishedAt={state.finishedAt}
+        durationMs={60 * 60 * 1000}
+      />
     </section>
   );
 }
