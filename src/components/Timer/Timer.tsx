@@ -23,7 +23,7 @@ export default function Timer({
 
     const interval = setInterval(() => {
       setNow(Date.now());
-    }, 10); //  <-- Adjust ms refresh rate
+    }, 10);
 
     return () => clearInterval(interval);
   }, [startedAt, finishedAt]);

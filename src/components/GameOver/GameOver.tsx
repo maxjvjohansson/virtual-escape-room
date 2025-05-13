@@ -10,7 +10,7 @@ export default function GameOver() {
         GAME OVER
       </h1>
       <p className="text-lg mb-6 max-w-md">
-        Time's up... You failed to escape the room.
+        Time&apos;s up... You failed to escape the room.
         <br />
         Perhaps this place is your new home — forever.
       </p>
