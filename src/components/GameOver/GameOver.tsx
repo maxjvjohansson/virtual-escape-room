@@ -1,3 +1,7 @@
 export default function GameOver() {
-  return <section></section>;
+  return (
+    <section>
+      <h1>GAME OVER</h1>
+    </section>
+  );
 }
