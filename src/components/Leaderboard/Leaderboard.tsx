@@ -36,9 +36,7 @@ export default function Leaderboard() {
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {!scores && !error && (
-        <p className="text-center text-sm text-gray-300 animate-pulse">
-          Loading scores...
-        </p>
+        <p className="text-center text-sm animate-pulse">Loading scores...</p>
       )}
 
       {scores && (
