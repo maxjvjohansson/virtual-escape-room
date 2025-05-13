@@ -6,6 +6,7 @@ type PaintingPuzzlePiecesProps = {
   onSelect: (piece: Piece) => void;
   selectedPiece: Piece | null;
   onDropToInventory: (piece: Piece, fromIndex?: number) => void;
+  onClick: (piece: Piece) => void;
 };
 
 export default function PaintingPuzzlePieces({
@@ -13,6 +14,7 @@ export default function PaintingPuzzlePieces({
   onSelect,
   selectedPiece,
   onDropToInventory,
+  onClick,
 }: PaintingPuzzlePiecesProps) {
   return (
     <section
@@ -25,7 +27,12 @@ export default function PaintingPuzzlePieces({
         const piece: Piece = JSON.parse(data);
         onDropToInventory(piece, fromIndex);
       }}
-      className="flex flex-wrap gap-2 items-center justify-center"
+      onClick={() => {
+        if (selectedPiece) {
+          onClick(selectedPiece);
+        }
+      }}
+      className="flex flex-wrap gap-2 items-center justify-center w-full h-50 bg-gray-200 border-1 border-gray-400"
     >
       {pieces.map((piece) => (
         <Image
