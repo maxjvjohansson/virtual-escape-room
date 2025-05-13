@@ -155,7 +155,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }, [painting]);
 
   return (
-    <section className="flex flex-col items-center gap-8 p-4">
+    <section className="flex flex-col items-center gap-4 p-2">
       <div className="grid grid-cols-3">
         {painting.map((piece, index) => (
           <div
@@ -179,7 +179,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
               );
             }}
             onClick={() => handlePlacePiece(index, "painting")}
-            className="w-24 h-27 border-1 border-gray-400 items-center bg-gray-200 justify-center"
+            className="w-16 h-18 border-1 border-gray-400 items-center bg-gray-200 justify-center"
           >
             {piece ? (
               <Image

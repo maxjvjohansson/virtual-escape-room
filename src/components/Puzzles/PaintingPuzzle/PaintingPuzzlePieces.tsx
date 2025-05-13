@@ -32,7 +32,7 @@ export default function PaintingPuzzlePieces({
           onClick(selectedPiece);
         }
       }}
-      className="flex flex-wrap gap-2 items-center justify-center w-full p-4 bg-gray-200 border-1 border-gray-400"
+      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 bg-gray-200 border-1 border-gray-400"
     >
       {pieces.map((piece) => (
         <Image
@@ -45,8 +45,8 @@ export default function PaintingPuzzlePieces({
               ? "border-red-400 border-2"
               : "border-transparent"
           }`}
-          width={75}
-          height={75}
+          width={62}
+          height={62}
           draggable
           onDragStart={(e) => {
             e.dataTransfer.setData("piece", JSON.stringify(piece));
