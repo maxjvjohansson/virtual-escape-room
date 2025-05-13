@@ -16,7 +16,7 @@ type Location = "painting" | "inventory";
 
 export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   const [painting, setPainting] = useState<(Piece | null)[]>(
-    Array(6).fill(null)
+    Array(12).fill(null)
   );
   const [inventory, setInventory] = useState<Piece[]>([]);
   const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
@@ -29,7 +29,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }
 
   useEffect(() => {
-    const newPainting = Array(6).fill(null);
+    const newPainting = Array(12).fill(null);
     newPainting[CluePiece.correctIndex!] = CluePiece;
 
     const remaining = MyersCorrectPieces.filter(
@@ -72,8 +72,6 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
         setSelectedPiece(piece);
       }
     } else {
-      const piece = indexOrPiece;
-
       if (from === "inventory" && selectedPiece) {
         const fromIndex = painting.findIndex((p) => p?.id === selectedPiece.id);
 
@@ -152,7 +150,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
   return (
     <section className="flex flex-col items-center gap-8 p-4">
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-3">
         {painting.map((piece, index) => (
           <div
             key={index}
@@ -175,7 +173,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
               );
             }}
             onClick={() => handlePlacePiece(index, "painting")}
-            className="w-32 h-32 border-1 border-gray-400 items-center bg-gray-200"
+            className="w-24 h-27 border-1 border-gray-400 items-center bg-gray-200 justify-center"
           >
             {piece ? (
               <Image

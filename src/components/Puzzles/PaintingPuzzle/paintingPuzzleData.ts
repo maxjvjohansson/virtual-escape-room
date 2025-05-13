@@ -5,7 +5,7 @@ export type Piece = {
 };
 
 export const MyersCorrectPieces: Piece[] = Array.from(
-  { length: 6 },
+  { length: 12 },
   (_, i) => ({
     id: i,
     image: `/paintingPuzzlePaintings/myers/myers-${i + 1}.png`,
