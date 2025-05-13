@@ -39,6 +39,8 @@ export default function Leaderboard() {
         <p className="text-center text-sm animate-pulse">Loading scores...</p>
       )}
 
+      {scores?.length === 0 && <p className="text-center">No scores yet.</p>}
+
       {scores && (
         <ol className="space-y-2">
           {scores.map((score, idx) => (
