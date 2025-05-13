@@ -41,7 +41,7 @@ export default function Timer({
 
   return (
     <div
-      className="fixed bottom-24 w-auto h-16 bg-black bg-opacity-80 text-yellow-300 text-3xl px-4 flex items-center justify-center rounded-lg shadow-lg border border-yellow-500 tracking-widest"
+      className="fixed bottom-24 w-auto h-16 text-yellow-300 text-3xl px-4 flex items-center justify-center rounded-lg shadow-lg border border-yellow-500 tracking-widest"
       style={{ fontFamily: "monospace" }}
     >
       {formatTime(remaining)}
