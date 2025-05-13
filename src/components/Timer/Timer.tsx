@@ -28,16 +28,27 @@ export default function Timer({
     return () => clearInterval(interval);
   }, [startedAt, finishedAt]);
 
-  if (!startedAt) return null;
+  const elapsed =
+    startedAt != null
+      ? finishedAt
+        ? finishedAt - startedAt
+        : now - startedAt
+      : 0;
 
-  const elapsed = finishedAt ? finishedAt - startedAt : now - startedAt;
   const remaining = Math.max(durationMs - elapsed, 0);
 
   useEffect(() => {
-    if (remaining === 0 && !state.finishedAt && !state.isGameOver) {
+    if (
+      startedAt &&
+      remaining === 0 &&
+      !state.finishedAt &&
+      !state.isGameOver
+    ) {
       dispatch({ type: "GAME_OVER" });
     }
-  }, [remaining, state.finishedAt, state.isGameOver, dispatch]);
+  }, [startedAt, remaining, state.finishedAt, state.isGameOver, dispatch]);
+
+  if (!startedAt) return null;
 
   return (
     <div
