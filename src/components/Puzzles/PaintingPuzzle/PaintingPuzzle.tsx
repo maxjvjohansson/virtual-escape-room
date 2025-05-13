@@ -12,6 +12,8 @@ type PaintingPuzzleProps = {
   onSolved?: () => void;
 };
 
+type Location = "painting" | "inventory";
+
 export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   const [painting, setPainting] = useState<(Piece | null)[]>(
     Array(6).fill(null)
@@ -39,14 +41,6 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     setInventory(mixedInventory);
   }, []);
 
-  function handlePlacePiece(index: number) {
-    if (!selectedPiece) {
-      return;
-    }
-    handleDrop(index, selectedPiece);
-    setSelectedPiece(null);
-  }
-
   function checkIfSolved(painting: (Piece | null)[]) {
     const isSolved = MyersCorrectPieces.every((correctPiece) => {
       if (correctPiece.correctIndex === null) return false;
@@ -59,44 +53,97 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     }
   }
 
-  function handleDrop(
-    index: number,
-    piece: Piece,
-    fromIndex?: number,
-    from?: string
-  ) {
-    if (painting[index]?.id === CluePiece.id) {
-      return;
+  function handlePlacePiece(indexOrPiece: number | Piece, from: Location) {
+    if (typeof indexOrPiece === "number") {
+      const index = indexOrPiece;
+
+      if (index === CluePiece.correctIndex) return;
+
+      const piece = painting[index];
+
+      if (selectedPiece) {
+        movePiece(
+          from,
+          selectedPiece,
+          index,
+          painting.findIndex((p) => p?.id === selectedPiece.id)
+        );
+      } else if (piece?.id !== CluePiece.id) {
+        setSelectedPiece(piece);
+      }
+    } else {
+      const piece = indexOrPiece;
+
+      if (from === "inventory" && selectedPiece) {
+        const fromIndex = painting.findIndex((p) => p?.id === selectedPiece.id);
+
+        if (fromIndex !== -1 && selectedPiece.id !== CluePiece.id) {
+          movePiece("inventory", selectedPiece, undefined, fromIndex);
+        }
+        setSelectedPiece(null);
+      }
     }
+  }
 
-    setPainting((prevPainting) => {
-      const newPainting = [...prevPainting];
+  function movePiece(
+    to: Location,
+    piece: Piece,
+    targetIndex?: number,
+    fromIndex?: number
+  ) {
+    if (piece.id === CluePiece.id) return;
 
-      const currentPiece = newPainting[index];
+    if (to === "painting" && typeof targetIndex === "number") {
+      setPainting((prevPainting) => {
+        const newPainting = [...prevPainting];
 
-      if (currentPiece && currentPiece.id !== piece.id) {
-        setInventory((prevInventory) => {
-          if (!prevInventory.some((p) => p.id === currentPiece.id)) {
-            return [...prevInventory, currentPiece];
-          }
-          return prevInventory;
-        });
-      }
+        const existing = newPainting[targetIndex];
 
-      if (from === "painting" && typeof fromIndex === "number") {
-        newPainting[fromIndex] = null;
-      }
+        if (
+          existing &&
+          existing.id !== piece.id &&
+          existing.id !== CluePiece.id
+        ) {
+          setInventory((prevInventory) => {
+            return prevInventory.some((p) => p.id === existing.id)
+              ? prevInventory
+              : [...prevInventory, existing];
+          });
+        }
 
-      newPainting[index] = piece;
+        if (typeof fromIndex === "number") {
+          newPainting[fromIndex] = null;
+        }
 
-      return newPainting;
-    });
-
-    if (from !== "painting") {
-      setInventory((prevPainting) =>
-        prevPainting.filter((p) => p.id !== piece.id)
+        newPainting[targetIndex] = piece;
+        return newPainting;
+      });
+      setInventory((prevInventory) =>
+        prevInventory.filter((p) => p.id !== piece.id)
       );
     }
+
+    if (to === "inventory") {
+      setPainting((prevPainting) => {
+        const newPainting = [...prevPainting];
+
+        if (
+          typeof fromIndex === "number" &&
+          newPainting[fromIndex]?.id === piece.id
+        ) {
+          newPainting[fromIndex] = null;
+        }
+        return newPainting;
+      });
+
+      setInventory((prevInventory) => {
+        if (!prevInventory.some((p) => p.id === piece.id)) {
+          return [...prevInventory, piece];
+        }
+        return prevInventory;
+      });
+    }
+    setSelectedPiece(null);
   }
 
   useEffect(() => {
@@ -118,11 +165,17 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
                 10
               );
               if (!data) return;
+              if (index === CluePiece.correctIndex) return;
               const droppedPiece: Piece = JSON.parse(data);
-              handleDrop(index, droppedPiece, fromIndex, source);
+              movePiece(
+                "painting",
+                droppedPiece,
+                index,
+                source === "painting" ? fromIndex : undefined
+              );
             }}
-            onClick={() => handlePlacePiece(index)}
-            className="w-32 h-32 border-1 border-dashed border-gray-400 items-center bg-gray-200"
+            onClick={() => handlePlacePiece(index, "painting")}
+            className="w-32 h-32 border-1 border-gray-400 items-center bg-gray-200"
           >
             {piece ? (
               <Image
@@ -137,7 +190,11 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
                   e.dataTransfer.setData("source", "painting");
                   e.dataTransfer.setData("fromIndex", index.toString());
                 }}
-                className="object-cover"
+                className={`border-1 ${
+                  selectedPiece?.id === piece.id
+                    ? "border-red-400 border-2"
+                    : "border-transparent"
+                } object-cover`}
               />
             ) : null}
           </div>
@@ -146,27 +203,13 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
       <PaintingPuzzlePieces
         pieces={inventory}
-        onSelect={(piece) => setSelectedPiece(piece)}
+        onSelect={setSelectedPiece}
         selectedPiece={selectedPiece}
-        onDropToInventory={(piece: Piece, fromIndex?: Number) => {
-          if (piece.id === CluePiece.id) return;
-
-          if (typeof fromIndex === "number") {
-            setPainting((prevPainting) => {
-              const newPainting = [...prevPainting];
-              if (newPainting[fromIndex]?.id === piece.id) {
-                newPainting[fromIndex] = null;
-              }
-              return newPainting;
-            });
-          }
-
-          setInventory((prevInventory) => {
-            if (!prevInventory.some((p) => p.id === piece.id)) {
-              return [...prevInventory, piece];
-            }
-            return prevInventory;
-          });
+        onClick={(piece) => {
+          handlePlacePiece(piece, "inventory");
+        }}
+        onDropToInventory={(piece: Piece, fromIndex?: number) => {
+          movePiece("inventory", piece, undefined, fromIndex);
         }}
       ></PaintingPuzzlePieces>
     </section>
