@@ -1,4 +1,9 @@
-import { PuzzleSet, PuzzleSets, Piece } from "./paintingPuzzleData";
+import {
+  PuzzleSet,
+  PuzzleSets,
+  Piece,
+  getRandomFakePieces,
+} from "./paintingPuzzleData";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import PaintingPuzzlePieces from "./PaintingPuzzlePieces";
@@ -36,10 +41,16 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     const newPainting = Array(selectedPainting.correct.length).fill(null);
     newPainting[clue.correctIndex!] = clue;
 
+    const randomFakePieces = getRandomFakePieces(
+      PuzzleSets,
+      selectedPainting.name,
+      2
+    );
+
     const remaining = selectedPainting.correct.filter(
       (piece) => piece.id !== clue.id
     );
-    const mixedInventory = shuffle([...remaining, ...selectedPainting.fake]);
+    const mixedInventory = shuffle([...remaining, ...randomFakePieces]);
 
     setPuzzleSet(selectedPainting);
     setCluePiece(clue);
