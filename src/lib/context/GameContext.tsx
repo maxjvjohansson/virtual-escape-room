@@ -20,6 +20,7 @@ const initialState: GameState = {
   playerName: "",
   startedAt: null,
   finishedAt: null,
+  isGameOver: false,
 };
 
 function gameReducer(state: GameState, action: Action): GameState {
@@ -71,6 +72,9 @@ function gameReducer(state: GameState, action: Action): GameState {
 
     case "RESET_GAME":
       return { ...initialState };
+
+    case "GAME_OVER":
+      return { ...state, isGameOver: true };
 
     default:
       return state;

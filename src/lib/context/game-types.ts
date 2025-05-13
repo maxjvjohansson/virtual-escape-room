@@ -9,6 +9,7 @@ export type GameState = {
   playerName: string;
   startedAt: number | null;
   finishedAt: number | null;
+  isGameOver: boolean;
 };
 
 export type Action =
@@ -19,4 +20,5 @@ export type Action =
   | { type: "SET_PLAYER_NAME"; payload: string }
   | { type: "START_GAME" }
   | { type: "END_GAME" }
-  | { type: "RESET_GAME" };
+  | { type: "RESET_GAME" }
+  | { type: "GAME_OVER" };
