@@ -1,5 +1,6 @@
 "use client";
 
+import { useGameContext } from "@/lib/context/GameContext";
 import { useEffect, useState } from "react";
 import { formatTime } from "@/utils/formatTime";
 
@@ -14,6 +15,7 @@ export default function Timer({
   finishedAt,
   durationMs = 60 * 60 * 1000,
 }: TimerProps) {
+  const { dispatch, state } = useGameContext();
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -30,6 +32,12 @@ export default function Timer({
 
   const elapsed = finishedAt ? finishedAt - startedAt : now - startedAt;
   const remaining = Math.max(durationMs - elapsed, 0);
+
+  useEffect(() => {
+    if (remaining === 0 && !state.finishedAt && !state.isGameOver) {
+      dispatch({ type: "GAME_OVER" });
+    }
+  }, [remaining, state.finishedAt, state.isGameOver, dispatch]);
 
   return (
     <div
