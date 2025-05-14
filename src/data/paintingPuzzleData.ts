@@ -14,11 +14,11 @@ export function getRandomFakePieces(
   excludeSetName: string,
   count: number
 ): Piece[] {
-  const otherPieces = allSets
+  const otherPieces: Piece[] = allSets
     .filter((set) => set.name !== excludeSetName)
     .flatMap((set) => set.correct);
 
-  const shuffled = [...otherPieces].sort(() => Math.random() - 0.5);
+  const shuffled: Piece[] = [...otherPieces].sort(() => Math.random() - 0.5);
 
   return shuffled.slice(0, count).map((p, i) => ({
     ...p,
