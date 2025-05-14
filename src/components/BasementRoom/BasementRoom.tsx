@@ -1,11 +1,14 @@
-import Button from "@/elements/Button";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useGameContext } from "@/lib/context/GameContext";
+import Button from "@/elements/Button";
 import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
 import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
 import PaintingPuzzleModal from "../Puzzles/PaintingPuzzle/PaintingPuzzleModal";
 import WordPuzzleModal from "../Puzzles/WordPuzzle/WordPuzzleModal";
-import { useGameContext } from "@/lib/context/GameContext";
 import CodeLockModal from "../CodeLock/CodeLockModal";
+import GameOverModal from "../GameOver/GameOverModal";
+import Timer from "../Timer/Timer";
 
 export default function BasementRoom() {
   const { state } = useGameContext();
@@ -14,6 +17,8 @@ export default function BasementRoom() {
   const [showPainting, setShowPainting] = useState(false);
   const [showWordPuzzle, setShowWordPuzzle] = useState(false);
   const [showCodeLock, setShowCodeLock] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     console.log(state.code);
@@ -49,6 +54,15 @@ export default function BasementRoom() {
         isOpen={showCodeLock}
         onClose={() => setShowCodeLock(false)}
       ></CodeLockModal>
+      <Timer
+        startedAt={state.startedAt}
+        finishedAt={state.finishedAt}
+        durationMs={60 * 60 * 1000}
+      />
+      <GameOverModal
+        isOpen={state.isGameOver}
+        onClose={() => router.push("/")}
+      />
     </section>
     
   );

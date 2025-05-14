@@ -1,8 +1,11 @@
 import Button from "@/elements/Button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import LeaderboardModal from "../Leaderboard/LeaderboardModal";
 
 export default function StartScreen() {
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
   const router = useRouter();
 
   return (
@@ -27,9 +30,16 @@ export default function StartScreen() {
         >
           Buy Ticket
         </Button>
-        <Button className="w-48 md:w-64 bg-red-600 hover:bg-red-800">
+        <Button
+          className="w-48 md:w-64 bg-red-600 hover:bg-red-800"
+          onClick={() => setShowLeaderboard(true)}
+        >
           Leaderboard
         </Button>
+        <LeaderboardModal
+          isOpen={showLeaderboard}
+          onClose={() => setShowLeaderboard(false)}
+        />
       </div>
     </section>
   );

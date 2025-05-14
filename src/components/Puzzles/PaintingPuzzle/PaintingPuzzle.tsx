@@ -1,7 +1,8 @@
 import {
-  MyersCorrectPieces,
-  MyersFakePieces,
+  PuzzleSet,
+  PuzzleSets,
   Piece,
+  getRandomFakePieces,
 } from "./paintingPuzzleData";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -11,13 +12,23 @@ type PaintingPuzzleProps = {
   onSolved?: () => void;
 };
 
+type Location = "painting" | "inventory";
+
+const selectedPainting =
+  PuzzleSets[Math.floor(Math.random() * PuzzleSets.length)];
+const clue =
+  selectedPainting.correct[
+    Math.floor(Math.random() * selectedPainting.correct.length)
+  ];
+
 export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   const [painting, setPainting] = useState<(Piece | null)[]>(
-    Array(6).fill(null)
+    Array(12).fill(null)
   );
   const [inventory, setInventory] = useState<Piece[]>([]);
-  const [cluePiece, setCluePiece] = useState<Piece | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
+  const [puzzleSet, setPuzzleSet] = useState<PuzzleSet | null>(null);
+  const [cluePiece, setCluePiece] = useState<Piece | null>(null);
 
   function shuffle<T>(array: T[]): T[] {
     return [...array]
@@ -27,34 +38,28 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }
 
   useEffect(() => {
-    if (cluePiece === null) {
-      const clueIndex = Math.floor(Math.random() * MyersCorrectPieces.length);
-      const cluePiece = MyersCorrectPieces[clueIndex];
+    const newPainting = Array(selectedPainting.correct.length).fill(null);
+    newPainting[clue.correctIndex!] = clue;
 
-      const newPainting = Array(6).fill(null);
-      newPainting[clueIndex] = cluePiece;
+    const randomFakePieces = getRandomFakePieces(
+      PuzzleSets,
+      selectedPainting.name,
+      2
+    );
 
-      const remaining = MyersCorrectPieces.filter(
-        (piece) => piece.id !== cluePiece.id
-      );
-      const mixedInventory = shuffle([...remaining, ...MyersFakePieces]);
+    const remaining = selectedPainting.correct.filter(
+      (piece) => piece.id !== clue.id
+    );
+    const mixedInventory = shuffle([...remaining, ...randomFakePieces]);
 
-      setPainting(newPainting);
-      setInventory(mixedInventory);
-      setCluePiece(cluePiece);
-    }
-  }, [cluePiece]);
-
-  function handlePlacePiece(index: number) {
-    if (!selectedPiece) {
-      return;
-    }
-    handleDrop(index, selectedPiece);
-    setSelectedPiece(null);
-  }
+    setPuzzleSet(selectedPainting);
+    setCluePiece(clue);
+    setPainting(newPainting);
+    setInventory(mixedInventory);
+  }, []);
 
   function checkIfSolved(painting: (Piece | null)[]) {
-    const isSolved = MyersCorrectPieces.every((correctPiece) => {
+    const isSolved = puzzleSet?.correct.every((correctPiece) => {
       if (correctPiece.correctIndex === null) return false;
       const placedPiece = painting[correctPiece.correctIndex];
       return placedPiece?.id === correctPiece.id;
@@ -65,55 +70,127 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
     }
   }
 
-  function handleDrop(index: number, piece: Piece) {
-    if (
-      painting[index]?.id ===
-      MyersCorrectPieces.find((piece) => piece.correctIndex === index)?.id
-    ) {
-      return;
-    }
+  function handlePlacePiece(indexOrPiece: number | Piece, from: Location) {
+    if (typeof indexOrPiece === "number") {
+      const index = indexOrPiece;
 
-    setPainting((prevPainting) => {
-      const newPainting = [...prevPainting];
+      if (index === cluePiece?.correctIndex) return;
 
-      const currentPiece = newPainting[index];
+      const piece = painting[index];
 
-      if (currentPiece) {
-        setInventory((prevInventory) => {
-          const newInventory = prevInventory.filter(
-            (p) => p.id !== currentPiece.id
-          );
-          return [...newInventory, currentPiece];
-        });
+      if (selectedPiece) {
+        movePiece(
+          from,
+          selectedPiece,
+          index,
+          painting.findIndex((p) => p?.id === selectedPiece.id)
+        );
+      } else if (piece?.id !== cluePiece?.id) {
+        setSelectedPiece(piece);
       }
+    } else {
+      if (from === "inventory" && selectedPiece) {
+        const fromIndex = painting.findIndex((p) => p?.id === selectedPiece.id);
 
-      newPainting[index] = piece;
-
-      checkIfSolved(newPainting);
-
-      return newPainting;
-    });
-
-    setInventory((prevPainting) =>
-      prevPainting.filter((p) => p.id !== piece.id)
-    );
+        if (fromIndex !== -1 && selectedPiece.id !== cluePiece?.id) {
+          movePiece("inventory", selectedPiece, undefined, fromIndex);
+        }
+        setSelectedPiece(null);
+      }
+    }
   }
 
+  function movePiece(
+    to: Location,
+    piece: Piece,
+    targetIndex?: number,
+    fromIndex?: number
+  ) {
+    if (piece.id === cluePiece?.id) return;
+
+    if (to === "painting" && typeof targetIndex === "number") {
+      setPainting((prevPainting) => {
+        const newPainting = [...prevPainting];
+
+        const existing = newPainting[targetIndex];
+
+        if (
+          existing &&
+          existing.id !== piece.id &&
+          existing.id !== cluePiece?.id
+        ) {
+          setInventory((prevInventory) => {
+            return prevInventory.some((p) => p.id === existing.id)
+              ? prevInventory
+              : [...prevInventory, existing];
+          });
+        }
+
+        if (typeof fromIndex === "number") {
+          newPainting[fromIndex] = null;
+        }
+
+        newPainting[targetIndex] = piece;
+        return newPainting;
+      });
+      setInventory((prevInventory) =>
+        prevInventory.filter((p) => p.id !== piece.id)
+      );
+    }
+
+    if (to === "inventory") {
+      setPainting((prevPainting) => {
+        const newPainting = [...prevPainting];
+
+        if (
+          typeof fromIndex === "number" &&
+          newPainting[fromIndex]?.id === piece.id
+        ) {
+          newPainting[fromIndex] = null;
+        }
+        return newPainting;
+      });
+
+      setInventory((prevInventory) => {
+        if (!prevInventory.some((p) => p.id === piece.id)) {
+          return [...prevInventory, piece];
+        }
+        return prevInventory;
+      });
+    }
+    setSelectedPiece(null);
+  }
+
+  useEffect(() => {
+    checkIfSolved(painting);
+  }, [painting]);
+
   return (
-    <section className="flex flex-col items-center gap-8 p-4">
-      <div className="grid grid-cols-2">
+    <section className="flex flex-col items-center gap-4 p-2">
+      <div className="grid grid-cols-3">
         {painting.map((piece, index) => (
           <div
             key={index}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               const data = e.dataTransfer.getData("piece");
+              const source = e.dataTransfer.getData("source");
+              const fromIndex = parseInt(
+                e.dataTransfer.getData("fromIndex"),
+                10
+              );
               if (!data) return;
+              if (index === cluePiece?.correctIndex) return;
               const droppedPiece: Piece = JSON.parse(data);
-              handleDrop(index, droppedPiece);
+              movePiece(
+                "painting",
+                droppedPiece,
+                index,
+                source === "painting" ? fromIndex : undefined
+              );
             }}
-            onClick={() => handlePlacePiece(index)}
-            className="w-32 h-32 border-1 border-dashed border-gray-400 items-center bg-gray-200"
+            onClick={() => handlePlacePiece(index, "painting")}
+            className="w-16 h-18 border-1 border-gray-400 items-center bg-gray-200 justify-center"
           >
             {piece ? (
               <Image
@@ -122,7 +199,17 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
                 width={128}
                 height={128}
                 data-piece={piece.id}
-                className="object-cover"
+                draggable={piece.id !== cluePiece?.id}
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("piece", JSON.stringify(piece));
+                  e.dataTransfer.setData("source", "painting");
+                  e.dataTransfer.setData("fromIndex", index.toString());
+                }}
+                className={`border-1 ${
+                  selectedPiece?.id === piece.id
+                    ? "border-red-400 border-2"
+                    : "border-transparent"
+                } object-cover`}
               />
             ) : null}
           </div>
@@ -131,8 +218,14 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
       <PaintingPuzzlePieces
         pieces={inventory}
-        onSelect={(piece) => setSelectedPiece(piece)}
+        onSelect={setSelectedPiece}
         selectedPiece={selectedPiece}
+        onClick={(piece) => {
+          handlePlacePiece(piece, "inventory");
+        }}
+        onDropToInventory={(piece: Piece, fromIndex?: number) => {
+          movePiece("inventory", piece, undefined, fromIndex);
+        }}
       ></PaintingPuzzlePieces>
     </section>
   );
