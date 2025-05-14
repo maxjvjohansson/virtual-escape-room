@@ -7,6 +7,7 @@ export type Piece = {
 export type PuzzleSet = {
   name: string;
   correct: Piece[];
+  fullImage: string;
 };
 
 export function getRandomFakePieces(
@@ -34,6 +35,7 @@ export const MyersSet: PuzzleSet = {
     image: `/paintingPuzzlePaintings/myers/myers-${i + 1}.png`,
     correctIndex: i,
   })),
+  fullImage: "/paintingPuzzlePaintings/myers/myers-full.png",
 };
 
 export const VorheesSet: PuzzleSet = {
@@ -43,6 +45,7 @@ export const VorheesSet: PuzzleSet = {
     image: `/paintingPuzzlePaintings/vorhees/vorhees-${i + 1}.png`,
     correctIndex: i,
   })),
+  fullImage: "/paintingPuzzlePaintings/vorhees/vorhees-full.png",
 };
 
 export const PuzzleSets: PuzzleSet[] = [MyersSet, VorheesSet];
