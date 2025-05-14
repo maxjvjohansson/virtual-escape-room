@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { GameProvider } from "@/lib/context/GameContext";
+import VolumeControl from "@/elements/VolumeControl";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <GameProvider>
-          <main>{children}</main>
+          <main>
+            <VolumeControl />
+            {children}
+          </main>
         </GameProvider>
       </body>
     </html>
