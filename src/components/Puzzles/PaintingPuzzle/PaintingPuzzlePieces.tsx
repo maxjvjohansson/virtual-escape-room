@@ -36,6 +36,7 @@ export default function PaintingPuzzlePieces({
     >
       {pieces.map((piece) => (
         <Image
+          tabIndex={0}
           key={piece.id}
           src={piece.image}
           alt={`Painting Piece`}
@@ -47,6 +48,13 @@ export default function PaintingPuzzlePieces({
           }`}
           width={62}
           height={62}
+          role="button"
+          onKeyDown={(e) => {
+            if (e.key === "enter" || e.key === " ") {
+              e.preventDefault();
+              onSelect(piece);
+            }
+          }}
           draggable
           onDragStart={(e) => {
             e.dataTransfer.setData("piece", JSON.stringify(piece));

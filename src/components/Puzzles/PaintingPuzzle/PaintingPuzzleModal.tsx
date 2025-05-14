@@ -7,13 +7,9 @@ type Props = {
 };
 
 export default function PaintingPuzzleModal({ isOpen, onClose }: Props) {
-  const handleSolved = () => {
-    onClose();
-  };
-
   return (
-    <Modal isOpen={isOpen} onClose={handleSolved}>
-      <PaintingPuzzle onSolved={onClose}></PaintingPuzzle>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <PaintingPuzzle></PaintingPuzzle>
     </Modal>
   );
 }
