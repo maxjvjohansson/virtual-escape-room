@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Piece } from "./paintingPuzzleData";
+import { Piece } from "../../../data/paintingPuzzleData";
 
 type PaintingPuzzlePiecesProps = {
   pieces: Piece[];

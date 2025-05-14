@@ -3,7 +3,7 @@ import {
   PuzzleSets,
   Piece,
   getRandomFakePieces,
-} from "./paintingPuzzleData";
+} from "../../../data/paintingPuzzleData";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import PaintingPuzzlePieces from "./PaintingPuzzlePieces";
@@ -14,9 +14,9 @@ type PaintingPuzzleProps = {
 
 type Location = "painting" | "inventory";
 
-const selectedPainting =
+const selectedPainting: PuzzleSet =
   PuzzleSets[Math.floor(Math.random() * PuzzleSets.length)];
-const clue =
+const clue: Piece =
   selectedPainting.correct[
     Math.floor(Math.random() * selectedPainting.correct.length)
   ];
@@ -38,19 +38,24 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }
 
   useEffect(() => {
-    const newPainting = Array(selectedPainting.correct.length).fill(null);
+    const newPainting: Array<Piece> = Array(
+      selectedPainting.correct.length
+    ).fill(null);
     newPainting[clue.correctIndex!] = clue;
 
-    const randomFakePieces = getRandomFakePieces(
+    const randomFakePieces: Piece[] = getRandomFakePieces(
       PuzzleSets,
       selectedPainting.name,
       2
     );
 
-    const remaining = selectedPainting.correct.filter(
+    const remaining: Piece[] = selectedPainting.correct.filter(
       (piece) => piece.id !== clue.id
     );
-    const mixedInventory = shuffle([...remaining, ...randomFakePieces]);
+    const mixedInventory: Piece[] = shuffle([
+      ...remaining,
+      ...randomFakePieces,
+    ]);
 
     setPuzzleSet(selectedPainting);
     setCluePiece(clue);
@@ -59,11 +64,13 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
   }, []);
 
   function checkIfSolved(painting: (Piece | null)[]) {
-    const isSolved = puzzleSet?.correct.every((correctPiece) => {
-      if (correctPiece.correctIndex === null) return false;
-      const placedPiece = painting[correctPiece.correctIndex];
-      return placedPiece?.id === correctPiece.id;
-    });
+    const isSolved: boolean | undefined = puzzleSet?.correct.every(
+      (correctPiece) => {
+        if (correctPiece.correctIndex === null) return false;
+        const placedPiece: Piece | null = painting[correctPiece.correctIndex];
+        return placedPiece?.id === correctPiece.id;
+      }
+    );
 
     if (isSolved && onSolved) {
       onSolved();
@@ -72,11 +79,11 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
   function handlePlacePiece(indexOrPiece: number | Piece, from: Location) {
     if (typeof indexOrPiece === "number") {
-      const index = indexOrPiece;
+      const index: number = indexOrPiece;
 
       if (index === cluePiece?.correctIndex) return;
 
-      const piece = painting[index];
+      const piece: Piece | null = painting[index];
 
       if (selectedPiece) {
         movePiece(
@@ -90,7 +97,9 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
       }
     } else {
       if (from === "inventory" && selectedPiece) {
-        const fromIndex = painting.findIndex((p) => p?.id === selectedPiece.id);
+        const fromIndex: number = painting.findIndex(
+          (p) => p?.id === selectedPiece.id
+        );
 
         if (fromIndex !== -1 && selectedPiece.id !== cluePiece?.id) {
           movePiece("inventory", selectedPiece, undefined, fromIndex);
@@ -110,9 +119,9 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
     if (to === "painting" && typeof targetIndex === "number") {
       setPainting((prevPainting) => {
-        const newPainting = [...prevPainting];
+        const newPainting: (Piece | null)[] = [...prevPainting];
 
-        const existing = newPainting[targetIndex];
+        const existing: Piece | null = newPainting[targetIndex];
 
         if (
           existing &&
@@ -140,7 +149,7 @@ export default function PaintingPuzzle({ onSolved }: PaintingPuzzleProps) {
 
     if (to === "inventory") {
       setPainting((prevPainting) => {
-        const newPainting = [...prevPainting];
+        const newPainting: (Piece | null)[] = [...prevPainting];
 
         if (
           typeof fromIndex === "number" &&
