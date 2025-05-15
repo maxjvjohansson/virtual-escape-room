@@ -4,8 +4,13 @@ import { useGameContext } from "@/lib/context/GameContext";
 import { formatTime } from "@/utils/formatTime";
 import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LeaderboardModal from "../Leaderboard/LeaderboardModal";
+
+type Score = {
+  player_name: string;
+  time_ms: number;
+};
 
 export default function EndGameScreen() {
   const [submitted, setSubmitted] = useState(false);
@@ -18,26 +23,16 @@ export default function EndGameScreen() {
   const { state, dispatch } = useGameContext();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!state.startedAt || !state.finishedAt) return;
-
-    const timeout = setTimeout(() => {
-      checkIfQualifies();
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [state.startedAt, state.finishedAt]);
-
-  const checkIfQualifies = async () => {
+  const checkIfQualifies = useCallback(async () => {
     const playerTime = state.finishedAt! - state.startedAt!;
 
     try {
       const res = await fetch("/api/highscores", { cache: "no-store" });
-      const data = await res.json();
+      const data: Score[] = await res.json();
 
       const sorted = data
-        .filter((entry: any) => typeof entry.time_ms === "number")
-        .sort((a: any, b: any) => a.time_ms - b.time_ms);
+        .filter((entry: Score) => typeof entry.time_ms === "number")
+        .sort((a: Score, b: Score) => a.time_ms - b.time_ms);
 
       if (sorted.length === 0) {
         setWouldQualify(true);
@@ -57,7 +52,17 @@ export default function EndGameScreen() {
       console.error("Leaderboard fetch failed:", err);
       setWouldQualify(true);
     }
-  };
+  }, [state.finishedAt, state.startedAt]);
+
+  useEffect(() => {
+    if (!state.startedAt || !state.finishedAt) return;
+
+    const timeout = setTimeout(() => {
+      checkIfQualifies();
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [state.startedAt, state.finishedAt, checkIfQualifies]);
 
   const handleSubmitScore = async () => {
     if (!state.playerName || !state.startedAt || !state.finishedAt) return;
@@ -125,7 +130,9 @@ export default function EndGameScreen() {
               <p className="text-red-400 text-sm italic">
                 You need to beat{" "}
                 <strong>
-                  {requiredTimeMs ? formatTime(requiredTimeMs) : "unknown"}
+                  {requiredTimeMs !== null
+                    ? formatTime(requiredTimeMs)
+                    : "unknown"}
                 </strong>{" "}
                 to enter the top 10.
               </p>
