@@ -5,7 +5,8 @@ export const WordPuzzleWords : string[] = [
     "Screaming",
     "Zombie",
     "Vampire",
-    "Monster"
+    "Monster",
+    "Coffin",
 ];
 
 export function getRandomWord(): string {

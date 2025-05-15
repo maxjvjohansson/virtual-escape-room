@@ -4,6 +4,7 @@ import Modal from '@/elements/Modal';
 import Button from '@/elements/Button';
 import { WordPuzzleWords, getRandomWord } from '@/data/WordPuzzleData';
 import { usePuzzle } from '@/hooks/usePuzzle';
+import { shuffle } from '@/utils/shuffleArray';
 
 type WordPuzzleModalProps = {
   isOpen: boolean;
@@ -17,6 +18,7 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
   const { isSolved, solutionDigit, solve } = usePuzzle("word", "C");
 
   const currentWordArray: string[] = currentWord.split("");
+  const shuffledCurrentWordArray = shuffle([...currentWord]);
 
   useEffect(() => {
     if (isOpen && !isSolved) {
@@ -43,7 +45,7 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
             )}
             
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-              {currentWordArray.map((letter: string) => (
+              {shuffledCurrentWordArray.map((letter: string) => (
                 <div
                   key={letter}
                   className="border-2 border-gray-300 hover:border-gray-500 rounded-lg overflow-hidden transition-all duration-200"
