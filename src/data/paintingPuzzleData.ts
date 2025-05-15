@@ -48,4 +48,40 @@ export const VorheesSet: PuzzleSet = {
   fullImage: "/paintingPuzzlePaintings/vorhees/vorhees-full.png",
 };
 
-export const PuzzleSets: PuzzleSet[] = [MyersSet, VorheesSet];
+export const leatherfaceSet: PuzzleSet = {
+  name: "leatherface",
+  correct: Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    image: `/paintingPuzzlePaintings/leatherface/leatherface-${i + 1}.png`,
+    correctIndex: i,
+  })),
+  fullImage: "/paintingPuzzlePaintings/leatherface/leatherface-full.png",
+};
+
+export const freddySet: PuzzleSet = {
+  name: "freddy",
+  correct: Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    image: `/paintingPuzzlePaintings/freddy/freddy-${i + 1}.png`,
+    correctIndex: i,
+  })),
+  fullImage: "/paintingPuzzlePaintings/freddy/freddy-full.png",
+};
+
+export const ghostfaceSet: PuzzleSet = {
+  name: "ghostface",
+  correct: Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    image: `/paintingPuzzlePaintings/ghostface/ghostface-${i + 1}.png`,
+    correctIndex: i,
+  })),
+  fullImage: "/paintingPuzzlePaintings/ghostface/ghostface-full.png",
+};
+
+export const PuzzleSets: PuzzleSet[] = [
+  MyersSet,
+  VorheesSet,
+  leatherfaceSet,
+  freddySet,
+  ghostfaceSet,
+];
