@@ -4,7 +4,7 @@ import { useGameContext } from "@/lib/context/GameContext";
 import { formatTime } from "@/utils/formatTime";
 import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeaderboardModal from "../Leaderboard/LeaderboardModal";
 
 export default function EndGameScreen() {
@@ -12,9 +12,52 @@ export default function EndGameScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [wouldQualify, setWouldQualify] = useState(false);
+  const [requiredTimeMs, setRequiredTimeMs] = useState<number | null>(null);
 
   const { state, dispatch } = useGameContext();
   const router = useRouter();
+
+  useEffect(() => {
+    if (!state.startedAt || !state.finishedAt) return;
+
+    const timeout = setTimeout(() => {
+      checkIfQualifies();
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [state.startedAt, state.finishedAt]);
+
+  const checkIfQualifies = async () => {
+    const playerTime = state.finishedAt! - state.startedAt!;
+
+    try {
+      const res = await fetch("/api/highscores", { cache: "no-store" });
+      const data = await res.json();
+
+      const sorted = data
+        .filter((entry: any) => typeof entry.time_ms === "number")
+        .sort((a: any, b: any) => a.time_ms - b.time_ms);
+
+      if (sorted.length === 0) {
+        setWouldQualify(true);
+        setRequiredTimeMs(null);
+        return;
+      }
+
+      const top10 = sorted.slice(0, 10);
+      const slowestTime = top10.length === 10 ? top10[9].time_ms : null;
+
+      const qualifies =
+        top10.length < 10 || (slowestTime !== null && playerTime < slowestTime);
+
+      setWouldQualify(qualifies);
+      setRequiredTimeMs(slowestTime);
+    } catch (err) {
+      console.error("Leaderboard fetch failed:", err);
+      setWouldQualify(true);
+    }
+  };
 
   const handleSubmitScore = async () => {
     if (!state.playerName || !state.startedAt || !state.finishedAt) return;
@@ -32,12 +75,19 @@ export default function EndGameScreen() {
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to submit score");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to submit score");
+      }
 
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      setError("Could not submit score.");
+      setError(
+        typeof err === "object" && err !== null && "message" in err
+          ? String(err.message)
+          : "Could not submit score."
+      );
     } finally {
       setLoading(false);
     }
@@ -65,13 +115,39 @@ export default function EndGameScreen() {
       </p>
 
       <div className="flex flex-col gap-4 mt-6">
+        {state.startedAt && state.finishedAt && (
+          <>
+            {wouldQualify ? (
+              <p className="text-green-400 text-sm italic">
+                Your time qualifies for the leaderboard!
+              </p>
+            ) : (
+              <p className="text-red-400 text-sm italic">
+                You need to beat{" "}
+                <strong>
+                  {requiredTimeMs ? formatTime(requiredTimeMs) : "unknown"}
+                </strong>{" "}
+                to enter the top 10.
+              </p>
+            )}
+          </>
+        )}
+
         {!submitted ? (
           <Button
             onClick={handleSubmitScore}
-            disabled={loading}
-            className="bg-blue-600 hover:bg-blue-800"
+            disabled={loading || !wouldQualify}
+            className={
+              wouldQualify
+                ? "bg-blue-600 hover:bg-blue-800"
+                : "bg-zinc-600 opacity-50 cursor-not-allowed"
+            }
           >
-            {loading ? "Submitting..." : "Submit Score"}
+            {loading
+              ? "Submitting..."
+              : wouldQualify
+              ? "Submit Score"
+              : "Not Eligible for Leaderboard"}
           </Button>
         ) : (
           <p className="text-green-400 text-sm italic">Score submitted!</p>
@@ -92,6 +168,7 @@ export default function EndGameScreen() {
         >
           Play Again
         </Button>
+
         {showLeaderboard && (
           <LeaderboardModal
             isOpen={showLeaderboard}
