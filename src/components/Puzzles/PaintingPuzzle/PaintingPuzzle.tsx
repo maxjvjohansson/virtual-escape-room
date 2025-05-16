@@ -175,21 +175,28 @@ export default function PaintingPuzzle() {
   }, [painting]);
 
   return (
-    <section className="flex flex-col items-center gap-4 p-2">
+    <section className="flex flex-col items-center gap-10 p-2">
       {isSolved ? (
         <>
           <Image
             src={selectedPainting.fullImage}
             alt="Finished Painting"
-            height={288}
-            width={192}
-            className="z-50 h-90 w-60"
+            height={275}
+            width={128}
+            className="h-80 w-55"
+          ></Image>
+          <Image
+            src={"/paintingPuzzlePaintings/painting-frame.png"}
+            alt="painting frame"
+            width={275}
+            height={128}
+            className="absolute self-center justify-self-center top-0 z-20 pointer-events-none h-auto w-67"
           ></Image>
           <p>D{solutionDigit}</p>
         </>
       ) : (
         <>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 p-6.5">
             {painting.map((piece, index) => (
               <div
                 key={index}
@@ -238,6 +245,14 @@ export default function PaintingPuzzle() {
               </div>
             ))}
           </div>
+
+          <Image
+            src={"/paintingPuzzlePaintings/painting-frame.png"}
+            alt="painting frame"
+            width={275}
+            height={128}
+            className="absolute self-center justify-self-center top-0 z-20 pointer-events-none h-auto w-67"
+          ></Image>
 
           <PaintingPuzzlePieces
             pieces={inventory}
