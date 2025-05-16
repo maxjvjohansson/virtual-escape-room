@@ -50,7 +50,6 @@ function LetterTile({
   );
 }
 
-// Component for the drop space between tiles
 function DropZone({ 
   index, 
   isActive, 
@@ -72,9 +71,7 @@ function DropZone({
 }
 
 export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProps) {
-  // Initial word setup
   const [selectedWord, setSelectedWord] = useState("");
-  const [shuffledLetters, setShuffledLetters] = useState<string[]>([]);
   const [currentArrangement, setCurrentArrangement] = useState<string[]>([]);
   
   // Drag state
@@ -85,7 +82,6 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { isSolved, solutionDigit, solve } = usePuzzle("word", "C");
 
-  // Setup a new puzzle when the modal opens or when reset
   const setupNewPuzzle = () => {
     const newWord = getRandomWord();
     setSelectedWord(newWord);
@@ -96,7 +92,6 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
       shuffled = shuffle([...newWord]);
     } while (shuffled.join('') === newWord);
     
-    setShuffledLetters(shuffled);
     setCurrentArrangement(shuffled);
     setErrorMessage(null);
   };
@@ -135,7 +130,6 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
     if (draggedIndex !== null && dropZoneIndex !== null) {
       const newArrangement = [...currentArrangement];
       
-      // Remove the dragged letter from its original position
       const draggedLetter = newArrangement.splice(draggedIndex, 1)[0];
       
       const adjustedDropIndex = dropZoneIndex > draggedIndex ? dropZoneIndex - 1 : dropZoneIndex;
@@ -145,7 +139,6 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
     }
   };
 
-  // Reset drag state on drag end
   const handleDragEnd = () => {
     setDraggedIndex(null);
     setDropZoneIndex(null);
