@@ -7,12 +7,14 @@ type PaintingPuzzlePiecesProps = {
   selectedPiece: Piece | null;
   onDropToInventory: (piece: Piece, fromIndex?: number) => void;
   onClick: (piece: Piece) => void;
+  focusMode: boolean;
 };
 
 export default function PaintingPuzzlePieces({
   pieces,
   onSelect,
   selectedPiece,
+  focusMode,
   onDropToInventory,
   onClick,
 }: PaintingPuzzlePiecesProps) {
@@ -32,25 +34,31 @@ export default function PaintingPuzzlePieces({
           onClick(selectedPiece);
         }
       }}
-      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 bg-gray-200 border-1 border-gray-400"
+      onKeyDown={(e) => {
+        if ((e.key === "Enter" || e.key === " ") && selectedPiece) {
+          onClick(selectedPiece);
+        }
+      }}
+      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 bg-gray-200 border-1 border-gray-400 focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
     >
-      {pieces.map((piece) => (
+      {pieces.map((piece, index) => (
         <Image
-          tabIndex={0}
+          tabIndex={focusMode ? 0 : -1}
+          data-inventory-index={index}
           key={piece.id}
           src={piece.image}
           alt={`Painting Piece`}
           onClick={() => onSelect(piece)}
           className={`border-1 ${
             selectedPiece?.id === piece.id
-              ? "border-red-400 border-2"
+              ? "border-yellow-400 border-2 shadow-[0_0_30px_rgba(255,215,0,0.6)] focus:ring-yellow-600 focus:shadow-[0_0_30px_rgba(255,215,0,0.6)]"
               : "border-transparent"
-          }`}
-          width={62}
-          height={62}
+          } hover:border-1 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transition-all w-16 h-18 duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+          width={720}
+          height={720}
           role="button"
           onKeyDown={(e) => {
-            if (e.key === "enter" || e.key === " ") {
+            if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
               onSelect(piece);
             }
