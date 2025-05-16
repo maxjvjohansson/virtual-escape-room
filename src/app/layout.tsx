@@ -24,10 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <GameProvider>
-          <main>
-            <VolumeControl />
-            {children}
-          </main>
+          <VolumeControl />
+          <main>{children}</main>
         </GameProvider>
       </body>
     </html>
