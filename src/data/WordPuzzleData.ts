@@ -1,12 +1,12 @@
 export const WordPuzzleWords : string[] = [
-    "Skeleton",
-    "Haunting",
-    "Werewolf",
-    "Screaming",
-    "Zombie",
-    "Vampire",
-    "Monster",
-    "Coffin",
+    "skeleton",
+    "haunting",
+    "werewolf",
+    "screaming",
+    "zombie",
+    "vampire",
+    "monster",
+    "coffin",
 ];
 
 export function getRandomWord(): string {
