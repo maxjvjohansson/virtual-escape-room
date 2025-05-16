@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { GameProvider } from "@/lib/context/GameContext";
 import VolumeControl from "@/elements/VolumeControl";
+import AudioManager from "@/components/AudioManager/AudioManager";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}>
         <GameProvider>
           <VolumeControl />
+          <AudioManager />
           <main>{children}</main>
         </GameProvider>
       </body>
