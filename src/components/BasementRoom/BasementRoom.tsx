@@ -4,6 +4,7 @@ import { useGameContext } from "@/lib/context/GameContext";
 import Button from "@/elements/Button";
 import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
 import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
+import WordPuzzleModal from "../Puzzles/WordPuzzle/WordPuzzleModal";
 import PaintingPuzzleModal from "../Puzzles/PaintingPuzzle/PaintingPuzzleModal";
 import CodeLockModal from "../CodeLock/CodeLockModal";
 import GameOverModal from "../GameOver/GameOverModal";
@@ -13,6 +14,7 @@ export default function BasementRoom() {
   const { state } = useGameContext();
   const [showComputer, setShowComputer] = useState(false);
   const [showOddOut, setShowOddOut] = useState(false);
+  const [showWordPuzzle, setShowWordPuzzle] = useState(false);
   const [showPainting, setShowPainting] = useState(false);
   const [showCodeLock, setShowCodeLock] = useState(false);
 
@@ -29,6 +31,7 @@ export default function BasementRoom() {
     >
       <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
       <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
+      <Button onClick={() => setShowWordPuzzle(true)}>Word puzzle</Button>
       <Button onClick={() => setShowPainting(true)}>Painting Puzzle</Button>
       <Button onClick={() => setShowCodeLock(true)}>Code Lock</Button>
       <ComputerPuzzleModal
@@ -38,6 +41,10 @@ export default function BasementRoom() {
       <OddOutPuzzleModal
         isOpen={showOddOut}
         onClose={() => setShowOddOut(false)}
+      />
+      <WordPuzzleModal
+        isOpen={showWordPuzzle}
+        onClose={() => setShowWordPuzzle(false)}
       />
       <PaintingPuzzleModal
         isOpen={showPainting}
