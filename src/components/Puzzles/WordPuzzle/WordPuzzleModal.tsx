@@ -1,6 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
 import Modal from '@/elements/Modal';
-import Button from '@/elements/Button';
 import { getRandomWord } from '@/data/WordPuzzleData';
 import { usePuzzle } from '@/hooks/usePuzzle';
 import { shuffle } from '@/utils/shuffleArray';
