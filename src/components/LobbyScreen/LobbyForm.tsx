@@ -19,8 +19,9 @@ export default function LobbyForm() {
     dispatch({ type: "SET_PLAYER_NAME", payload: playerName });
     dispatch({ type: "GENERATE_ESCAPE_CODE" });
     dispatch({ type: "START_GAME" });
-
-    router.push("/basement");
+    setTimeout(() => {
+      router.push("/basement");
+    }, 200);
   };
   return (
     <form
