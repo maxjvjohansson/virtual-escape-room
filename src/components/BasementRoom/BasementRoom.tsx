@@ -25,7 +25,7 @@ export default function BasementRoom() {
   return (
     <section
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
-      style={{ backgroundImage: "url('/images/haunted_basement.png')" }}
+      style={{ backgroundImage: "url('/images/basement_empty.png')" }}
     >
       <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
       <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
