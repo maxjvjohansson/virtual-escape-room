@@ -139,8 +139,6 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
       // Remove the dragged letter from its original position
       const draggedLetter = newArrangement.splice(draggedIndex, 1)[0];
       
-      // Insert the dragged letter at the drop position, pushing other letters
-      // If dropping after the last element, adjust the insertion index
       const adjustedDropIndex = dropZoneIndex > draggedIndex ? dropZoneIndex - 1 : dropZoneIndex;
       newArrangement.splice(adjustedDropIndex, 0, draggedLetter);
       
@@ -206,7 +204,7 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
               Well done! The right word was <span className="font-bold">{selectedWord}</span>.
             </p>
             <p className="text-xl mb-4">
-              You've discovered code digit: <span className="font-bold text-2xl">C{solutionDigit}</span>
+              You&apos;ve discovered code digit: <span className="font-bold text-2xl">C{solutionDigit}</span>
             </p>
           </div>
         )}
