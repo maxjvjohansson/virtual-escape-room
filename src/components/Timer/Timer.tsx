@@ -51,11 +51,20 @@ export default function Timer({
   if (!startedAt) return null;
 
   return (
-    <div
-      className="fixed bottom-24 w-auto h-16 text-yellow-300 text-3xl px-4 flex items-center justify-center rounded-lg shadow-lg border border-yellow-500 tracking-widest"
-      style={{ fontFamily: "monospace" }}
-    >
-      {formatTime(remaining)}
+    <div className="flex flex-col items-center py-2 px-4 justify-center border border-yellow-500 rounded-2xl">
+      <div
+        className="text-yellow-400 text-6xl font-digital tracking-widest"
+        style={{
+          textShadow: `
+        0 0 4px #78620e,
+        0 0 8px #78620e,
+        0 0 16px #78620e,
+        0 0 20px #78620e
+      `,
+        }}
+      >
+        {formatTime(remaining)}
+      </div>
     </div>
   );
 }
