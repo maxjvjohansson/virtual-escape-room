@@ -9,6 +9,7 @@ import PaintingPuzzleModal from "../Puzzles/PaintingPuzzle/PaintingPuzzleModal";
 import CodeLockModal from "../CodeLock/CodeLockModal";
 import GameOverModal from "../GameOver/GameOverModal";
 import Timer from "../Timer/Timer";
+import Inventory from "../Inventory/Inventory";
 
 export default function BasementRoom() {
   const { state } = useGameContext();
@@ -54,11 +55,7 @@ export default function BasementRoom() {
         isOpen={showCodeLock}
         onClose={() => setShowCodeLock(false)}
       ></CodeLockModal>
-      <Timer
-        startedAt={state.startedAt}
-        finishedAt={state.finishedAt}
-        durationMs={60 * 60 * 1000}
-      />
+      <Inventory />
       <GameOverModal
         isOpen={state.isGameOver}
         onClose={() => router.push("/")}
