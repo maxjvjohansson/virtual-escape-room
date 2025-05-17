@@ -53,7 +53,7 @@ export default function Timer({
   return (
     <div className="flex flex-col items-center py-2 px-4 justify-center border border-yellow-500 rounded-2xl">
       <div
-        className="text-yellow-400 text-3xl font-digital tracking-widest w-full text-left"
+        className="text-yellow-400 text-4xl md:text-6xl font-digital tracking-widest w-full text-left"
         style={{
           textShadow: `
         0 0 4px #78620e,
