@@ -42,10 +42,13 @@ export function useBackgroundAudio() {
         ? OUTSIDE_TRACKS
         : [];
 
+    const storedVolume = parseFloat(localStorage.getItem("volume") || "1");
+    const isMuted = JSON.parse(localStorage.getItem("muted") || "false");
+
     const newAudios = sources.map((src) => {
       const audio = new Audio(src);
       audio.loop = true;
-      audio.volume = 1;
+      audio.volume = isMuted ? 0 : storedVolume;
       return audio;
     });
 
