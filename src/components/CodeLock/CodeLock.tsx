@@ -55,19 +55,44 @@ export default function CodeLock() {
     <section className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold">Enter Escape Code</h2>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4">
         {(["A", "B", "C", "D"] as const).map((key) => (
-          <input
-            key={key}
-            type="number"
-            min={0}
-            max={9}
-            value={inputs[key]}
-            onChange={handleChange(key)}
-            className="w-full p-2 text-center border rounded"
-            maxLength={1}
-            placeholder={key}
-          />
+          <div key={key} className="flex flex-col items-center">
+            <span className="text-xl font-bold ">{key}</span>
+
+            <div className="flex flex-col items-center">
+              <button
+                type="button"
+                onClick={() =>
+                  setInputs((prev) => ({
+                    ...prev,
+                    [key]: String((+prev[key] + 1) % 10),
+                  }))
+                }
+              >
+                ▲
+              </button>
+
+              <input
+                type="text"
+                value={inputs[key] || "0"}
+                readOnly
+                className="w-10 h-10 text-center text-xl text-white border-2 border-black rounded-full bg-gray-700 select-none pointer-events-none"
+              />
+
+              <button
+                type="button"
+                onClick={() =>
+                  setInputs((prev) => ({
+                    ...prev,
+                    [key]: String((+prev[key] + 9) % 10),
+                  }))
+                }
+              >
+                ▼
+              </button>
+            </div>
+          </div>
         ))}
       </div>
 
