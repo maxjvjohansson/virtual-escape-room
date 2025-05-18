@@ -10,10 +10,10 @@ export default function CollectedCodes() {
 
   return (
     <ul className="flex gap-6 text-white text-xl md:text-4xl tracking-wide">
-      {computerSolved ? ( <p>A{code.A}</p> ): (<></>)}
-      {oddoutSolved ? ( <p>B{code.B}</p> ): (<></>)}
-      {wordSolved ? ( <p>C{code.C}</p> ): (<></>)}
-      {paintingSolved ? ( <p>D{code.D}</p> ): (<></>)}
+      {computerSolved && <p>A{code.A}</p>}
+      {oddoutSolved && <p>B{code.B}</p>}
+      {wordSolved && <p>C{code.C}</p>}
+      {paintingSolved && <p>D{code.D}</p>}
     </ul>
   );
 }
