@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
+import Image from "next/image";
 import Button from "@/elements/Button";
 import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
 import OddOutPuzzleModal from "../Puzzles/OddOutPuzzle/OddOutPuzzleModal";
@@ -34,7 +35,16 @@ export default function BasementRoom() {
       <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
       <Button onClick={() => setShowWordPuzzle(true)}>Word puzzle</Button>
       <Button onClick={() => setShowPainting(true)}>Painting Puzzle</Button>
-      <Button onClick={() => setShowCodeLock(true)}>Code Lock</Button>
+      <div className="relative w-full max-w-[1920px] mx-auto">
+        <Button onClick={() => setShowCodeLock(true)} className="border-none">
+          <Image
+            src="/images/lock.png"
+            alt="Code Lock"
+            width={100}
+            height={100}
+          />
+        </Button>
+      </div>
       <ComputerPuzzleModal
         isOpen={showComputer}
         onClose={() => setShowComputer(false)}
