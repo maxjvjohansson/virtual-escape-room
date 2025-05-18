@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
 import { formatTime } from "@/utils/formatTime";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Button from "@/elements/Button";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
@@ -14,12 +13,6 @@ export default function CodeLock() {
 
   const [inputs, setInputs] = useState({ A: "", B: "", C: "", D: "" });
   const [error, setError] = useState("");
-
-  const handleChange =
-    (key: "A" | "B" | "C" | "D") =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputs({ ...inputs, [key]: e.target.value });
-    };
 
   const handleSubmit = () => {
     const correctCode = state.code;
@@ -99,6 +92,8 @@ export default function CodeLock() {
           </div>
         ))}
       </div>
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <Button
         className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg shadow-lg transition"
