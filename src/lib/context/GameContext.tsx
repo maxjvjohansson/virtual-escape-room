@@ -18,6 +18,7 @@ const initialState: GameState = {
   },
   notes: [],
   playerName: "",
+  hasTicket: false,
   startedAt: null,
   finishedAt: null,
   isGameOver: false,
@@ -63,6 +64,9 @@ function gameReducer(state: GameState, action: Action): GameState {
 
     case "SET_PLAYER_NAME":
       return { ...state, playerName: action.payload };
+
+    case "SET_HAS_TICKET":
+      return { ...state, hasTicket: action.payload };
 
     case "START_GAME":
       if (typeof document !== "undefined") {
