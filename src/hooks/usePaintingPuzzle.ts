@@ -5,13 +5,7 @@ import {
   getRandomFakePieces,
 } from "@/data/paintingPuzzleData";
 import { useState, useEffect } from "react";
-
-function shuffle<T>(array: T[]): T[] {
-  return [...array]
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-}
+import { shuffle } from "@/utils/shuffleArray";
 
 export const selectedPainting: PuzzleSet =
   PuzzleSets[Math.floor(Math.random() * PuzzleSets.length)];
