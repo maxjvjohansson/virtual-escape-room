@@ -209,6 +209,22 @@ const handleSubmit = (e: React.FormEvent) => {
                 </Fragment>
               ))}
             </div>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-gray-50/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+            >
+              <InputField
+                id="inputGuess"
+                placeholder="Write your guess instead..."
+                value={inputGuess}
+                onChange={handleInputChange}
+                className="w-full"
+                required
+              />
+              <Button type="submit" className="bg-green-600 hover:bg-green-700">
+                Enter guess
+              </Button>
+            </form>
           </>
         ) : (
           <div className="text-center">
@@ -221,22 +237,6 @@ const handleSubmit = (e: React.FormEvent) => {
           </div>
         )}
       </section>
-      <form
-      onSubmit={handleSubmit}
-      className="bg-gray-50/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
-    >
-      <InputField
-        id="inputGuess"
-        placeholder="Write your guess instead..."
-        value={inputGuess}
-        onChange={handleInputChange}
-        className="w-full"
-        required
-      />
-      <Button type="submit" className="bg-green-600 hover:bg-green-700">
-        Enter guess
-      </Button>
-      </form>
     </Modal>
   );
 }
