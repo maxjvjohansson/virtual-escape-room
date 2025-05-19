@@ -75,7 +75,8 @@ function DropZone({
 export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProps) {
   const [selectedWord, setSelectedWord] = useState("");
   const [currentArrangement, setCurrentArrangement] = useState<string[]>([]);
-  
+  const [inputGuess, setInputGuess] = useState("");
+
   // Drag state
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dropZoneIndex, setDropZoneIndex] = useState<number | null>(null);
@@ -146,6 +147,11 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
     setDropZoneIndex(null);
   };
 
+  // Handle inputfield option 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setInputGuess(e.target.value);
+};
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <section className="p-4">
@@ -211,7 +217,7 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
         id="inputGuess"
         placeholder="Write your guess instead..."
         value={inputGuess}
-        onChange={(e) => (e.target.value)}
+        onChange={handleInputChange}
         className="w-full"
         required
       />
