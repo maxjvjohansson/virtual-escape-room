@@ -1,5 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
 import Modal from '@/elements/Modal';
+import Button from "@/elements/Button";
+import InputField from "@/elements/InputField";
 import { getRandomWord } from '@/data/WordPuzzleData';
 import { usePuzzle } from '@/hooks/usePuzzle';
 import { shuffle } from '@/utils/shuffleArray';
@@ -201,6 +203,22 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
           </div>
         )}
       </section>
+      <form
+      onSubmit={handleSubmit}
+      className="bg-black/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+    >
+      <InputField
+        id="inputGuess"
+        placeholder="Write your guess instead..."
+        value={inputGuess}
+        onChange={(e) => (e.target.value)}
+        className="w-full"
+        required
+      />
+      <Button type="submit" className="bg-green-600 hover:bg-green-700">
+        Enter guess
+      </Button>
+      </form>
     </Modal>
   );
 }
