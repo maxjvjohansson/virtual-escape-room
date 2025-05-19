@@ -1,5 +1,12 @@
 export async function buyTicket(jwt: string): Promise<void> {
-  const res = await fetch("https://api.tivoli.se/transactions", {
+  const isDev = process.env.NODE_ENV === "development";
+
+  if (isDev) {
+    console.log("Mock ticket purchase for dev");
+    return;
+  }
+
+  const res = await fetch("https://yrgobanken.vip/api/transactions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
