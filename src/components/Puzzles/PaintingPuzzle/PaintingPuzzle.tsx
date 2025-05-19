@@ -62,7 +62,7 @@ export default function PaintingPuzzle() {
             className="h-auto w-55"
           />
           <Image
-            src="/paintingPuzzlePaintings/painting-frame.png"
+            src="/images/paintingPuzzlePaintings/painting-frame.png"
             alt="Frame"
             width={720}
             height={720}
@@ -121,7 +121,7 @@ export default function PaintingPuzzle() {
             />
           </section>
           <Image
-            src="/paintingPuzzlePaintings/painting-frame.png"
+            src="/images/paintingPuzzlePaintings/painting-frame.png"
             alt="Frame"
             width={720}
             height={720}
