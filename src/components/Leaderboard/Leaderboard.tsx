@@ -48,7 +48,9 @@ export default function Leaderboard() {
               key={idx}
               className="flex justify-between border-b border-white/20 pb-1"
             >
-              <span>{score.player_name}</span>
+              <span>
+                {idx + 1}. {score.player_name}
+              </span>
               <span>{formatTime(score.time_ms)}</span>
             </li>
           ))}

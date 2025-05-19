@@ -11,6 +11,8 @@ type OddOutPuzzleModalProps = {
   onClose: () => void;
 };
 
+const randomOddOutSet = getRandomOddOutSet();
+
 export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModalProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [currentOddOutSet, setCurrentOddOutSet] = useState<OddOutImageSet>(() => getRandomOddOutSet());
@@ -20,7 +22,7 @@ export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModal
   useEffect(() => {
     if (isOpen && !isSolved) {
       setErrorMessage(null);
-      setCurrentOddOutSet(getRandomOddOutSet());
+      setCurrentOddOutSet(randomOddOutSet);
     }
   }, [isOpen, isSolved]);
 
