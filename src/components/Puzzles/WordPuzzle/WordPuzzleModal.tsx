@@ -76,6 +76,7 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
   const [selectedWord, setSelectedWord] = useState("");
   const [currentArrangement, setCurrentArrangement] = useState<string[]>([]);
   const [inputGuess, setInputGuess] = useState("");
+  const [showInput, setShowInput] = useState<boolean>(false);
 
   // Drag state
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
@@ -147,8 +148,13 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
     setDropZoneIndex(null);
   };
 
-  // Handle inputfield option 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+// Handle inputfield option 
+const toggleInputForm = () => {
+  setShowInput(!showInput);
+  /* setErrorMessage(null); */
+};
+
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setInputGuess(e.target.value);
 };
 
@@ -209,6 +215,14 @@ const handleSubmit = (e: React.FormEvent) => {
                 </Fragment>
               ))}
             </div>
+            <Button
+              type="button"
+              onClick={toggleInputForm}
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded"
+            >
+              {showInput ? "Hide typing option" : "Type your answer instead"}
+            </Button>
+            {showInput && (
             <form
               onSubmit={handleSubmit}
               className="bg-gray-50/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
@@ -225,6 +239,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 Enter guess
               </Button>
             </form>
+            )}
           </>
         ) : (
           <div className="text-center">
