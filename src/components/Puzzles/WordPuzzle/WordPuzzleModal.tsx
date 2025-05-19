@@ -152,6 +152,18 @@ export default function WordPuzzleModal({ isOpen, onClose }: WordPuzzleModalProp
   setInputGuess(e.target.value);
 };
 
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (inputGuess.toLowerCase() === selectedWord.toLowerCase()) {
+    // If correct, update the arrangement to match the correct word, if we end up not removing the letters uppon sucess when the design is set!
+    setCurrentArrangement([...selectedWord]);
+    setErrorMessage(null);
+  } else {
+    setErrorMessage("That's not the right word. Try again!");
+  }
+};
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <section className="p-4">
