@@ -66,20 +66,22 @@ function gameReducer(state: GameState, action: Action): GameState {
 
     case "START_GAME":
       if (typeof document !== "undefined") {
-        document.cookie = "game_started=true; path=/";
+        document.cookie = "game_started=true; path=/; SameSite=None; Secure";
       }
       return { ...state, startedAt: Date.now() };
 
     case "END_GAME":
       if (typeof document !== "undefined") {
-        document.cookie = "game_finished=true; path=/";
+        document.cookie = "game_finished=true; path=/; SameSite=None; Secure";
       }
       return { ...state, finishedAt: Date.now() };
 
     case "RESET_GAME":
       if (typeof document !== "undefined") {
-        document.cookie = "game_started=; Max-Age=0; path=/";
-        document.cookie = "game_finished=; Max-Age=0; path=/";
+        document.cookie =
+          "game_started=; Max-Age=0; path=/; SameSite=None; Secure";
+        document.cookie =
+          "game_finished=; Max-Age=0; path=/; SameSite=None; Secure";
       }
       return { ...initialState };
 
