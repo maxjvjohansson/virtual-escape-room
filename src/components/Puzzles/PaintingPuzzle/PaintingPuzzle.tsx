@@ -8,7 +8,7 @@ import {
 import PaintingPuzzlePieces from "./PaintingPuzzlePieces";
 import PaintingGrid from "./PaintingGrid";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function PaintingPuzzle() {
   const { isSolved, solutionDigit, solve } = usePuzzle("painting", "D");
@@ -26,7 +26,23 @@ export default function PaintingPuzzle() {
     cluePiece,
   } = usePaintingPuzzle();
 
-  console.log(focusMode);
+  const neutralFocusRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (focusMode === "painting") {
+      const square = document.querySelector(
+        '[data-painting-index="0"]'
+      ) as HTMLElement | null;
+      square?.focus();
+    } else if (focusMode === "inventory") {
+      const piece = document.querySelector(
+        '[data-inventory-index="0"]'
+      ) as HTMLElement | null;
+      piece?.focus();
+    } else if (focusMode === "none") {
+      neutralFocusRef?.current?.focus();
+    }
+  }, [focusMode]);
 
   useEffect(() => {
     if (puzzleSet) {
@@ -58,13 +74,19 @@ export default function PaintingPuzzle() {
         <>
           <section
             tabIndex={0}
+            ref={neutralFocusRef}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
+              if (
+                e.key === "Enter" ||
+                (e.key === " " && focusMode !== "painting")
+              ) {
                 e.preventDefault();
                 setFocusMode("painting");
+              } else if (e.key === "Escape") {
+                setFocusMode("none");
               }
             }}
-            className="focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
+            className="focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
           >
             <PaintingGrid
               painting={painting}
@@ -103,29 +125,28 @@ export default function PaintingPuzzle() {
             alt="Frame"
             width={720}
             height={720}
-            className="absolute z-20 h-auto w-69 top-0 pointer-events-none"
+            className="absolute z-20 h-auto w-70 top-0 pointer-events-none"
           />
           <section
             tabIndex={0}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
+              if (
+                e.key === "Enter" ||
+                (e.key === " " && focusMode !== "inventory")
+              ) {
                 e.preventDefault();
                 setFocusMode("inventory");
+              } else if (e.key === "Escape") {
+                setFocusMode("none");
               }
             }}
-            className="focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
+            className="focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
           >
             <PaintingPuzzlePieces
               pieces={inventory}
               onSelect={(piece) => {
                 setSelectedPiece(piece);
-                setTimeout(() => {
-                  setFocusMode("painting");
-                  const nextEl = document.querySelector(
-                    '[data-painting-index="0"]'
-                  ) as HTMLElement | null;
-                  nextEl?.focus();
-                }, 0);
+                setFocusMode("painting");
               }}
               selectedPiece={selectedPiece}
               focusMode={focusMode === "inventory"}
