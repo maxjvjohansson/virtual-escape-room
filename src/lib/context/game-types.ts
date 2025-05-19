@@ -7,6 +7,7 @@ export type GameState = {
   code: Record<CodeKey, number | null>;
   notes: string[];
   playerName: string;
+  hasTicket: boolean;
   startedAt: number | null;
   finishedAt: number | null;
   isGameOver: boolean;
@@ -18,6 +19,7 @@ export type Action =
   | { type: "ADD_NOTE"; payload: string }
   | { type: "GENERATE_ESCAPE_CODE" }
   | { type: "SET_PLAYER_NAME"; payload: string }
+  | { type: "SET_HAS_TICKET"; payload: boolean }
   | { type: "START_GAME" }
   | { type: "END_GAME" }
   | { type: "RESET_GAME" }
