@@ -223,7 +223,7 @@ const handleSubmit = (e: React.FormEvent) => {
       </section>
       <form
       onSubmit={handleSubmit}
-      className="bg-black/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+      className="bg-gray-50/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
     >
       <InputField
         id="inputGuess"
