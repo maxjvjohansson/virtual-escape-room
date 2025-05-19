@@ -51,9 +51,9 @@ export default function PaintingPuzzlePieces({
           onClick={() => onSelect(piece)}
           className={`border-1 ${
             selectedPiece?.id === piece.id
-              ? "border-yellow-400 border-2 shadow-[0_0_30px_rgba(255,215,0,0.6)] focus:ring-yellow-600 focus:shadow-[0_0_30px_rgba(255,215,0,0.6)]"
+              ? "border-yellow-400 border-2 shadow-[0_0_30px_rgba(190,140,60,0.7)] focus:ring-yellow-600 focus:shadow-[0_0_30px_rgba(190,140,60,0.7)]"
               : "border-transparent"
-          } hover:border-1 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transition-all w-16 h-18 duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+          } hover:border-1 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(190,140,60,0.7)] transition-all w-16 h-18 duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400`}
           width={720}
           height={720}
           role="button"
