@@ -13,7 +13,7 @@ export async function buyTicket(jwt: string): Promise<void> {
       Authorization: `Bearer ${jwt}`,
     },
     body: JSON.stringify({
-      amusement_id: 8,
+      amusement_id: 1,
       stake_amount: 3.0,
     }),
   });
