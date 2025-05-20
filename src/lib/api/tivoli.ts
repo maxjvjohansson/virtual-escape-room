@@ -14,7 +14,7 @@ export async function buyTicket(jwt: string): Promise<void> {
     },
     body: JSON.stringify({
       amusement_id: 8,
-      stake_amount: 3,
+      stake_amount: 3.0,
     }),
   });
 
