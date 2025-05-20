@@ -35,12 +35,15 @@ export async function buyTicket(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[buyTicket] Error data:", errorData);
-        } catch (_parseErr) {
-          console.error("[buyTicket] Failed to parse error response as JSON");
+        } catch (parseErr: any) {
+          console.error(
+            "[buyTicket] Failed to parse error response as JSON:",
+            parseErr
+          );
           errorData = { error: "Invalid error response format" };
         }
-      } catch (_err) {
-        console.error("[buyTicket] Failed to read error response");
+      } catch (err: any) {
+        console.error("[buyTicket] Failed to read error response:", err);
         errorData = { error: "Failed to read error response" };
       }
 
@@ -50,7 +53,7 @@ export async function buyTicket(jwt: string): Promise<void> {
     }
 
     console.log("[buyTicket] Ticket purchase successful");
-  } catch (err) {
+  } catch (err: any) {
     console.error("[buyTicket] Fatal error:", err);
     throw err;
   }
@@ -94,12 +97,15 @@ export async function awardStamp(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[awardStamp] Error data:", errorData);
-        } catch (_parseErr) {
-          console.error("[awardStamp] Failed to parse error response as JSON");
+        } catch (parseErr: any) {
+          console.error(
+            "[awardStamp] Failed to parse error response as JSON:",
+            parseErr
+          );
           errorData = { error: "Invalid error response format" };
         }
-      } catch (_err) {
-        console.error("[awardStamp] Failed to read error response");
+      } catch (err: any) {
+        console.error("[awardStamp] Failed to read error response:", err);
         errorData = { error: "Failed to read error response" };
       }
 
@@ -109,7 +115,7 @@ export async function awardStamp(jwt: string): Promise<void> {
     }
 
     console.log("[awardStamp] Stamp award successful");
-  } catch (err) {
+  } catch (err: any) {
     console.error("[awardStamp] Fatal error:", err);
     throw err;
   }
