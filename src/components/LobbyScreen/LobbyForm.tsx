@@ -39,7 +39,7 @@ export default function LobbyForm() {
 
       dispatch({ type: "SET_HAS_TICKET", payload: true });
       setTicketBought(true);
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
       setError("Could not complete transaction.");
     } finally {
