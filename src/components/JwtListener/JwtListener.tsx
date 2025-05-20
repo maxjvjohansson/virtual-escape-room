@@ -13,15 +13,30 @@ export default function JwtListener() {
         event.data
       );
 
-      // if (event.origin !== "https://tivoli.yrgobanken.vip") return;
+      let jwt = null;
 
-      const jwt = event.data?.jwt || event.data?.token || event.data;
+      if (
+        event.data?.type === "JWT_TOKEN" &&
+        typeof event.data.token === "string"
+      ) {
+        jwt = event.data.token;
+      } else if (typeof event.data?.jwt === "string") {
+        jwt = event.data.jwt;
+      } else if (
+        typeof event.data === "string" &&
+        event.data.startsWith("eyJ")
+      ) {
+        jwt = event.data;
+      }
 
-      if (typeof jwt === "string") {
+      if (jwt) {
         localStorage.setItem("jwt", jwt);
         console.log("[JwtListener] JWT received and saved:", jwt);
       } else {
-        console.log("[JwtListener] No valid JWT in message");
+        console.log(
+          "[JwtListener] No valid JWT format in message:",
+          event.data
+        );
       }
     };
 
