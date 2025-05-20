@@ -95,7 +95,6 @@ export async function awardStamp(jwt: string): Promise<void> {
       },
       body: JSON.stringify({
         amusement_id: 1,
-        payout_amount: 0.1,
         stamp_id: 13,
       }),
     });
