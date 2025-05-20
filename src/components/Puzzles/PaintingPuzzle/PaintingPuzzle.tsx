@@ -68,7 +68,15 @@ export default function PaintingPuzzle() {
             height={720}
             className="absolute z-20 h-auto w-69 top-0 pointer-events-none"
           />
-          <p>D{solutionDigit}</p>
+          <div className="text-center w-full flex items-center flex-col justify-center p-5">
+            <p className="bg-green-100 text-green-800 p-3 mb-4 rounded w-full">
+              Good job! The painting has been repaired!
+            </p>
+            <p className="text-xl mb-4">
+              You&apos;ve discovered code digit:{" "}
+              <span className="font-bold text-2xl">D{solutionDigit}</span>
+            </p>
+          </div>
         </>
       ) : (
         <>
