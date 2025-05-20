@@ -17,15 +17,9 @@ export default function ComputerPuzzleModal({ isOpen, onClose }: Props) {
     }
   }, [isOpen, riddle]);
 
-  const handleSuccess = () => {
-    onClose();
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      {riddle && (
-        <ComputerPuzzleScreen riddle={riddle} onSuccess={handleSuccess} />
-      )}
+      {riddle && <ComputerPuzzleScreen riddle={riddle} />}
     </Modal>
   );
 }
