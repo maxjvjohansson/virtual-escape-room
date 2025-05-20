@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     try {
       data = text ? JSON.parse(text) : {};
     } catch (err) {
-      console.error("Invalid JSON from upstream:", text);
+      console.error("JSON parse error:", err);
       return NextResponse.json(
         { error: "Invalid JSON response", raw: text },
         { status: 502 }
@@ -50,7 +50,12 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("Unexpected server error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      {
+        error:
+          err instanceof Error
+            ? err.message
+            : "Server error during transaction processing",
+      },
       { status: 500 }
     );
   }
