@@ -1,6 +1,7 @@
 "use client";
 
 import { useGameContext } from "@/lib/context/GameContext";
+import { awardStamp } from "@/lib/api/tivoli";
 import { formatTime } from "@/utils/formatTime";
 import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
@@ -20,6 +21,9 @@ export default function EndGameScreen() {
   const [wouldQualify, setWouldQualify] = useState(false);
   const [requiredTimeMs, setRequiredTimeMs] = useState<number | null>(null);
   const [isChecking, setIsChecking] = useState(true);
+  const [medalStatus, setMedalStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   const { state, dispatch } = useGameContext();
   const router = useRouter();
@@ -67,6 +71,25 @@ export default function EndGameScreen() {
 
     return () => clearTimeout(timeout);
   }, [state.startedAt, state.finishedAt, checkIfQualifies]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt || !state.startedAt || !state.finishedAt) return;
+
+    const giveStampReward = async () => {
+      setMedalStatus("loading");
+
+      try {
+        await awardStamp(jwt);
+        setMedalStatus("success");
+      } catch (err) {
+        console.error("Stamp reward failed:", err);
+        setMedalStatus("error");
+      }
+    };
+
+    giveStampReward();
+  }, [state.startedAt, state.finishedAt]);
 
   const handleSubmitScore = async () => {
     if (!state.playerName || !state.startedAt || !state.finishedAt) return;
@@ -123,6 +146,18 @@ export default function EndGameScreen() {
       <h2 className="text-2xl font-semibold">You Escaped!</h2>
 
       <p className="text-xl">Your Time: {timeTaken}</p>
+
+      {medalStatus === "loading" && (
+        <p className="text-yellow-400 text-sm italic">Awarding your medal...</p>
+      )}
+
+      {medalStatus === "success" && (
+        <p className="text-green-400 text-sm italic">You earned a medal!</p>
+      )}
+
+      {medalStatus === "error" && (
+        <p className="text-red-400 text-sm italic">Failed to grant medal.</p>
+      )}
 
       <div className="flex flex-col gap-4 mt-6">
         {state.startedAt && state.finishedAt && !isChecking && (
