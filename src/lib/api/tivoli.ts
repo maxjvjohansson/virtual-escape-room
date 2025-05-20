@@ -35,15 +35,26 @@ export async function buyTicket(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[buyTicket] Error data:", errorData);
-        } catch (parseErr: any) {
-          console.error(
-            "[buyTicket] Failed to parse error response as JSON:",
-            parseErr
-          );
+        } catch (parseErr: unknown) {
+          if (parseErr instanceof Error) {
+            console.error(
+              "[buyTicket] Failed to parse JSON:",
+              parseErr.message
+            );
+          } else {
+            console.error("[buyTicket] Failed to parse JSON:", parseErr);
+          }
           errorData = { error: "Invalid error response format" };
         }
-      } catch (err: any) {
-        console.error("[buyTicket] Failed to read error response:", err);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error(
+            "[buyTicket] Failed to read error response:",
+            err.message
+          );
+        } else {
+          console.error("[buyTicket] Failed to read error response:", err);
+        }
         errorData = { error: "Failed to read error response" };
       }
 
@@ -53,9 +64,14 @@ export async function buyTicket(jwt: string): Promise<void> {
     }
 
     console.log("[buyTicket] Ticket purchase successful");
-  } catch (err: any) {
-    console.error("[buyTicket] Fatal error:", err);
-    throw err;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("[buyTicket] Fatal error:", err.message);
+      throw err;
+    } else {
+      console.error("[buyTicket] Unknown fatal error:", err);
+      throw new Error("Unknown error during ticket purchase");
+    }
   }
 }
 
@@ -97,15 +113,26 @@ export async function awardStamp(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[awardStamp] Error data:", errorData);
-        } catch (parseErr: any) {
-          console.error(
-            "[awardStamp] Failed to parse error response as JSON:",
-            parseErr
-          );
+        } catch (parseErr: unknown) {
+          if (parseErr instanceof Error) {
+            console.error(
+              "[awardStamp] Failed to parse JSON:",
+              parseErr.message
+            );
+          } else {
+            console.error("[awardStamp] Failed to parse JSON:", parseErr);
+          }
           errorData = { error: "Invalid error response format" };
         }
-      } catch (err: any) {
-        console.error("[awardStamp] Failed to read error response:", err);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error(
+            "[awardStamp] Failed to read error response:",
+            err.message
+          );
+        } else {
+          console.error("[awardStamp] Failed to read error response:", err);
+        }
         errorData = { error: "Failed to read error response" };
       }
 
@@ -115,8 +142,13 @@ export async function awardStamp(jwt: string): Promise<void> {
     }
 
     console.log("[awardStamp] Stamp award successful");
-  } catch (err: any) {
-    console.error("[awardStamp] Fatal error:", err);
-    throw err;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("[awardStamp] Fatal error:", err.message);
+      throw err;
+    } else {
+      console.error("[awardStamp] Unknown fatal error:", err);
+      throw new Error("Unknown error during stamp award");
+    }
   }
 }
