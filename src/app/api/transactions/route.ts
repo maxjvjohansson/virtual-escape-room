@@ -1,35 +1,57 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const jwtHeader = req.headers.get("authorization");
-  const apiKey = process.env.TIVOLI_API_KEY;
+  try {
+    const jwtHeader = req.headers.get("authorization");
+    const apiKey = process.env.TIVOLI_API_KEY;
 
-  if (!jwtHeader || !apiKey) {
-    return NextResponse.json({ error: "Missing auth info" }, { status: 401 });
-  }
+    if (!jwtHeader || !apiKey) {
+      console.error("Missing auth info:", { jwtHeader, apiKey });
+      return NextResponse.json({ error: "Missing auth info" }, { status: 401 });
+    }
 
-  const token = jwtHeader.replace(/^Bearer\s+/i, "");
+    const token = jwtHeader.replace(/^Bearer\s+/i, "");
+    const payload = await req.json();
 
-  const payload = await req.json();
+    console.log("[/api/transactions] Payload:", payload);
 
-  const upstreamRes = await fetch("https://yrgobanken.vip/api/transactions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-      "x-api-key": apiKey,
-    },
-    body: JSON.stringify(payload),
-  });
+    const response = await fetch("https://yrgobanken.vip/api/transactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+        "x-api-key": apiKey,
+      },
+      body: JSON.stringify(payload),
+    });
 
-  const data = await upstreamRes.json();
+    const text = await response.text();
+    let data;
 
-  if (!upstreamRes.ok) {
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch (err) {
+      console.error("Invalid JSON from upstream:", text);
+      return NextResponse.json(
+        { error: "Invalid JSON response", raw: text },
+        { status: 502 }
+      );
+    }
+
+    if (!response.ok) {
+      console.error("Upstream error:", data);
+      return NextResponse.json(
+        { error: data.error || "Transaction failed", details: data },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (err) {
+    console.error("Unexpected server error:", err);
     return NextResponse.json(
-      { error: data.error || "Failed" },
-      { status: upstreamRes.status }
+      { error: "Internal server error" },
+      { status: 500 }
     );
   }
-
-  return NextResponse.json(data);
 }
