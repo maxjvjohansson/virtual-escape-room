@@ -105,7 +105,7 @@ export default function ComputerPuzzleScreen({
                   }
                 }}
               >
-                New hint
+                {!hasReqHint ? "Hint" : "Hide hint"}
               </button>
             </div>
           </form>
