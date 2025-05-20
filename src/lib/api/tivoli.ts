@@ -35,11 +35,11 @@ export async function buyTicket(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[buyTicket] Error data:", errorData);
-        } catch (parseErr) {
+        } catch (_parseErr) {
           console.error("[buyTicket] Failed to parse error response as JSON");
           errorData = { error: "Invalid error response format" };
         }
-      } catch (err) {
+      } catch (_err) {
         console.error("[buyTicket] Failed to read error response");
         errorData = { error: "Failed to read error response" };
       }
@@ -94,11 +94,11 @@ export async function awardStamp(jwt: string): Promise<void> {
         try {
           errorData = JSON.parse(errorText);
           console.error("[awardStamp] Error data:", errorData);
-        } catch (parseErr) {
+        } catch (_parseErr) {
           console.error("[awardStamp] Failed to parse error response as JSON");
           errorData = { error: "Invalid error response format" };
         }
-      } catch (err) {
+      } catch (_err) {
         console.error("[awardStamp] Failed to read error response");
         errorData = { error: "Failed to read error response" };
       }
