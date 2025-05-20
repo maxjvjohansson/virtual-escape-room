@@ -6,6 +6,11 @@ export default function JwtListener() {
   useEffect(() => {
     console.log("[JwtListener] Mounted");
 
+    if (window.parent !== window) {
+      console.log("[JwtListener] Sending GAME_READY to parent");
+      window.parent.postMessage({ type: "GAME_READY" }, "*");
+    }
+
     const handleMessage = (event: MessageEvent) => {
       console.log(
         "[JwtListener] Raw message received:",
@@ -13,30 +18,16 @@ export default function JwtListener() {
         event.data
       );
 
-      let jwt = null;
+      const jwt =
+        event.data?.jwt ||
+        event.data?.token ||
+        (typeof event.data === "string" ? event.data : null);
 
-      if (
-        event.data?.type === "JWT_TOKEN" &&
-        typeof event.data.token === "string"
-      ) {
-        jwt = event.data.token;
-      } else if (typeof event.data?.jwt === "string") {
-        jwt = event.data.jwt;
-      } else if (
-        typeof event.data === "string" &&
-        event.data.startsWith("eyJ")
-      ) {
-        jwt = event.data;
-      }
-
-      if (jwt) {
+      if (typeof jwt === "string" && jwt.startsWith("eyJ")) {
         localStorage.setItem("jwt", jwt);
         console.log("[JwtListener] JWT received and saved:", jwt);
       } else {
-        console.log(
-          "[JwtListener] No valid JWT format in message:",
-          event.data
-        );
+        console.log("[JwtListener] No valid JWT in message");
       }
     };
 
