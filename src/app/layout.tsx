@@ -4,6 +4,7 @@ import "./globals.css";
 import { GameProvider } from "@/lib/context/GameContext";
 import VolumeControl from "@/elements/VolumeControl";
 import AudioManager from "@/components/AudioManager/AudioManager";
+import JwtListener from "@/components/JwtListener/JwtListener";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <GameProvider>
+          <JwtListener />
           <VolumeControl />
           <AudioManager />
           <main>{children}</main>
