@@ -23,7 +23,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       >
         <Button
           onClick={onClose}
-          className="absolute top-2 right-2 text-sm text-gray-500"
+          className="absolute top-2 right-2 text-sm text-gray-500 z-50"
         >
           ✕
         </Button>
