@@ -66,11 +66,13 @@ export default function BasementRoom() {
         onClose={() => setShowCodeLock(false)}
       ></CodeLockModal>
       <Inventory />
-      <Timer
-        startedAt={state.startedAt}
-        finishedAt={state.finishedAt}
-        durationMs={60 * 60 * 1000}
-      />
+      <div className="absolute top-8">
+        <Timer
+          startedAt={state.startedAt}
+          finishedAt={state.finishedAt}
+          durationMs={60 * 60 * 1000}
+        />
+      </div>
       <GameOverModal
         isOpen={state.isGameOver}
         onClose={() => router.push("/")}
