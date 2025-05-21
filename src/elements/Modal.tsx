@@ -18,12 +18,12 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <article
-        className="bg-white text-black p-4 rounded shadow-lg w-[90%] max-w-lg relative"
+        className="bg-white text-black rounded shadow-lg w-[90%] max-w-lg relative"
         onClick={(e) => e.stopPropagation()}
       >
         <Button
           onClick={onClose}
-          className="absolute top-2 right-2 text-sm text-gray-500"
+          className="absolute top-2 right-2 text-sm text-gray-500 z-50"
         >
           ✕
         </Button>
