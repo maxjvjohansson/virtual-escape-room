@@ -35,7 +35,7 @@ export default function BasementRoom() {
         <Timer
           startedAt={state.startedAt}
           finishedAt={state.finishedAt}
-          durationMs={5 * 1000}
+          durationMs={60 * 60 * 1000}
         />
       </div>
       <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
