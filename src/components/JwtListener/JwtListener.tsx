@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 export default function JwtListener() {
   useEffect(() => {
-    localStorage.removeItem("jwt");
+    if (process.env.NODE_ENV !== "development") {
+      localStorage.removeItem("jwt");
+    }
 
     if (window.parent !== window) {
       try {
