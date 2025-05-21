@@ -68,7 +68,7 @@ export default function LobbyForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-black/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+      className="bg-black/60 p-6 rounded-xl w-full max-w-lg mx-auto flex flex-col gap-6"
     >
       <InputField
         id="playerName"
@@ -103,12 +103,16 @@ export default function LobbyForm() {
       </div>
 
       {!ticketBought && (
-        <p className="text-yellow-400 text-sm italic">
+        <p className="bg-yellow-100 text-yellow-800 text-center p-3 mb-4 rounded">
           You must buy a ticket before starting the game.
         </p>
       )}
 
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && (
+        <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+          {error}
+        </p>
+      )}
 
       <Button
         type="submit"
