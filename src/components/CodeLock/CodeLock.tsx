@@ -47,60 +47,78 @@ export default function CodeLock() {
   };
 
   return (
-    <section className="flex flex-col justify-center items-center gap-4">
-      <h2 className="text-xl font-semibold">Enter Escape Code</h2>
+    <section className="flex items-center z-0 justify-center">
+      <div className="relative w-full p-6 rounded-lg">
+        <div
+          className="absolute inset-0 bg-no-repeat bg-center z-1"
+          style={{
+            backgroundImage: "url('/images/codelock_bg.png')",
+          }}
+        />
 
-      <div className="grid grid-cols-4 gap-4 bg-[#3d342a] p-8 rounded-2xl">
-        {(["A", "B", "C", "D"] as const).map((key) => (
-          <div key={key} className="flex flex-col items-center">
-            <span className="text-xl text-white font-bold mb-1">{key}</span>
+        <div className="flex justify-center flex-col items-center relative z-10">
+          <div className="flex justify-center items-center mb-6">
+            <h2 className="text-3xl font-bold text-yellow-400 tracking-wider font-mono">
+              ENTER ESCAPE CODE
+            </h2>
+          </div>
 
-            <div className="p-2 rounded-lg shadow-inner flex flex-col items-center gap-4">
-              <Button
-                type="button"
-                onClick={() =>
-                  setInputs((prev) => ({
-                    ...prev,
-                    [key]: String((+prev[key] + 1) % 10),
-                  }))
-                }
-                className="text-white hover:text-yellow-300 border-2"
-              >
-                <ChevronUp size={24} />
-              </Button>
+          <div className="mb-6">
+            <div className="grid grid-cols-4 gap-4">
+              {(["A", "B", "C", "D"] as const).map((key) => (
+                <div key={key} className="flex flex-col items-center">
+                  <span className="text-xl text-yellow-400 font-mono font-bold mb-2">
+                    {key}
+                  </span>
 
-              <input
-                type="text"
-                value={inputs[key] || "0"}
-                readOnly
-                className="w-12 h-12 text-center text-xl text-white border-2 border-yellow-400 rounded-full bg-gray-700 select-none pointer-events-none"
-              />
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      setInputs((prev) => ({
+                        ...prev,
+                        [key]: String((+prev[key] + 1) % 10),
+                      }))
+                    }
+                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md mb-2"
+                  >
+                    <ChevronUp size={20} />
+                  </Button>
 
-              <Button
-                type="button"
-                onClick={() =>
-                  setInputs((prev) => ({
-                    ...prev,
-                    [key]: String((+prev[key] + 9) % 10),
-                  }))
-                }
-                className="text-white hover:text-yellow-300 border-2"
-              >
-                <ChevronDown size={24} />
-              </Button>
+                  <div className="w-14 h-14 flex items-center justify-center text-2xl font-bold text-white bg-gray-800 border-2 border-yellow-500 rounded-full mb-2 shadow-lg">
+                    {inputs[key]}
+                  </div>
+
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      setInputs((prev) => ({
+                        ...prev,
+                        [key]: String((+prev[key] + 9) % 10),
+                      }))
+                    }
+                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md"
+                  >
+                    <ChevronDown size={20} />
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+
+          {error && (
+            <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+              {error}
+            </p>
+          )}
+
+          <Button
+            onClick={handleSubmit}
+            className="w-8/12 py-3 px-6 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-md transition-all duration-200 shadow-lg flex items-center justify-center"
+          >
+            <span className="font-mono tracking-wide">UNLOCK</span>
+          </Button>
+        </div>
       </div>
-
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-
-      <Button
-        className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg shadow-lg transition"
-        onClick={handleSubmit}
-      >
-        Unlock
-      </Button>
     </section>
   );
 }
