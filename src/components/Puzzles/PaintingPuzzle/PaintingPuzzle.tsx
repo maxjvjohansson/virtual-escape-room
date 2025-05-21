@@ -51,7 +51,7 @@ export default function PaintingPuzzle() {
   }, [painting]);
 
   return (
-    <section className="flex flex-col items-center gap-10 p-2 bg-[#191807]">
+    <section className="flex flex-col items-center gap-10 p-6 bg-[#191807]">
       {isSolved ? (
         <>
           <Image
