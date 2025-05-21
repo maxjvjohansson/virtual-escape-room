@@ -30,35 +30,21 @@ export default function LobbyForm() {
     try {
       const token = localStorage.getItem("jwt");
 
-      console.log("[handleBuyTicket] Attempting to purchase ticket");
-      console.log("[handleBuyTicket] Token exists:", !!token);
-
       if (!token) {
-        const errorMsg = "Missing token. Are you logged in via Tivoli?";
-        console.error("[handleBuyTicket]", errorMsg);
-        setError(errorMsg);
-        setLoading(false);
+        setError("Missing token. Are you logged in via Tivoli?");
         return;
       }
 
-      console.log("[handleBuyTicket] Calling buyTicket with token");
-
       await buyTicket(token);
 
-      console.log("[handleBuyTicket] Ticket purchase successful");
       dispatch({ type: "SET_HAS_TICKET", payload: true });
       setTicketBought(true);
     } catch (err) {
-      console.error("[handleBuyTicket] Error:", err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message || "Could not complete transaction."
+          : "An unknown error occurred during transaction.";
 
-      let errorMessage;
-      if (err instanceof Error) {
-        errorMessage = err.message || "Could not complete transaction.";
-      } else {
-        errorMessage = "An unknown error occurred during transaction.";
-      }
-
-      console.error("[handleBuyTicket] Setting error:", errorMessage);
       setError(errorMessage);
     } finally {
       setLoading(false);
