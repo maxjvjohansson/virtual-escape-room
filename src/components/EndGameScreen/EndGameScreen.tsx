@@ -82,8 +82,7 @@ export default function EndGameScreen() {
       try {
         await awardStamp(jwt);
         setMedalStatus("success");
-      } catch (err) {
-        console.error("Stamp reward failed:", err);
+      } catch {
         setMedalStatus("error");
       }
     };
