@@ -46,7 +46,7 @@ export default function PaintingGrid({
           tabIndex={focusMode ? 0 : -1}
           data-painting-index={index}
           onClick={() => handleClick(index)}
-          className="w-16 h-18 border-1 border-gray-400 items-center bg-gray-200 justify-center duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
+          className="w-16 h-18 border-1 border-[#3F2915] items-center bg-[#30260C] justify-center duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
         >
           {piece && (
             <Image
