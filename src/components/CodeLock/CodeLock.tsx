@@ -11,7 +11,7 @@ export default function CodeLock() {
   const { state, dispatch } = useGameContext();
   const router = useRouter();
 
-  const [inputs, setInputs] = useState({ A: "", B: "", C: "", D: "" });
+  const [inputs, setInputs] = useState({ A: "0", B: "0", C: "0", D: "0" });
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
