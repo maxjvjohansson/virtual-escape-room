@@ -1,5 +1,5 @@
 import { useGameContext } from "@/lib/context/GameContext";
-import type { PuzzleKey, CodeKey } from "@/lib/context/game-types";
+import type { PuzzleKey, CodeKey } from "@/lib/context/gameTypes";
 
 export function usePuzzle(puzzleKey: PuzzleKey, codeKey: CodeKey) {
   const { state, dispatch } = useGameContext();
