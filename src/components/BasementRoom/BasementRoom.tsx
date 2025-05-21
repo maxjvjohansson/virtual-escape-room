@@ -31,6 +31,13 @@ export default function BasementRoom() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
       style={{ backgroundImage: "url('/images/basement_empty.png')" }}
     >
+      <div className="absolute top-8">
+        <Timer
+          startedAt={state.startedAt}
+          finishedAt={state.finishedAt}
+          durationMs={60 * 60 * 1000}
+        />
+      </div>
       <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
       <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
       <Button onClick={() => setShowWordPuzzle(true)}>Word puzzle</Button>
@@ -65,13 +72,8 @@ export default function BasementRoom() {
         isOpen={showCodeLock}
         onClose={() => setShowCodeLock(false)}
       ></CodeLockModal>
-      <Inventory />
-      <div className="absolute top-8">
-        <Timer
-          startedAt={state.startedAt}
-          finishedAt={state.finishedAt}
-          durationMs={60 * 60 * 1000}
-        />
+      <div className="absolute w-full h-auto bottom-8">
+        <Inventory />
       </div>
       <GameOverModal
         isOpen={state.isGameOver}
