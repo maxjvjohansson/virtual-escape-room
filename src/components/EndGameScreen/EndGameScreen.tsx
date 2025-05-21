@@ -147,15 +147,21 @@ export default function EndGameScreen() {
       <p className="text-xl">Your Time: {timeTaken}</p>
 
       {medalStatus === "loading" && (
-        <p className="text-yellow-400 text-sm italic">Awarding your medal...</p>
+        <p className="bg-yellow-100 text-yellow-800 text-center p-3 mb-4 rounded">
+          Awarding your medal...
+        </p>
       )}
 
       {medalStatus === "success" && (
-        <p className="text-green-400 text-sm italic">You earned a medal!</p>
+        <p className="bg-green-100 text-green-800 text-center p-3 mb-4 rounded">
+          You earned a medal!
+        </p>
       )}
 
       {medalStatus === "error" && (
-        <p className="text-red-400 text-sm italic">Failed to grant medal.</p>
+        <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+          Failed to grant medal.
+        </p>
       )}
 
       <div className="flex flex-col gap-4 mt-6">
@@ -166,7 +172,7 @@ export default function EndGameScreen() {
                 Your time qualifies for the leaderboard!
               </p>
             ) : (
-              <p className="text-red-400 text-sm italic">
+              <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
                 You need to beat{" "}
                 <strong>
                   {requiredTimeMs !== null
@@ -198,10 +204,16 @@ export default function EndGameScreen() {
               : "Not Eligible for Leaderboard"}
           </Button>
         ) : (
-          <p className="text-green-400 text-sm italic">Score submitted!</p>
+          <p className="bg-green-100 text-green-800 text-center p-3 mb-4 rounded">
+            Score submitted!
+          </p>
         )}
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && (
+          <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+            {error}
+          </p>
+        )}
 
         <Button
           className="bg-purple-600 hover:bg-purple-800"
