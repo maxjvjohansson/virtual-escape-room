@@ -33,7 +33,11 @@ export default function Leaderboard() {
     <section className="w-full max-w-sm space-y-2">
       <h2 className="text-2xl font-bold text-center mb-4">Leaderboard</h2>
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      {error && (
+        <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+          {error}
+        </p>
+      )}
 
       {!scores && !error && (
         <p className="text-center text-sm animate-pulse">Loading scores...</p>
