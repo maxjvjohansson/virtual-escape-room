@@ -51,7 +51,7 @@ export default function PaintingPuzzle() {
   }, [painting]);
 
   return (
-    <section className="flex flex-col items-center gap-10 p-2">
+    <section className="flex flex-col items-center gap-10 p-2 bg-[#191807]">
       {isSolved ? (
         <>
           <Image
@@ -59,20 +59,20 @@ export default function PaintingPuzzle() {
             alt="Finished Painting"
             height={720}
             width={720}
-            className="h-auto w-55"
+            className="h-auto w-55 pt-8"
           />
           <Image
             src="/images/paintingPuzzlePaintings/painting-frame.png"
             alt="Frame"
             width={720}
             height={720}
-            className="absolute z-20 h-auto w-69 top-0 pointer-events-none"
+            className="absolute z-20 h-auto w-68 top-4 pointer-events-none"
           />
           <div className="text-center w-full flex items-center flex-col justify-center p-5">
             <p className="bg-green-100 text-green-800 p-3 mb-4 rounded w-full">
               Good job! The painting has been repaired!
             </p>
-            <p className="text-xl mb-4">
+            <p className="text-xl mb-4 text-white">
               You&apos;ve discovered code digit:{" "}
               <span className="font-bold text-2xl">D{solutionDigit}</span>
             </p>
@@ -133,7 +133,7 @@ export default function PaintingPuzzle() {
             alt="Frame"
             width={720}
             height={720}
-            className="absolute z-20 h-auto w-70 top-0 pointer-events-none"
+            className="absolute z-20 h-auto w-66 top-3 pointer-events-none"
           />
           <section
             tabIndex={0}
@@ -148,7 +148,7 @@ export default function PaintingPuzzle() {
                 setFocusMode("none");
               }
             }}
-            className="focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
+            className="focus:shadow-[0_0_50px_rgba(190,140,60,0.7)] bg-[url(/images/paintingPuzzlePaintings/painting-table.png)] bg-no-repeat bg-cover"
           >
             <PaintingPuzzlePieces
               pieces={inventory}
