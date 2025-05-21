@@ -30,8 +30,13 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <section className="w-full max-w-sm space-y-2">
-      <h2 className="text-2xl font-bold text-center mb-4">Leaderboard</h2>
+    <section
+      className="w-full p-8 text-white space-y-2 bg-cover"
+      style={{ backgroundImage: "url('/images/dark_wall_texture.jpg')" }}
+    >
+      <h2 className="text-4xl font-bold text-[#B81B00] text-center mb-4">
+        LEADERBOARD
+      </h2>
 
       {error && (
         <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
@@ -46,18 +51,32 @@ export default function Leaderboard() {
       {scores?.length === 0 && <p className="text-center">No scores yet.</p>}
 
       {scores && (
-        <ol className="space-y-2">
-          {scores.map((score, idx) => (
-            <li
-              key={idx}
-              className="flex justify-between border-b border-white/20 pb-1"
-            >
-              <span>
-                {idx + 1}. {score.player_name}
-              </span>
-              <span>{formatTime(score.time_ms)}</span>
-            </li>
-          ))}
+        <ol className="space-y-4">
+          {scores.map((score, idx) => {
+            const medalSrc =
+              idx === 0
+                ? "/images/gold_medal.png"
+                : idx === 1
+                ? "/images/silver_medal.png"
+                : idx === 2
+                ? "/images/bronze_medal.png"
+                : null;
+
+            return (
+              <li
+                key={idx}
+                className="flex items-center justify-between border-b border-white pb-1"
+              >
+                <span className="flex items-center gap-2">
+                  {medalSrc && (
+                    <img src={medalSrc} alt="Medal" className="w-12 h-auto" />
+                  )}
+                  {idx + 1}. {score.player_name}
+                </span>
+                <span>{formatTime(score.time_ms)}</span>
+              </li>
+            );
+          })}
         </ol>
       )}
     </section>

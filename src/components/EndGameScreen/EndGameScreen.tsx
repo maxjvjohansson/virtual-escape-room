@@ -168,7 +168,7 @@ export default function EndGameScreen() {
         {state.startedAt && state.finishedAt && !isChecking && (
           <>
             {wouldQualify ? (
-              <p className="text-green-400 text-sm italic">
+              <p className="bg-green-100 text-green-800 text-center p-3 mb-4 rounded">
                 Your time qualifies for the leaderboard!
               </p>
             ) : (
