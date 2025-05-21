@@ -1,7 +1,7 @@
 "use client";
 
 import { useGameContext } from "@/lib/context/GameContext";
-import { awardStamp } from "@/lib/api/tivoli";
+import { awardStamp } from "@/lib/api/transactionService";
 import { formatTime } from "@/utils/formatTime";
 import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
