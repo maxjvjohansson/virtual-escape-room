@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
 import InstructionsModal from "../Instructions/InstructionsModal";
-import { buyTicket } from "@/lib/api/tivoli";
+import { buyTicket } from "@/lib/api/transactionService";
 
 export default function LobbyForm() {
   const { dispatch } = useGameContext();
