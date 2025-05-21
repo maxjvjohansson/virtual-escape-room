@@ -39,7 +39,7 @@ export default function PaintingPuzzlePieces({
           onClick(selectedPiece);
         }
       }}
-      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 bg-gray-200 border-1 border-gray-400 focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
+      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 border-2 border-[#3F2915] focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
     >
       {pieces.map((piece, index) => (
         <Image
