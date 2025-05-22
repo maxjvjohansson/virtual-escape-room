@@ -17,31 +17,31 @@ export const OddOutSets : OddOutImageSet[] = [
         images: [
             {
                 id: "bat",
-                src: "/images/OddOut/bat.jpeg",
+                src: "/images/OddOut/bat.png",
                 alt: "Bat",
                 isOddOne: false
             },
             {
                 id: "hedgehog",
-                src: "/images/OddOut/hedgehog.jpeg",
+                src: "/images/OddOut/hedgehog.png",
                 alt: "Hedgehog",
                 isOddOne: false
             },
             {
                 id: "owl",
-                src: "/images/OddOut/owl.jpeg",
+                src: "/images/OddOut/owl.png",
                 alt: "Owl",
                 isOddOne: false
             },
             {
                 id: "fox",
-                src: "/images/OddOut/fox.jpeg",
+                src: "/images/OddOut/fox.png",
                 alt: "Fox",
                 isOddOne: false
             },
             {
                 id: "crow",
-                src: "/images/OddOut/crow.jpeg",
+                src: "/images/OddOut/crow.png",
                 alt: "crow",
                 isOddOne: true
             }
