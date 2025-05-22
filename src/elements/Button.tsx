@@ -17,18 +17,20 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variantStyles: Record<Variant, string> = {
-  default: "",
+  default: "cursor-pointer",
   "primary-red":
-    "bg-primary-red hover:bg-black text-white hover:text-primary-red",
+    "bg-primary-red hover:bg-primary-red-hover text-white cursor-pointer",
   "secondary-red":
-    "bg-black border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white",
-  "primary-green": "bg-primary-green hover:bg-primary-green-hover text-black",
+    "bg-black border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white cursor-pointer",
+  "primary-green":
+    "bg-primary-green hover:bg-primary-green-hover text-black cursor-pointer",
   "primary-purple":
-    "bg-primary-purple hover:bg-primary-purple-hover text-white",
+    "bg-primary-purple hover:bg-primary-purple-hover text-white cursor-pointer",
   "primary-yellow":
-    "bg-primary-yellow hover:bg-primary-yellow-hover text-black",
-  "primary-gray": "bg-light-gray hover:bg-light-gray-hover text-black",
-  disabled: "bg-dark-gray text-light-gray cursor-not-allowed opacity-60",
+    "bg-primary-yellow hover:bg-primary-yellow-hover text-black cursor-pointer",
+  "primary-gray":
+    "bg-light-gray hover:bg-light-gray-hover text-black cursor-pointer",
+  disabled: "bg-dark-gray text-light-gray cursor-not-allowed opacity-80",
 };
 
 export default function Button({
@@ -41,7 +43,7 @@ export default function Button({
     <button
       {...props}
       className={clsx(
-        "flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold uppercase transition-all duration-200 cursor-pointer",
+        "flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-200",
         variantStyles[variant],
         className
       )}
