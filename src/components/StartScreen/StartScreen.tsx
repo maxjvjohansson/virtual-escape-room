@@ -13,9 +13,9 @@ export default function StartScreen() {
   return (
     <section
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
-      style={{ backgroundImage: "url('/images/haunted_mansion.png')" }}
+      style={{ backgroundImage: "url('/images/mansion_bg.png')" }}
     >
-      <div className="w-64 md:w-96 mb-8">
+      <div className="w-64 md:w-112 mb-8">
         <Image
           src="/images/logo.svg"
           alt="The Haunted Escape logo"
