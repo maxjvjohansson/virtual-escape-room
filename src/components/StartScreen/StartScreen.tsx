@@ -25,13 +25,15 @@ export default function StartScreen() {
       </div>
       <div className="flex flex-col justify-between gap-4 md:gap-8">
         <Button
-          className="w-48 md:w-64 bg-red-600 hover:bg-red-800"
+          variant="primary-red"
+          className="w-48 md:w-64"
           onClick={() => router.push("/lobby")}
         >
           Buy Ticket
         </Button>
         <Button
-          className="w-48 md:w-64 bg-red-600 hover:bg-red-800"
+          variant="primary-green"
+          className="w-48 md:w-64"
           onClick={() => setShowLeaderboard(true)}
         >
           Leaderboard
