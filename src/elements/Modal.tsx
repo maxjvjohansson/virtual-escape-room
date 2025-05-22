@@ -18,7 +18,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <article
-        className="bg-white text-black rounded shadow-lg w-[90%] max-w-lg relative"
+        className="bg-white text-black rounded shadow-lg max-w-6xl relative"
         onClick={(e) => e.stopPropagation()}
       >
         <Button
