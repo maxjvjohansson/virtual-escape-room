@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Modal from '@/elements/Modal';
-import Button from '@/elements/Button';
-import { OddOutImage, OddOutImageSet, getRandomOddOutSet } from '@/data/OddOutPuzzleData';
-import { usePuzzle } from '@/hooks/usePuzzle';
-import { useGameContext } from '@/lib/context/GameContext';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Modal from "@/elements/Modal";
+import Button from "@/elements/Button";
+import {
+  OddOutImage,
+  OddOutImageSet,
+  getRandomOddOutSet,
+} from "@/data/OddOutPuzzleData";
+import { usePuzzle } from "@/hooks/usePuzzle";
+import { useGameContext } from "@/lib/context/GameContext";
 
 type OddOutPuzzleModalProps = {
   isOpen: boolean;
@@ -13,9 +17,14 @@ type OddOutPuzzleModalProps = {
 
 const randomOddOutSet = getRandomOddOutSet();
 
-export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModalProps) {
+export default function OddOutPuzzleModal({
+  isOpen,
+  onClose,
+}: OddOutPuzzleModalProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [currentOddOutSet, setCurrentOddOutSet] = useState<OddOutImageSet>(() => getRandomOddOutSet());
+  const [currentOddOutSet, setCurrentOddOutSet] = useState<OddOutImageSet>(() =>
+    getRandomOddOutSet()
+  );
   const { isSolved, solutionDigit, solve } = usePuzzle("oddOneOut", "B");
   const { state } = useGameContext();
 
@@ -28,14 +37,13 @@ export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModal
 
   const handleImageClick = (image: OddOutImage) => {
     if (isSolved) return;
-    
+
     if (image.isOddOne) {
       solve();
 
       console.log(state.puzzles);
-      
-      setErrorMessage(null);
 
+      setErrorMessage(null);
     } else {
       setErrorMessage("That's not the odd one out. Look carefully!");
       setTimeout(() => {
@@ -48,22 +56,23 @@ export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModal
     console.log("YAAAAY!!");
   }
 
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <section className="p-2">
-        <h2 className="text-2xl mb-4 font-bold text-center">Find the odd one out!</h2>
-        
+        <h2 className="text-2xl mb-4 font-bold text-center">
+          Find the odd one out!
+        </h2>
+
         {!isSolved ? (
           <>
             <p>Which card doesn&apos;t belong?</p>
-            
+
             {errorMessage && (
               <p className="bg-red-100 text-red-800 p-3 mb-4 rounded">
                 {errorMessage}
               </p>
             )}
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
               {currentOddOutSet.images.map((image: OddOutImage) => (
                 <Button
@@ -91,7 +100,8 @@ export default function OddOutPuzzleModal({ isOpen, onClose }: OddOutPuzzleModal
               Well done! You&apos;ve found the odd one out.
             </p>
             <p className="text-xl mb-4">
-              You&apos;ve discovered code digit: <span className="font-bold text-2xl">B{solutionDigit}</span>
+              You&apos;ve discovered code digit:{" "}
+              <span className="font-bold text-2xl">B{solutionDigit}</span>
             </p>
           </div>
         )}
