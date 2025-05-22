@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LeaderboardModal from "../Leaderboard/LeaderboardModal";
+import TicketIcon from "@assets/icons/ticket_white.svg";
+import TrophyIcon from "@assets/icons/trophy_black.svg";
 
 export default function StartScreen() {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
@@ -29,13 +31,15 @@ export default function StartScreen() {
           className="w-48 md:w-64"
           onClick={() => router.push("/lobby")}
         >
+          <TicketIcon />
           Buy Ticket
         </Button>
         <Button
-          variant="primary-red"
+          variant="primary-yellow"
           className="w-48 md:w-64"
           onClick={() => setShowLeaderboard(true)}
         >
+          <TrophyIcon />
           Leaderboard
         </Button>
         <LeaderboardModal
