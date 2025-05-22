@@ -141,7 +141,7 @@ export default function EndGameScreen() {
   return (
     <section
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-6 text-white text-center"
-      style={{ backgroundImage: "url('/images/haunted_mansion.png')" }}
+      style={{ backgroundImage: "url('/images/mansion_bg.png')" }}
     >
       <h1 className="text-3xl font-bold">
         Well done, {state.playerName || "Houdini"}!
