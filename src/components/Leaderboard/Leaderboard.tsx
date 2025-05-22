@@ -51,6 +51,7 @@ export default function Leaderboard() {
           alt="Trophy Icon"
           width={36}
           height={36}
+          className="w-auto"
         />
         LEADERBOARD
       </h2>
@@ -104,7 +105,7 @@ export default function Leaderboard() {
                       alt="Medal"
                       width={28}
                       height={28}
-                      className="object-contain"
+                      className="object-contain w-auto"
                     />
                   ) : (
                     <span className="font-bold text-yellow-400">{idx + 1}</span>

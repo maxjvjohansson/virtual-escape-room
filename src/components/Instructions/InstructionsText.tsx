@@ -3,7 +3,6 @@ import TrophyIcon from "@assets/icons/trophy_yellow.svg";
 import LockOpenIcon from "@assets/icons/lock_open_purple.svg";
 import ClockIcon from "@assets/icons/clock_purple.svg";
 import SkullIcon from "@assets/icons/skull_purple.svg";
-import Image from "next/image";
 
 export default function InstructionsText() {
   return (
@@ -15,11 +14,10 @@ export default function InstructionsText() {
       }}
     >
       <div className="flex items-center justify-center gap-3 mb-6">
-        <Image
+        <img
           src="/images/ghost_white.svg"
           alt="Ghost Icon"
-          width={24}
-          height={24}
+          className="w-6 h-auto"
         />
         <h2 className="text-3xl font-bold tracking-wide">Game Rules</h2>
       </div>
