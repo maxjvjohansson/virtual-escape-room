@@ -116,19 +116,28 @@ export default function LobbyForm() {
       >
         Start Game
       </Button>
+      <div className="flex items-center justify-between gap-8">
+        <Button
+          variant="primary-yellow"
+          className="w-full"
+          onClick={() => router.push("/")}
+        >
+          Home
+        </Button>
+        <Button
+          type="button"
+          variant="primary-gray"
+          className="w-full"
+          onClick={() => setShowInstructions(true)}
+        >
+          Instructions
+        </Button>
 
-      <Button
-        type="button"
-        variant="primary-gray"
-        onClick={() => setShowInstructions(true)}
-      >
-        Instructions
-      </Button>
-
-      <InstructionsModal
-        isOpen={showInstructions}
-        onClose={() => setShowInstructions(false)}
-      />
+        <InstructionsModal
+          isOpen={showInstructions}
+          onClose={() => setShowInstructions(false)}
+        />
+      </div>
     </form>
   );
 }
