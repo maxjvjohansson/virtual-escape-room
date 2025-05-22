@@ -86,11 +86,7 @@ export default function LobbyForm() {
         <p className="text-lg">Ticket Price: 3€</p>
         <Button
           type="button"
-          className={
-            ticketBought
-              ? "bg-green-700 cursor-default"
-              : "bg-purple-600 hover:bg-purple-700"
-          }
+          variant={ticketBought ? "disabled" : "primary-purple"}
           onClick={handleBuyTicket}
           disabled={ticketBought || loading}
         >
@@ -116,19 +112,14 @@ export default function LobbyForm() {
 
       <Button
         type="submit"
-        disabled={!ticketBought}
-        className={
-          ticketBought
-            ? "bg-green-600 hover:bg-green-700"
-            : "bg-gray-600 opacity-50 cursor-not-allowed"
-        }
+        variant={ticketBought ? "primary-green" : "disabled"}
       >
         Start Game
       </Button>
 
       <Button
         type="button"
-        className="bg-gray-600 hover:bg-gray-700"
+        variant="primary-gray"
         onClick={() => setShowInstructions(true)}
       >
         Instructions
