@@ -4,7 +4,6 @@ import clsx from "clsx";
 type Variant =
   | "default"
   | "primary-red"
-  | "secondary-red"
   | "primary-green"
   | "primary-purple"
   | "primary-yellow"
@@ -20,10 +19,8 @@ const variantStyles: Record<Variant, string> = {
   default: "cursor-pointer",
   "primary-red":
     "bg-primary-red hover:bg-primary-red-hover text-white cursor-pointer",
-  "secondary-red":
-    "bg-black border-2 border-primary-red text-primary-red hover:bg-primary-red hover:text-white cursor-pointer",
   "primary-green":
-    "bg-primary-green hover:bg-primary-green-hover text-black cursor-pointer",
+    "bg-primary-green hover:bg-primary-green-hover text-white cursor-pointer",
   "primary-purple":
     "bg-primary-purple hover:bg-primary-purple-hover text-white cursor-pointer",
   "primary-yellow":
@@ -43,7 +40,7 @@ export default function Button({
     <button
       {...props}
       className={clsx(
-        "flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-200",
+        "flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold capitalize transition-all duration-200",
         variantStyles[variant],
         className
       )}

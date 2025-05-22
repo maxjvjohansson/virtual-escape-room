@@ -32,7 +32,7 @@ export default function StartScreen() {
           Buy Ticket
         </Button>
         <Button
-          variant="primary-green"
+          variant="primary-red"
           className="w-48 md:w-64"
           onClick={() => setShowLeaderboard(true)}
         >
