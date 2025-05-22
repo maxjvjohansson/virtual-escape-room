@@ -7,6 +7,10 @@ import Button from "@/elements/Button";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import LeaderboardModal from "../Leaderboard/LeaderboardModal";
+import TrophyIcon from "@assets/icons/trophy_black.svg";
+import DoorIcon from "@assets/icons/door_white.svg";
+import CheckBoxIcon from "@assets/icons/checkbox_white.svg";
+import CrossIcon from "@assets/icons/close_x_white.svg";
 
 type Score = {
   player_name: string;
@@ -192,9 +196,15 @@ export default function EndGameScreen() {
             variant={
               loading || !wouldQualify || isChecking
                 ? "disabled"
-                : "primary-yellow"
+                : "primary-purple"
             }
           >
+            {loading || isChecking ? null : wouldQualify ? (
+              <CheckBoxIcon />
+            ) : (
+              <CrossIcon />
+            )}
+
             {loading
               ? "Submitting..."
               : isChecking
@@ -216,13 +226,15 @@ export default function EndGameScreen() {
         )}
 
         <Button
-          variant="primary-purple"
+          variant="primary-yellow"
           onClick={() => setShowLeaderboard(true)}
         >
+          <TrophyIcon />
           View Leaderboard
         </Button>
 
         <Button variant="primary-green" onClick={handlePlayAgain}>
+          <DoorIcon />
           Play Again
         </Button>
 

@@ -78,7 +78,7 @@ export default function LobbyForm() {
       <div className="flex flex-col gap-4">
         <label
           htmlFor="playerName"
-          className="text-sm font-medium text-white tracking-wide flex items-center gap-2"
+          className="text-lg font-medium text-white tracking-wide flex items-center gap-2"
         >
           <GhostIcon />
           Player Name
