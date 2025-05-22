@@ -5,7 +5,9 @@ import { useGameContext } from "@/lib/context/GameContext";
 import { formatTime } from "@/utils/formatTime";
 import { useRouter } from "next/navigation";
 import Button from "@/elements/Button";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import ArrowUpIcon from "@assets/icons/arrow_up_white.svg";
+import ArrowDownIcon from "@assets/icons/arrow_down_white.svg";
+import UnlockIcon from "@assets/icons/lock_open_black.svg";
 
 export default function CodeLock() {
   const { state, dispatch } = useGameContext();
@@ -71,7 +73,7 @@ export default function CodeLock() {
                     {key}
                   </span>
 
-                  <Button
+                  <button
                     type="button"
                     onClick={() =>
                       setInputs((prev) => ({
@@ -79,16 +81,16 @@ export default function CodeLock() {
                         [key]: String((+prev[key] + 1) % 10),
                       }))
                     }
-                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md mb-2"
+                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md mb-2 cursor-pointer"
                   >
-                    <ChevronUp size={20} />
-                  </Button>
+                    <ArrowUpIcon />
+                  </button>
 
                   <div className="w-14 h-14 flex items-center justify-center text-2xl font-bold text-white bg-gray-800 border-2 border-yellow-500 rounded-full mb-2 shadow-lg">
                     {inputs[key]}
                   </div>
 
-                  <Button
+                  <button
                     type="button"
                     onClick={() =>
                       setInputs((prev) => ({
@@ -96,10 +98,10 @@ export default function CodeLock() {
                         [key]: String((+prev[key] + 9) % 10),
                       }))
                     }
-                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md"
+                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md cursor-pointer"
                   >
-                    <ChevronDown size={20} />
-                  </Button>
+                    <ArrowDownIcon />
+                  </button>
                 </div>
               ))}
             </div>
@@ -116,6 +118,7 @@ export default function CodeLock() {
             variant="primary-yellow"
             className="w-8/12"
           >
+            <UnlockIcon />
             Unlock
           </Button>
         </div>
