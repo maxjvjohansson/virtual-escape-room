@@ -113,9 +113,10 @@ export default function CodeLock() {
 
           <Button
             onClick={handleSubmit}
-            className="w-8/12 py-3 px-6 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-md transition-all duration-200 shadow-lg flex items-center justify-center"
+            variant="primary-yellow"
+            className="w-8/12"
           >
-            <span className="font-mono tracking-wide">UNLOCK</span>
+            Unlock
           </Button>
         </div>
       </div>
