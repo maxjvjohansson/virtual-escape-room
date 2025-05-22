@@ -69,12 +69,12 @@ export default function OddOutPuzzleModal({
               </p>
             )}
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 px-0 py-0">
               {currentOddOutSet.images.map((image: OddOutImage) => (
                 <Button
                   key={image.id}
                   onClick={() => handleImageClick(image)}
-                  className="transition-all duration-200"
+                  className="px-0 py-0"
                   aria-label={`Select image: ${image.alt}`}
                 >
                   <div className="relative w-full h-36 md:h-40">
