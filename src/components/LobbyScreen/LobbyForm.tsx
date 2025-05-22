@@ -7,6 +7,11 @@ import { useState } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
 import InstructionsModal from "../Instructions/InstructionsModal";
 import { buyTicket } from "@/lib/api/transactionService";
+import TicketIcon from "@assets/icons/ticket_white.svg";
+import HandLeftIcon from "@assets/icons/hand_left_black.svg";
+import InfoIcon from "@assets/icons/info_black.svg";
+import DoorIcon from "@assets/icons/door_white.svg";
+import GhostIcon from "@assets/icons/ghost_white.svg";
 
 export default function LobbyForm() {
   const { dispatch } = useGameContext();
@@ -70,17 +75,27 @@ export default function LobbyForm() {
       onSubmit={handleSubmit}
       className="bg-black/60 p-6 rounded-xl w-full max-w-lg mx-auto flex flex-col gap-6"
     >
-      <InputField
-        id="playerName"
-        placeholder="Enter your name"
-        value={playerName}
-        onChange={(e) => {
-          setPlayerName(e.target.value);
-          if (error) setError("");
-        }}
-        className="w-full"
-        required
-      />
+      <div className="flex flex-col gap-4">
+        <label
+          htmlFor="playerName"
+          className="text-sm font-medium text-white tracking-wide flex items-center gap-2"
+        >
+          <GhostIcon />
+          Player Name
+        </label>
+
+        <InputField
+          id="playerName"
+          placeholder="Enter your name"
+          value={playerName}
+          onChange={(e) => {
+            setPlayerName(e.target.value);
+            if (error) setError("");
+          }}
+          className="w-full"
+          required
+        />
+      </div>
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <p className="text-lg">Ticket Price: 3€</p>
@@ -90,6 +105,8 @@ export default function LobbyForm() {
           onClick={handleBuyTicket}
           disabled={ticketBought || loading}
         >
+          {" "}
+          <TicketIcon />
           {ticketBought
             ? "Ticket Bought"
             : loading
@@ -114,6 +131,7 @@ export default function LobbyForm() {
         type="submit"
         variant={ticketBought ? "primary-green" : "disabled"}
       >
+        <DoorIcon />
         Start Game
       </Button>
       <div className="flex items-center justify-between gap-8">
@@ -122,6 +140,8 @@ export default function LobbyForm() {
           className="w-full"
           onClick={() => router.push("/")}
         >
+          {" "}
+          <HandLeftIcon />
           Home
         </Button>
         <Button
@@ -130,6 +150,8 @@ export default function LobbyForm() {
           className="w-full"
           onClick={() => setShowInstructions(true)}
         >
+          {" "}
+          <InfoIcon />
           Instructions
         </Button>
 
