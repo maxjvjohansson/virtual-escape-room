@@ -52,10 +52,6 @@ export default function OddOutPuzzleModal({
     }
   };
 
-  if (isSolved) {
-    console.log("YAAAAY!!");
-  }
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <section className="p-2">
@@ -78,7 +74,7 @@ export default function OddOutPuzzleModal({
                 <Button
                   key={image.id}
                   onClick={() => handleImageClick(image)}
-                  className="border-2 border-gray-300 hover:border-gray-500 rounded-lg overflow-hidden transition-all duration-200"
+                  className="transition-all duration-200"
                   aria-label={`Select image: ${image.alt}`}
                 >
                   <div className="relative w-full h-36 md:h-40">
@@ -86,7 +82,7 @@ export default function OddOutPuzzleModal({
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-cover"
+                      className="object-contain object-center"
                       sizes="(max-width: 768px) 50vw, 33vw"
                     />
                   </div>
