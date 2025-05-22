@@ -189,10 +189,10 @@ export default function EndGameScreen() {
           <Button
             onClick={handleSubmitScore}
             disabled={loading || !wouldQualify || isChecking}
-            className={
-              wouldQualify
-                ? "bg-blue-600 hover:bg-blue-800"
-                : "bg-zinc-600 opacity-50 cursor-not-allowed"
+            variant={
+              loading || !wouldQualify || isChecking
+                ? "disabled"
+                : "primary-yellow"
             }
           >
             {loading
@@ -216,16 +216,13 @@ export default function EndGameScreen() {
         )}
 
         <Button
-          className="bg-purple-600 hover:bg-purple-800"
+          variant="primary-purple"
           onClick={() => setShowLeaderboard(true)}
         >
           View Leaderboard
         </Button>
 
-        <Button
-          className="bg-green-600 hover:bg-green-800"
-          onClick={handlePlayAgain}
-        >
+        <Button variant="primary-green" onClick={handlePlayAgain}>
           Play Again
         </Button>
 
