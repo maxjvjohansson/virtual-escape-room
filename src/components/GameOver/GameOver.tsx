@@ -32,7 +32,8 @@ export default function GameOver() {
       </p>
 
       <p className="italic text-sm text-purple-300 mb-6">
-        "Only those who truly seek the light can escape the shadows."
+        &ldquo;Only those who truly seek the light can escape the
+        shadows.&ldquo;
       </p>
 
       <Button
