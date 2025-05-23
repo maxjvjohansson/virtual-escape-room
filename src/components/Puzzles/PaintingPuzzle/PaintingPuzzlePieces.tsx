@@ -39,7 +39,7 @@ export default function PaintingPuzzlePieces({
           onClick(selectedPiece);
         }
       }}
-      className="flex flex-wrap gap-2 items-center justify-center w-full p-2 border-2 border-[#3F2915] focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
+      className="flex flex-wrap gap-2 items-center justify-center w-full p-4 border-2 border-[#3F2915] focus:shadow-[0_0_50px_rgba(255,215,0.6)]"
     >
       {pieces.map((piece, index) => (
         <Image
@@ -53,7 +53,7 @@ export default function PaintingPuzzlePieces({
             selectedPiece?.id === piece.id
               ? "border-yellow-400 border-2 shadow-[0_0_30px_rgba(190,140,60,0.7)] focus:ring-yellow-600 focus:shadow-[0_0_30px_rgba(190,140,60,0.7)]"
               : "border-transparent"
-          } hover:border-1 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(190,140,60,0.7)] transition-all w-16 h-18 duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+          } hover:border-1 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(190,140,60,0.7)] transition-all w-12 h-14 md:w-16 md:h-18 duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer`}
           width={720}
           height={720}
           role="button"
