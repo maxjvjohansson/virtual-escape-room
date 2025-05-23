@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
-import { formatTime } from "@/utils/formatTime";
 import { useRouter } from "next/navigation";
 import Button from "@/elements/Button";
 import ArrowUpIcon from "@assets/icons/arrow_up_white.svg";
@@ -29,18 +28,6 @@ export default function CodeLock() {
       dispatch({ type: "END_GAME" });
 
       setTimeout(() => {
-        const { startedAt, finishedAt } = {
-          startedAt: state.startedAt,
-          finishedAt: Date.now(),
-        };
-
-        if (startedAt) {
-          const elapsedMs = finishedAt - startedAt;
-          const formattedTime = formatTime(elapsedMs);
-
-          console.log(`Escaped in ${formattedTime}`);
-        }
-
         router.push("/endgame");
       }, 100);
     } else {
@@ -50,7 +37,7 @@ export default function CodeLock() {
 
   return (
     <section
-      className="flex flex-col justify-center items-center w-md md:w-xl mx-auto p-6 md:p-8 border-2 border-yellow-500/20 shadow-2xl"
+      className="flex flex-col justify-center items-center w-sm md:w-xl mx-auto p-6 md:p-8 border-2 border-yellow-500/20 shadow-2xl"
       style={{
         background:
           "linear-gradient(90deg, #282614 0%, #232116 50%, #25241d 100%)",
@@ -58,7 +45,7 @@ export default function CodeLock() {
     >
       <div className="flex justify-center flex-col items-center relative z-10">
         <div className="flex justify-center items-center mb-6">
-          <h2 className="text-3xl font-bold text-primary-yellow tracking-wider">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-yellow tracking-wider">
             ENTER ESCAPE CODE
           </h2>
         </div>

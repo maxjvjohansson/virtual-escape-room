@@ -12,6 +12,7 @@ import HandLeftIcon from "@assets/icons/hand_left_black.svg";
 import InfoIcon from "@assets/icons/info_black.svg";
 import DoorIcon from "@assets/icons/door_white.svg";
 import GhostIcon from "@assets/icons/ghost_white.svg";
+import StampAward from "../StampAward/StampAward";
 
 export default function LobbyForm() {
   const { dispatch } = useGameContext();
@@ -126,6 +127,15 @@ export default function LobbyForm() {
           {error}
         </p>
       )}
+
+      <div className="flex flex-col justify-center items-center text-center">
+        <p className="mb-2">
+          Winners will be honored with the exclusive{" "}
+          <span className="text-yellow-300">Gold Raven </span>stamp – the mark
+          of true puzzle masters.
+        </p>
+        <StampAward />
+      </div>
 
       <Button
         type="submit"
