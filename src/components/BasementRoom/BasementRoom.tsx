@@ -11,6 +11,7 @@ import CodeLockModal from "../CodeLock/CodeLockModal";
 import GameOverModal from "../GameOver/GameOverModal";
 import Timer from "../Timer/Timer";
 import Inventory from "../Inventory/Inventory";
+import clsx from "clsx";
 
 export default function BasementRoom() {
   const { state } = useGameContext();
@@ -26,8 +27,13 @@ export default function BasementRoom() {
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
+  const [showCodeHint, setShowCodeHint] = useState(false);
+  const [codeHintFade, setCodeHintFade] = useState(false);
+
   const fakeFadeTimerRef = useRef<NodeJS.Timeout | null>(null);
   const fakeHideTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const allPuzzlesSolved = Object.values(state.puzzles).every(Boolean);
 
   const router = useRouter();
 
@@ -67,6 +73,17 @@ export default function BasementRoom() {
       setFakePopupFade(false);
       setShowFakePopup(false);
     }, 2000);
+  }
+
+  function showCodeHintPopup() {
+    setShowCodeHint(true);
+    setCodeHintFade(false);
+
+    setTimeout(() => setCodeHintFade(true), 1500);
+    setTimeout(() => {
+      setShowCodeHint(false);
+      setCodeHintFade(false);
+    }, 3000);
   }
 
   useEffect(() => {
@@ -109,6 +126,19 @@ export default function BasementRoom() {
             ></Image>
             <p className="text-lg text-black">
               Swipe left and right to find objects to interact with.
+            </p>
+          </div>
+        </div>
+      )}
+      {showCodeHint && (
+        <div
+          className={`fixed inset-0 z-50 flex flex-col justify-center items-center bg-opacity-10 p-4 transition-opacity duration-750 ease-in-out ${
+            fakePopupFade ? "opacity-0" : "opacity-100"
+          } pointer-events-none`}
+        >
+          <div className="rounded-lg p-10 max-w-lg text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2 bg-[url(/images/inventory.png)] bg-contain bg-no-repeat bg-center">
+            <p className="text-lg text-orange-300 z-1">
+              You must solve all puzzles before accessing the code lock.
             </p>
           </div>
         </div>
@@ -167,7 +197,19 @@ export default function BasementRoom() {
           </Button>
         </div>
         <div className="absolute w-[9%] top-[48%] left-[20%] md:top-[49%] md:left-[21%] md:w-[7%] lg:top-[47%] lg:left-[20%] lg:w-[9%] xl:top-[49%] xl:left-[21%] xl:w-[7%] hover-shake">
-          <Button onClick={() => setShowCodeLock(true)} className="border-none">
+          <Button
+            onClick={() => {
+              if (allPuzzlesSolved) {
+                setShowCodeLock(true);
+              } else {
+                showCodeHintPopup();
+              }
+            }}
+            className={clsx(
+              "border-none transition-opacity",
+              allPuzzlesSolved ? "" : "opacity-30 cursor-pointer"
+            )}
+          >
             <Image
               src="/images/lock.png"
               alt="Code Lock"
