@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Button from "./Button";
+import CloseIcon from "@assets/icons/close_x_white.svg";
 
 type ModalProps = {
   isOpen: boolean;
@@ -21,12 +21,12 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         className="bg-white text-black rounded shadow-lg max-w-6xl relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <Button
+        <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-sm text-gray-500 z-50"
+          className="absolute top-3 right-3 bg-black/70 hover:bg-black/30 rounded-full p-2 text-white z-50 cursor-pointer"
         >
-          ✕
-        </Button>
+          <CloseIcon className="w-5 h-5" />
+        </button>
         {children}
       </article>
     </div>
