@@ -1,7 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
 import Modal from "@/elements/Modal";
-import Button from "@/elements/Button";
-import Image from "next/image";
 import ArrowIconDown from "@assets/icons/arrow_down_black.svg";
 import ArrowIconUp from "@assets/icons/arrow_up_black.svg";
 import { getRandomWord } from "@/data/WordPuzzleData";
