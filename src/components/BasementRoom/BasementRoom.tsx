@@ -31,7 +31,7 @@ export default function BasementRoom() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center relative"
       style={{ backgroundImage: "url('/images/basement_empty.png')" }}
     >
-      <div className="absolute top-8">
+      <div className="absolute top-8 z-10">
         <Timer
           startedAt={state.startedAt}
           finishedAt={state.finishedAt}
@@ -58,7 +58,7 @@ export default function BasementRoom() {
           ></Image>
         </Button>
       </div>
-      <div className="absolute w-[6.5%] top-[2%] right-[9.5%] hover-shake">
+      <div className="absolute w-[7%] top-[1%] right-[9.5%] hover-shake">
         <Button onClick={() => setShowWordPuzzle(true)}>
           <Image
             src={"/images/book.png"}
@@ -86,6 +86,36 @@ export default function BasementRoom() {
             width={100}
             height={100}
           />
+        </Button>
+      </div>
+      <div className="absolute w-[10%] top-[18%] right-[6%] hover-shake">
+        <Button className="fake-item">
+          <Image
+            src={"/images/statue.png"}
+            width={720}
+            height={720}
+            alt="A stone statue"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute w-[7%] bottom-[18%] right-[7.5%] hover-shake">
+        <Button className="fake-item">
+          <Image
+            src={"/images/candle.png"}
+            width={720}
+            height={720}
+            alt="A big candle"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute w-[14%] top-[1%] right-[23%] hover-shake">
+        <Button className="fake-item">
+          <Image
+            src={"/images/painting_circle.png"}
+            width={720}
+            height={720}
+            alt="A stone statue"
+          ></Image>
         </Button>
       </div>
       <ComputerPuzzleModal
