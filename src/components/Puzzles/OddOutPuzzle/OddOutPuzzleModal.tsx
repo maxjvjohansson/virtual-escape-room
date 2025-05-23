@@ -7,7 +7,6 @@ import {
   getRandomOddOutSet,
 } from "@/data/OddOutPuzzleData";
 import { usePuzzle } from "@/hooks/usePuzzle";
-import { useGameContext } from "@/lib/context/GameContext";
 
 type OddOutPuzzleModalProps = {
   isOpen: boolean;
