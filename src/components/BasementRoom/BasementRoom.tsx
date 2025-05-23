@@ -133,7 +133,7 @@ export default function BasementRoom() {
       {showCodeHint && (
         <div
           className={`fixed inset-0 z-50 flex flex-col justify-center items-center bg-opacity-10 p-4 transition-opacity duration-750 ease-in-out ${
-            fakePopupFade ? "opacity-0" : "opacity-100"
+            codeHintFade ? "opacity-0" : "opacity-100"
           } pointer-events-none`}
         >
           <div className="rounded-lg p-10 max-w-lg text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2 bg-[url(/images/inventory.png)] bg-contain bg-no-repeat bg-center">
