@@ -11,6 +11,7 @@ import TrophyIcon from "@assets/icons/trophy_black.svg";
 import DoorIcon from "@assets/icons/door_white.svg";
 import CheckBoxIcon from "@assets/icons/checkbox_white.svg";
 import CrossIcon from "@assets/icons/close_x_white.svg";
+import StampAward from "../StampAward/StampAward";
 
 type Score = {
   player_name: string;
@@ -157,9 +158,12 @@ export default function EndGameScreen() {
       )}
 
       {medalStatus === "success" && (
-        <p className="bg-green-100 text-green-800 text-center p-3 mb-4 rounded">
-          You earned a medal!
-        </p>
+        <>
+          <div className="flex flex-col justify-center items-center gap-4 bg-green-100 text-green-800 text-center p-3 mb-4 rounded">
+            <p>You&apos;ve been awarded a Gold Raven stamp!</p>
+            <StampAward />
+          </div>
+        </>
       )}
 
       {medalStatus === "error" && (
