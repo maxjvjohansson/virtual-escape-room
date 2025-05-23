@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Modal from "@/elements/Modal";
-import Button from "@/elements/Button";
 import {
   OddOutImage,
   OddOutImageSet,
@@ -25,6 +24,7 @@ export default function OddOutPuzzleModal({
   const [currentOddOutSet, setCurrentOddOutSet] = useState<OddOutImageSet>(() =>
     getRandomOddOutSet()
   );
+  const [wrongGuessCount, setWrongGuessCount] = useState(0);
   const { isSolved, solutionDigit, solve } = usePuzzle("oddOneOut", "B");
   const { state } = useGameContext();
 
@@ -32,6 +32,7 @@ export default function OddOutPuzzleModal({
     if (isOpen && !isSolved) {
       setErrorMessage(null);
       setCurrentOddOutSet(randomOddOutSet);
+      setWrongGuessCount(0);
     }
   }, [isOpen, isSolved]);
 
@@ -40,21 +41,25 @@ export default function OddOutPuzzleModal({
 
     if (image.isOddOne) {
       solve();
-
-      console.log(state.puzzles);
-
       setErrorMessage(null);
     } else {
-      setErrorMessage("That's not the odd one out. Look carefully!");
+      const newWrongGuessCount = wrongGuessCount + 1;
+      setWrongGuessCount(newWrongGuessCount);
+      
+      if (newWrongGuessCount >= 3) {
+        // Reset puzzle with new random set
+        setCurrentOddOutSet(getRandomOddOutSet());
+        setWrongGuessCount(0);
+        setErrorMessage("Too many wrong guesses! Here's a new puzzle.");
+      } else {
+        setErrorMessage("That's not the odd one out. Look carefully!");
+      }
+      
       setTimeout(() => {
         setErrorMessage(null);
       }, 3500);
     }
   };
-
-  if (isSolved) {
-    console.log("YAAAAY!!");
-  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -69,7 +74,11 @@ export default function OddOutPuzzleModal({
 
         {!isSolved ? (
           <>
-            <p className="text-center mb-6 text-white">Which card doesn&apos;t belong?</p>
+            <p className="text-center mb-2 text-white">Which card doesn&apos;t belong?</p>
+            
+            <p className="text-center mb-6 text-gray-300 text-sm">
+              Guesses used: {wrongGuessCount}/3
+            </p>
 
             {errorMessage && (
               <p className="bg-red-100 text-red-800 p-3 mb-4 rounded max-w-fit mx-auto">
