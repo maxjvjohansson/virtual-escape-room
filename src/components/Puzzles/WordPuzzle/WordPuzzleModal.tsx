@@ -1,6 +1,9 @@
 import { useState, useEffect, Fragment } from "react";
 import Modal from "@/elements/Modal";
 import Button from "@/elements/Button";
+import Image from "next/image";
+import ArrowIconDown from "@assets/icons/arrow_down_black.svg";
+import ArrowIconUp from "@assets/icons/arrow_up_black.svg";
 import { getRandomWord } from "@/data/WordPuzzleData";
 import { usePuzzle } from "@/hooks/usePuzzle";
 import { shuffle } from "@/utils/shuffleArray";
@@ -36,7 +39,7 @@ function LetterTile({
       draggable
       className={`
         border-2 bg-gradient-to-b from-[#FDFAF7] to-[#ECE2D4] p-4 text-center text-4xl rounded-lg cursor-move h-16 w-16 flex items-center justify-center
-        ${isDragging ? "opacity-50 border-dashed" : "opacity-100"}
+        ${isDragging ? "opacity-50 border-dashed " : "opacity-100"}
         ${
           isDropTarget
             ? "bg-blue-100 border-amber-950"
@@ -162,7 +165,6 @@ export default function WordPuzzleModal({
   // Handle inputfield option
   const toggleInputForm = () => {
     setShowInput(!showInput);
-    /* setErrorMessage(null); */
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,7 +185,7 @@ export default function WordPuzzleModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <section className="p-8 max-w-4xl mx-auto bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
+      <section className="p-5 w-screen max-w-4xl mx-auto bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
         <h2 className="text-4xl mb-4 font-bold text-center font-word-puzzle">
           Unscramble the Word
         </h2>
@@ -193,7 +195,7 @@ export default function WordPuzzleModal({
             <p className="text-center text-2xl mb-10 font-word-puzzle">What word is this?</p>
 
             {errorMessage && (
-              <p className="bg-red-100 text-red-800 p-3 mb-4 rounded text-center">
+              <p className="bg-red-100 text-red-800 p-3 mb-4 rounded text-center max-w-fit mx-auto">
                 {errorMessage}
               </p>
             )}
@@ -231,9 +233,9 @@ export default function WordPuzzleModal({
             <button
               type="button"
               onClick={toggleInputForm}
-              className="text-lg font-word-puzzle cursor-pointer mb-2"
+              className="text-lg font-word-puzzle cursor-pointer mb-2 inline-flex flex-row items-center gap-1.5"
             >
-              {showInput ? "Hide input field" : "Show input field"}
+              {showInput ? "Hide input field" : "Show input field"} {showInput ? <ArrowIconDown/> : <ArrowIconUp/>}
             </button>
             {showInput && (
               <form
