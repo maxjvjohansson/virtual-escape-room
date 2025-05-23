@@ -8,7 +8,7 @@ export default function GameOver() {
 
   return (
     <section
-      className="flex flex-col justify-center items-center max-w-2xl mx-auto p-6 md:p-8 border-2 border-purple-500/20 shadow-2xl text-white text-center"
+      className="flex flex-col justify-center items-center w-md md:w-xl mx-auto p-6 md:p-8 border-2 border-purple-500/20 shadow-2xl text-white text-center"
       style={{
         background:
           "linear-gradient(90deg, #111827 0%, #24243B 50%, #18181E 100%)",
