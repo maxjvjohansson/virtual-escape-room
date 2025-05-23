@@ -36,12 +36,12 @@ function LetterTile({
     <div
       draggable
       className={`
-        border-2 p-4 text-center text-xl font-bold rounded-lg cursor-move h-16 w-16 flex items-center justify-center
+        border-2 bg-gradient-to-b from-[#FDFAF7] to-[#ECE2D4] p-4 text-center text-xl font-bold rounded-lg cursor-move h-16 w-16 flex items-center justify-center
         ${isDragging ? "opacity-50 border-dashed" : "opacity-100"}
         ${
           isDropTarget
             ? "bg-blue-100 border-amber-950"
-            : "border-gray-300 hover:border-gray-500"
+            : "border-[#7d6849] hover:border-[#392E1E]"
         }
         transition-all duration-200
       `}
@@ -51,7 +51,7 @@ function LetterTile({
       onDragEnd={onDragEnd}
       aria-label={`Letter tile: ${letter}`}
     >
-      {letter}
+      {letter.toLocaleUpperCase()}
     </div>
   );
 }
@@ -184,7 +184,7 @@ export default function WordPuzzleModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <section className="p-4">
+      <section className="p-4 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
         <h2 className="text-2xl mb-4 font-bold text-center">
           Unscramble the Word
         </h2>
@@ -256,7 +256,7 @@ export default function WordPuzzleModal({
           </>
         ) : (
           <div className="text-center">
-            <p className="bg-green-100 text-green-800 p-3 mb-4 rounded">
+            <p className="bg-green-100 text-green-800 p-3 mb-4 rounded max-w-fit mx-auto">
               Well done! The right word was{" "}
               <span className="font-bold">{selectedWord}</span>.
             </p>
