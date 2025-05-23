@@ -28,7 +28,7 @@ export default function BasementRoom() {
 
   return (
     <section
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center relative"
       style={{ backgroundImage: "url('/images/basement_empty.png')" }}
     >
       <div className="absolute top-8">
@@ -38,11 +38,47 @@ export default function BasementRoom() {
           durationMs={60 * 60 * 1000}
         />
       </div>
-      <Button onClick={() => setShowComputer(true)}>Computer Game</Button>
-      <Button onClick={() => setShowOddOut(true)}>Odd One Out</Button>
-      <Button onClick={() => setShowWordPuzzle(true)}>Word puzzle</Button>
-      <Button onClick={() => setShowPainting(true)}>Painting Puzzle</Button>
-      <div className="relative w-full max-w-[1920px] mx-auto">
+      <div className="absolute w-[16%] top-[40%] left-[32%] hover-shake">
+        <Button onClick={() => setShowComputer(true)}>
+          <Image
+            src={"/images/computer.png"}
+            width={720}
+            height={720}
+            alt="A old Computer"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute w-[13%] top-[58%] left-[60.5%] hover-shake">
+        <Button onClick={() => setShowOddOut(true)}>
+          <Image
+            src={"/images/cards.png"}
+            width={720}
+            height={720}
+            alt="A stack of cards"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute w-[6.5%] top-[2%] right-[9.5%] hover-shake">
+        <Button onClick={() => setShowWordPuzzle(true)}>
+          <Image
+            src={"/images/book.png"}
+            width={720}
+            height={720}
+            alt="An old book"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute w-[15%] top-[5%] left-[44%] hover-shake">
+        <Button onClick={() => setShowPainting(true)}>
+          <Image
+            src={"/images/painting_rectangular.png"}
+            width={720}
+            height={720}
+            alt="stack of cards"
+          ></Image>
+        </Button>
+      </div>
+      <div className="absolute top-[49%] left-[21%] w-[7%] hover-shake">
         <Button onClick={() => setShowCodeLock(true)} className="border-none">
           <Image
             src="/images/lock.png"
