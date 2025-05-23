@@ -24,7 +24,7 @@ export default function PaintingGrid({
   handleDrop,
 }: Props) {
   return (
-    <div className="grid grid-cols-3 p-6.5 gap-1">
+    <div className="grid grid-cols-3 p-6 gap-1">
       {painting.map((piece, index) => (
         <div
           key={index}
@@ -46,7 +46,7 @@ export default function PaintingGrid({
           tabIndex={focusMode ? 0 : -1}
           data-painting-index={index}
           onClick={() => handleClick(index)}
-          className="w-16 h-18 border-1 border-[#3F2915] items-center bg-[#30260C] justify-center duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]"
+          className="md:w-16 md:h-18 h-14 w-12 border-1 border-[#3F2915] items-center bg-[#30260C] justify-center duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)] cursor-pointer"
         >
           {piece && (
             <Image
@@ -64,7 +64,7 @@ export default function PaintingGrid({
                 selectedPiece?.id === piece.id
                   ? "border-yellow-400 border-2"
                   : "border-transparent"
-              } duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)]`}
+              } duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all focus:shadow-[0_0_50px_rgba(190,140,60,0.7)] h-14 w-12 md:w-16 md:h-18`}
             />
           )}
         </div>
