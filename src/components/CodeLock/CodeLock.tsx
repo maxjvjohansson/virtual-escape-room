@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
-import { formatTime } from "@/utils/formatTime";
 import { useRouter } from "next/navigation";
 import Button from "@/elements/Button";
 import ArrowUpIcon from "@assets/icons/arrow_up_white.svg";
@@ -29,18 +28,6 @@ export default function CodeLock() {
       dispatch({ type: "END_GAME" });
 
       setTimeout(() => {
-        const { startedAt, finishedAt } = {
-          startedAt: state.startedAt,
-          finishedAt: Date.now(),
-        };
-
-        if (startedAt) {
-          const elapsedMs = finishedAt - startedAt;
-          const formattedTime = formatTime(elapsedMs);
-
-          console.log(`Escaped in ${formattedTime}`);
-        }
-
         router.push("/endgame");
       }, 100);
     } else {
