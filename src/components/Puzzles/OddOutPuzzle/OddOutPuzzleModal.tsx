@@ -89,7 +89,8 @@ export default function OddOutPuzzleModal({
               <button
                 key={image.id}
                 onClick={() => handleImageClick(image)}
-                className="md:hover:-translate-y-0.5 md:hover:shadow-black rounded-[0.6rem] overflow-hidden transition-all duration-200 p-0 bg-transparent"
+                className="md:hover:-translate-y-0.5 md:hover:shadow-black rounded-[0.6rem] overflow-hidden transition-all duration-200 p-0 bg-transparent cursor-pointer
+                "
                 aria-label={`Select image: ${image.alt}`}
               >
                 <div className="relative w-36 aspect-[465/771] bg-white">
