@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
 import Image from "next/image";
 import Button from "@/elements/Button";
@@ -20,8 +20,14 @@ export default function BasementRoom() {
   const [showPainting, setShowPainting] = useState(false);
   const [showCodeLock, setShowCodeLock] = useState(false);
 
+  const [showFakePopup, setShowFakePopup] = useState(false);
+  const [fakePopupFade, setFakePopupFade] = useState(false);
+
   const [showSwipeHint, setShowSwipeHint] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
+
+  const fakeFadeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const fakeHideTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const router = useRouter();
 
@@ -46,13 +52,54 @@ export default function BasementRoom() {
     }
   }, []);
 
+  function fakeItemPressed() {
+    if (fakeFadeTimerRef.current) clearTimeout(fakeFadeTimerRef.current);
+    if (fakeHideTimerRef.current) clearTimeout(fakeHideTimerRef.current);
+
+    setShowFakePopup(true);
+    setFakePopupFade(false);
+
+    fakeFadeTimerRef.current = setTimeout(() => {
+      setFakePopupFade(true);
+    }, 1000);
+
+    fakeHideTimerRef.current = setTimeout(() => {
+      setFakePopupFade(false);
+      setShowFakePopup(false);
+    }, 2000);
+  }
+
+  useEffect(() => {
+    if (fakeFadeTimerRef.current) clearTimeout(fakeFadeTimerRef.current);
+    if (fakeHideTimerRef.current) clearTimeout(fakeHideTimerRef.current);
+  }, []);
+
   useEffect(() => {
     console.log(state.code);
-    console.log(showSwipeHint);
   }, [state.code]);
 
   return (
     <section className="w-screen h-screen overflow-auto touch-pan-x touch-pan-y">
+      {showFakePopup && (
+        <div
+          className={`fixed inset-0 z-50 flex flex-col justify-center items-center bg-opacity-10 p-4 transition-opacity duration-750 ease-in-out ${
+            fakePopupFade ? "opacity-0" : "opacity-100"
+          } pointer-events-none`}
+        >
+          <div className="rounded-lg p-4 max-w-xs text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2">
+            <Image
+              src={"/images/inventory.png"}
+              height={720}
+              width={720}
+              alt="Content frame"
+              className="absolute md:w-[20%]"
+            ></Image>
+            <p className="text-lg text-orange-300 z-1">
+              This item holds no puzzle. Search elsewhere.
+            </p>
+          </div>
+        </div>
+      )}
       {showSwipeHint && (
         <div
           className={`fixed inset-0 z-50 flex flex-col justify-center items-center bg-opacity-10 p-4 transition-opacity duration-1000 ease-in-out ${
@@ -104,7 +151,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[8%] top-[11%] right-[8%] md:w-[7%] md:top-[1%] md:right-[9.5%] hover-shake">
+        <div className="absolute w-[8%] top-[11%] right-[8%] md:w-[6.5%] md:top-[2%] md:right-[9.5%] hover-shake">
           <Button onClick={() => setShowWordPuzzle(true)}>
             <Image
               src={"/images/book.png"}
@@ -135,7 +182,7 @@ export default function BasementRoom() {
           </Button>
         </div>
         <div className="absolute w-[12%] top-[23%] right-[5%] md:w-[10%] md:top-[18%] md:right-[6%] hover-shake">
-          <Button className="fake-item">
+          <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/statue.png"}
               width={720}
@@ -145,7 +192,7 @@ export default function BasementRoom() {
           </Button>
         </div>
         <div className="absolute w-[9%] bottom-[24%] right-[7%] md:w-[7%] md:bottom-[18%] md:right-[7.5%] hover-shake">
-          <Button className="fake-item">
+          <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/candle.png"}
               width={720}
@@ -155,7 +202,7 @@ export default function BasementRoom() {
           </Button>
         </div>
         <div className="absolute w-[19%] top-[9%] right-[20%] md:w-[14%] md:top-[1%] md:right-[23%] hover-shake">
-          <Button className="fake-item">
+          <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/painting_circle.png"}
               width={720}
