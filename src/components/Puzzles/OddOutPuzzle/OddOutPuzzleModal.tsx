@@ -110,9 +110,9 @@ export default function OddOutPuzzleModal({
             <p className="bg-green-100 text-green-800 p-3 mb-4 rounded max-w-fit mx-auto">
               Well done! You&apos;ve found the odd one out.
             </p>
-            <p className="text-xl mb-4">
+            <p className="text-xl mb-4 text-white">
               You&apos;ve discovered code digit:{" "}
-              <span className="font-bold text-2xl">B{solutionDigit}</span>
+              <span className="font-bold text-2xl text-white">B{solutionDigit}</span>
             </p>
           </div>
         )}
