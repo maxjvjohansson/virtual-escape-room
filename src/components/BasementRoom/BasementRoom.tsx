@@ -138,7 +138,7 @@ export default function BasementRoom() {
         >
           <div className="rounded-lg p-10 max-w-lg text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2 bg-[url(/images/inventory.png)] bg-contain bg-no-repeat bg-center">
             <p className="text-lg text-orange-300 z-1">
-              You must solve all puzzles before accessing the code lock.
+              You must solve all puzzles to access the code lock.
             </p>
           </div>
         </div>
