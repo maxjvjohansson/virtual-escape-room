@@ -45,7 +45,7 @@ export const OddOutSets : OddOutImageSet[] = [
                 isOddOne: false
             }
         ]
-    },
+    },/* 
     {
         theme: 'Nocturnal animals 2',
         images: [
@@ -115,7 +115,7 @@ export const OddOutSets : OddOutImageSet[] = [
                 isOddOne: false
             }
         ]
-    }
+    } */
 ];
 
 export function getRandomOddOutSet(): OddOutImageSet {
