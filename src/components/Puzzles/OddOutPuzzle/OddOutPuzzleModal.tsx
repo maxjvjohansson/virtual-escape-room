@@ -52,16 +52,20 @@ export default function OddOutPuzzleModal({
     }
   };
 
+  if (isSolved) {
+    console.log("YAAAAY!!");
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <section className="p-2">
+      <section className="p-8 w-[90vw] max-w-5xl">
         <h2 className="text-2xl mb-4 font-bold text-center">
           Find the odd one out!
         </h2>
 
         {!isSolved ? (
           <>
-            <p>Which card doesn&apos;t belong?</p>
+            <p className="text-center mb-6">Which card doesn&apos;t belong?</p>
 
             {errorMessage && (
               <p className="bg-red-100 text-red-800 p-3 mb-4 rounded">
@@ -69,26 +73,26 @@ export default function OddOutPuzzleModal({
               </p>
             )}
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 px-0 py-0">
-              {currentOddOutSet.images.map((image: OddOutImage) => (
-                <Button
-                  key={image.id}
-                  onClick={() => handleImageClick(image)}
-                  className="px-0 py-0"
-                  aria-label={`Select image: ${image.alt}`}
-                >
-                  <div className="relative w-full h-36 md:h-40">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-contain object-center"
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                    />
-                  </div>
-                </Button>
-              ))}
-            </div>
+<div className="flex flex-wrap justify-center gap-4 mb-4">
+  {currentOddOutSet.images.map((image: OddOutImage) => (
+    <button
+      key={image.id}
+      onClick={() => handleImageClick(image)}
+      className="md:hover:-translate-y-0.5 md:hover:shadow-md rounded-lg overflow-hidden transition-all duration-200 p-0 bg-transparent"
+      aria-label={`Select image: ${image.alt}`}
+    >
+      <div className="relative w-36 aspect-[465/771] bg-white">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 150px, (max-width: 1024px) 200px, 250px"
+        />
+      </div>
+    </button>
+  ))}
+</div>
           </>
         ) : (
           <div className="text-center">
