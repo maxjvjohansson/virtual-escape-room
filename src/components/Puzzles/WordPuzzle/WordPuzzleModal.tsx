@@ -1,7 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import Modal from "@/elements/Modal";
 import Button from "@/elements/Button";
-import InputField from "@/elements/InputField";
 import { getRandomWord } from "@/data/WordPuzzleData";
 import { usePuzzle } from "@/hooks/usePuzzle";
 import { shuffle } from "@/utils/shuffleArray";
@@ -36,7 +35,7 @@ function LetterTile({
     <div
       draggable
       className={`
-        border-2 bg-gradient-to-b from-[#FDFAF7] to-[#ECE2D4] p-4 text-center text-xl font-bold rounded-lg cursor-move h-16 w-16 flex items-center justify-center
+        border-2 bg-gradient-to-b from-[#FDFAF7] to-[#ECE2D4] p-4 text-center text-4xl rounded-lg cursor-move h-16 w-16 flex items-center justify-center
         ${isDragging ? "opacity-50 border-dashed" : "opacity-100"}
         ${
           isDropTarget
@@ -184,14 +183,14 @@ export default function WordPuzzleModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <section className="p-4 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
-        <h2 className="text-2xl mb-4 font-bold text-center">
+      <section className="p-8 max-w-4xl mx-auto bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
+        <h2 className="text-4xl mb-4 font-bold text-center font-word-puzzle">
           Unscramble the Word
         </h2>
 
         {!isSolved ? (
           <>
-            <p className="mb-4 text-center">What word is this?</p>
+            <p className="text-center text-2xl mb-10 font-word-puzzle">What word is this?</p>
 
             {errorMessage && (
               <p className="bg-red-100 text-red-800 p-3 mb-4 rounded text-center">
@@ -199,7 +198,7 @@ export default function WordPuzzleModal({
               </p>
             )}
 
-            <div className="flex flex-wrap justify-center gap-y-1.5 mb-6">
+            <div className="flex flex-wrap justify-center gap-y-1.5 mb-18">
               <DropZone
                 index={0}
                 isActive={dropZoneIndex === 0}
@@ -228,29 +227,33 @@ export default function WordPuzzleModal({
                 </Fragment>
               ))}
             </div>
-            <Button
+            <p className="text-center text-2xl mb-1 font-word-puzzle justify-self-start">Want to type in your guess instead?</p>
+            <button
               type="button"
               onClick={toggleInputForm}
-              variant="primary-gray"
+              className="text-lg font-word-puzzle cursor-pointer mb-2"
             >
-              {showInput ? "Hide typing option" : "Type your answer instead"}
-            </Button>
+              {showInput ? "Hide input field" : "Show input field"}
+            </button>
             {showInput && (
               <form
                 onSubmit={handleSubmit}
-                className="bg-gray-50/60 p-6 rounded-xl w-full max-w-md mx-auto flex flex-col gap-6"
+                className="justify-self-start w-full max-w-md flex flex-col gap-3"
               >
-                <InputField
+                <input
                   id="inputGuess"
                   placeholder="Write your guess instead..."
                   value={inputGuess}
                   onChange={handleInputChange}
-                  className="w-full"
+                  className="w-60 bg-none border border-b-black rounded-lg text-lg font-word-puzzle p-1 justify-self-start"
                   required
                 />
-                <Button type="submit" variant="primary-green">
+                <button 
+                  type="submit"
+                  className="bg-black rounded-lg text-white font-word-puzzle justify-self-start w-fit p-2 leading-4" 
+                >
                   Enter guess
-                </Button>
+                </button>
               </form>
             )}
           </>
