@@ -49,79 +49,76 @@ export default function CodeLock() {
   };
 
   return (
-    <section className="flex items-center z-0 justify-center">
-      <div className="relative w-full p-6 rounded-lg">
-        <div
-          className="absolute inset-0 bg-no-repeat bg-center z-1"
-          style={{
-            backgroundImage: "url('/images/codelock_bg.png')",
-          }}
-        />
-
-        <div className="flex justify-center flex-col items-center relative z-10">
-          <div className="flex justify-center items-center mb-6">
-            <h2 className="text-3xl font-bold text-yellow-400 tracking-wider font-mono">
-              ENTER ESCAPE CODE
-            </h2>
-          </div>
-
-          <div className="mb-6">
-            <div className="grid grid-cols-4 gap-4">
-              {(["A", "B", "C", "D"] as const).map((key) => (
-                <div key={key} className="flex flex-col items-center">
-                  <span className="text-xl text-yellow-400 font-mono font-bold mb-2">
-                    {key}
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setInputs((prev) => ({
-                        ...prev,
-                        [key]: String((+prev[key] + 1) % 10),
-                      }))
-                    }
-                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md mb-2 cursor-pointer"
-                  >
-                    <ArrowUpIcon />
-                  </button>
-
-                  <div className="w-14 h-14 flex items-center justify-center text-2xl font-bold text-white bg-gray-800 border-2 border-yellow-500 rounded-full mb-2 shadow-lg">
-                    {inputs[key]}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setInputs((prev) => ({
-                        ...prev,
-                        [key]: String((+prev[key] + 9) % 10),
-                      }))
-                    }
-                    className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md cursor-pointer"
-                  >
-                    <ArrowDownIcon />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {error && (
-            <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
-              {error}
-            </p>
-          )}
-
-          <Button
-            onClick={handleSubmit}
-            variant="primary-yellow"
-            className="w-8/12"
-          >
-            <UnlockIcon />
-            Unlock
-          </Button>
+    <section
+      className="flex flex-col justify-center items-center w-md md:w-xl mx-auto p-6 md:p-8 border-2 border-yellow-500/20 shadow-2xl"
+      style={{
+        background:
+          "linear-gradient(90deg, #282614 0%, #232116 50%, #25241d 100%)",
+      }}
+    >
+      <div className="flex justify-center flex-col items-center relative z-10">
+        <div className="flex justify-center items-center mb-6">
+          <h2 className="text-3xl font-bold text-primary-yellow tracking-wider">
+            ENTER ESCAPE CODE
+          </h2>
         </div>
+
+        <div className="mb-6">
+          <div className="grid grid-cols-4 gap-4">
+            {(["A", "B", "C", "D"] as const).map((key) => (
+              <div key={key} className="flex flex-col items-center">
+                <span className="text-xl text-yellow-400 font-mono font-bold mb-2">
+                  {key}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setInputs((prev) => ({
+                      ...prev,
+                      [key]: String((+prev[key] + 1) % 10),
+                    }))
+                  }
+                  className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md mb-2 cursor-pointer"
+                >
+                  <ArrowUpIcon />
+                </button>
+
+                <div className="w-14 h-14 flex items-center justify-center text-2xl font-bold text-white bg-gray-800 border-2 border-yellow-500 rounded-full mb-2 shadow-lg">
+                  {inputs[key]}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setInputs((prev) => ({
+                      ...prev,
+                      [key]: String((+prev[key] + 9) % 10),
+                    }))
+                  }
+                  className="w-12 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-200 rounded-md cursor-pointer"
+                >
+                  <ArrowDownIcon />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {error && (
+          <p className="bg-red-100 text-red-800 text-center p-3 mb-4 rounded">
+            {error}
+          </p>
+        )}
+
+        <Button
+          onClick={handleSubmit}
+          variant="primary-yellow"
+          className="w-8/12"
+        >
+          <UnlockIcon />
+          Unlock
+        </Button>
       </div>
     </section>
   );
