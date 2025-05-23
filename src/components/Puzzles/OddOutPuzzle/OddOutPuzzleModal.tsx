@@ -26,7 +26,6 @@ export default function OddOutPuzzleModal({
   );
   const [wrongGuessCount, setWrongGuessCount] = useState(0);
   const { isSolved, solutionDigit, solve } = usePuzzle("oddOneOut", "B");
-  const { state } = useGameContext();
 
   useEffect(() => {
     if (isOpen && !isSolved) {
