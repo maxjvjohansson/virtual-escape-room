@@ -51,7 +51,7 @@ export default function PaintingPuzzle() {
   }, [painting]);
 
   return (
-    <section className="flex flex-col items-center gap-10 p-6 bg-[#191807]">
+    <section className="flex flex-col items-center gap-10 p-10 bg-[#191807] md:w-130">
       {isSolved ? (
         <>
           <Image
@@ -59,7 +59,7 @@ export default function PaintingPuzzle() {
             alt="Finished Painting"
             height={720}
             width={720}
-            className="h-auto w-55 pt-8"
+            className="h-auto w-55 pt-10"
           />
           <Image
             src="/images/paintingPuzzlePaintings/painting-frame.png"
@@ -133,7 +133,7 @@ export default function PaintingPuzzle() {
             alt="Frame"
             width={720}
             height={720}
-            className="absolute z-20 h-auto w-66 top-3 pointer-events-none"
+            className="absolute z-20 h-auto w-50 md:w-66 top-10 md:top-6.5 pointer-events-none"
           />
           <section
             tabIndex={0}

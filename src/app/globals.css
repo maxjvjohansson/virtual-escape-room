@@ -47,3 +47,31 @@ input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  75% {
+    transform: translateX(-4px);
+  }
+}
+
+.fake-item:active {
+  animation: shake 150ms ease-in-out;
+}
+
+.hover-shake:hover {
+  animation: shake 400ms ease-in-out;
+}

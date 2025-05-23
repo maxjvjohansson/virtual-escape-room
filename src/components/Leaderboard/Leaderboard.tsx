@@ -39,7 +39,7 @@ export default function Leaderboard() {
 
   return (
     <section
-      className={`max-w-2xl mx-auto p-8 border-2 border-purple-500/20 shadow-2xl text-white ${cinzel.className}`}
+      className={`w-md md:w-xl p-6 border-2 border-purple-500/20 shadow-2xl text-white ${cinzel.className}`}
       style={{
         background:
           "linear-gradient(90deg, #111827 0%, #24243B 50%, #18181E 100%)",
@@ -75,7 +75,7 @@ export default function Leaderboard() {
       {scores?.length === 0 && <p className="text-center">No scores yet.</p>}
 
       {scores && (
-        <ol className="space-y-2">
+        <ol className="space-y-1.5">
           {scores.map((score, idx) => {
             const medalSrc =
               idx === 0
@@ -103,8 +103,8 @@ export default function Leaderboard() {
                     <Image
                       src={medalSrc}
                       alt="Medal"
-                      width={28}
-                      height={28}
+                      width={24}
+                      height={24}
                       className="object-contain w-auto"
                     />
                   ) : (
@@ -112,7 +112,7 @@ export default function Leaderboard() {
                   )}
                 </span>
 
-                <span className="w-3/6 text-left truncate">
+                <span className="w-2/6 text-left truncate">
                   {score.player_name}
                 </span>
 
