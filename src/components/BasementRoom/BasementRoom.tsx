@@ -113,18 +113,20 @@ export default function BasementRoom() {
           </div>
         </div>
       )}
-      <div className="absolute top-8 z-10 left-17 md:left-[43.5%]">
-        <Timer
-          startedAt={state.startedAt}
-          finishedAt={state.finishedAt}
-          durationMs={60 * 60 * 1000}
-        />
+      <div className="flex w-full justify-center pointer-events-none">
+        <div className="absolute z-10 pt-5">
+          <Timer
+            startedAt={state.startedAt}
+            finishedAt={state.finishedAt}
+            durationMs={60 * 60 * 1000}
+          />
+        </div>
       </div>
       <div
-        className="relative w-[300vw] h-[100vh] bg-cover bg-center bg-no-repeat md:w-screen md:h-screen"
+        className="relative w-[300vw] h-[100vh] bg-cover bg-center bg-no-repeat lg:w-screen lg:h-screen"
         style={{ backgroundImage: "url('/images/basement_empty.png')" }}
       >
-        <div className="absolute w-[20%] top-[38%] left-[29%] md:w-[16%] md:top-[40%] md:left-[32%] hover-shake">
+        <div className="absolute w-[20%] top-[38%] left-[29%] md:w-[16%] md:top-[38%] md:left-[32%] lg:w-[18%] lg:top-[41%] lg:left-[31%] xl:w-[16%] xl:top-[40%] xl:left-[32%] hover-shake">
           <Button onClick={() => setShowComputer(true)}>
             <Image
               src={"/images/computer.png"}
@@ -134,7 +136,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[15%] top-[55%] left-[59%] md:w-[13%] md:top-[58%] md:left-[60.5%] hover-shake">
+        <div className="absolute w-[15%] top-[55%] left-[59%] md:w-[13%] md:top-[58%] md:left-[60.5%] lg:w-[16%] lg:top-[55%] lg:left-[59%] xl:w-[13%] xl:top-[58%] xl:left-[60.5%] hover-shake">
           <Button onClick={() => setShowOddOut(true)}>
             <Image
               src={"/images/cards.png"}
@@ -144,7 +146,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[8%] top-[11%] right-[8%] md:w-[6.5%] md:top-[2%] md:right-[9.5%] hover-shake">
+        <div className="absolute w-[8%] top-[11%] right-[8%] md:w-[6.5%] md:top-[-4%] md:right-[9.5%] lg:w-[9%] lg:top-[8%] lg:right-[8%] xl:w-[6.5%] xl:top-[2%] xl:right-[9.5%] hover-shake">
           <Button onClick={() => setShowWordPuzzle(true)}>
             <Image
               src={"/images/book.png"}
@@ -154,7 +156,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[17%] top-[15%] left-[43%] md:w-[15%] md:top-[5%] md:left-[44%] hover-shake">
+        <div className="absolute w-[17%] top-[15%] left-[43%] md:w-[15%] md:top-[2%] md:left-[44%] lg:w-[17%] lg:top-[13%] lg:left-[43%] xl:w-[15%] xl:top-[5%] xl:left-[44%] hover-shake">
           <Button onClick={() => setShowPainting(true)}>
             <Image
               src={"/images/painting_rectangular.png"}
@@ -164,7 +166,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[9%] top-[48%] left-[20%] md:top-[49%] md:left-[21%] md:w-[7%] hover-shake">
+        <div className="absolute w-[9%] top-[48%] left-[20%] md:top-[49%] md:left-[21%] md:w-[7%] lg:top-[47%] lg:left-[20%] lg:w-[9%] xl:top-[49%] xl:left-[21%] xl:w-[7%] hover-shake">
           <Button onClick={() => setShowCodeLock(true)} className="border-none">
             <Image
               src="/images/lock.png"
@@ -174,7 +176,7 @@ export default function BasementRoom() {
             />
           </Button>
         </div>
-        <div className="absolute w-[12%] top-[23%] right-[5%] md:w-[10%] md:top-[18%] md:right-[6%] hover-shake">
+        <div className="absolute w-[12%] top-[23%] right-[5%] md:w-[10%] md:top-[13%] md:right-[6%] lg:w-[13%] lg:top-[20%] lg:right-[5%] xl:w-[10%] xl:top-[18%] xl:right-[6%] hover-shake">
           <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/statue.png"}
@@ -184,7 +186,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[9%] bottom-[24%] right-[7%] md:w-[7%] md:bottom-[18%] md:right-[7.5%] hover-shake">
+        <div className="absolute w-[9%] bottom-[24%] right-[7%] md:w-[7%] md:bottom-[15%] md:right-[7.5%] lg:w-[10%] lg:bottom-[21%] lg:right-[6%] xl:w-[7%] xl:bottom-[18%] xl:right-[7.5%] hover-shake">
           <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/candle.png"}
@@ -194,7 +196,7 @@ export default function BasementRoom() {
             ></Image>
           </Button>
         </div>
-        <div className="absolute w-[19%] top-[9%] right-[20%] md:w-[14%] md:top-[1%] md:right-[23%] hover-shake">
+        <div className="absolute w-[19%] top-[9%] right-[20%] md:w-[16%] md:top-[-5%] md:right-[22%] lg:w-[18%] lg:top-[6%] lg:right-[21%] xl:w-[14%] xl:top-[1%] xl:right-[23%] hover-shake">
           <Button className="fake-item" onClick={fakeItemPressed}>
             <Image
               src={"/images/painting_circle.png"}
