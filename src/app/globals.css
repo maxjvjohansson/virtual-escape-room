@@ -56,18 +56,22 @@ input[type="number"] {
   }
 
   25% {
-    transform: translateX(-3px);
+    transform: translateX(-4px);
   }
 
   50% {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 
   75% {
-    transform: translateX(-3px);
+    transform: translateX(-4px);
   }
 }
 
+.fake-item:active {
+  animation: shake 150ms ease-in-out;
+}
+
 .hover-shake:hover {
-  animation: shake 200ms ease-in-out;
+  animation: shake 400ms ease-in-out;
 }
