@@ -91,10 +91,6 @@ export default function BasementRoom() {
     if (fakeHideTimerRef.current) clearTimeout(fakeHideTimerRef.current);
   }, []);
 
-  useEffect(() => {
-    console.log(state.code);
-  }, [state.code]);
-
   return (
     <section className="w-screen h-screen overflow-auto touch-pan-x touch-pan-y">
       {showFakePopup && (
