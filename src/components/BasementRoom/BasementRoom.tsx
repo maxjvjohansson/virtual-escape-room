@@ -86,14 +86,7 @@ export default function BasementRoom() {
             fakePopupFade ? "opacity-0" : "opacity-100"
           } pointer-events-none`}
         >
-          <div className="rounded-lg p-4 max-w-xs text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2">
-            <Image
-              src={"/images/inventory.png"}
-              height={720}
-              width={720}
-              alt="Content frame"
-              className="absolute md:w-[20%]"
-            ></Image>
+          <div className="rounded-lg p-10 max-w-lg text-center shadow-lg opacity-100 flex flex-col justify-center items-center gap-2 bg-[url(/images/inventory.png)] bg-contain bg-no-repeat bg-center">
             <p className="text-lg text-orange-300 z-1">
               This item holds no puzzle. Search elsewhere.
             </p>
