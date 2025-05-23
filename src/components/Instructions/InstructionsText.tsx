@@ -7,7 +7,7 @@ import SkullIcon from "@assets/icons/skull_purple.svg";
 export default function InstructionsText() {
   return (
     <article
-      className="w-md md:w-xl mx-auto p-6 md:p-8 border-2 border-purple-500/20 shadow-2xl text-white"
+      className="w-sm md:w-xl mx-auto p-6 md:p-8 border-2 border-purple-500/20 shadow-2xl text-white"
       style={{
         background:
           "linear-gradient(90deg, #111827 0%, #24243B 50%, #18181E 100%)",

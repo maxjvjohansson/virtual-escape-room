@@ -39,7 +39,7 @@ export default function Leaderboard() {
 
   return (
     <section
-      className={`w-md md:w-xl p-6 border-2 border-purple-500/20 shadow-2xl text-white ${cinzel.className}`}
+      className={`w-sm md:w-xl p-6 border-2 border-purple-500/20 shadow-2xl text-white ${cinzel.className}`}
       style={{
         background:
           "linear-gradient(90deg, #111827 0%, #24243B 50%, #18181E 100%)",
