@@ -186,7 +186,7 @@ export default function WordPuzzleModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <section className="p-5 w-screen max-w-4xl mx-auto bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_rgba(253,_250,_247,_0.87)_0%,_#ECE2D4_100%)]">
-        <h2 className="text-4xl mb-4 font-bold text-center font-word-puzzle">
+      <h2 className="text-4xl mb-3 text-center font-word-puzzle w-fit mx-auto px-1 border-b border-black">
           Unscramble the Word
         </h2>
 
