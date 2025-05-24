@@ -2,6 +2,8 @@
 
 _A spooky, interactive escape room built with modern web tech._
 
+<img width="488" alt="The Haunted Escape Logo/StartScreen" src="https://github.com/user-attachments/assets/75c2442f-a43b-4851-847a-4b1a40b0f66f" />
+
 Welcome to **The Haunted Escape**, a browser-based digital escape room game where players must solve interactive puzzles, discover hidden clues, and beat the clock to escape a haunted basement.
 
 This game is part of a larger experience within a **digital amusement park platform**, and is only playable by authenticated users through the [Tivoli web-portal](https://tivoli.yrgobanken.vip/). While the game itself is deployed via **Vercel**, it relies on token-based authentication and backend integration with Tivoli's API.
