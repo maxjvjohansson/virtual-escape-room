@@ -12,29 +12,36 @@
 }
 
 @font-face {
+  font-family: "chalk";
+  src: url("/fonts/Chalkchalk-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
   font-family: "Digital-7";
   src: url("/fonts/digital-7-mono.ttf") format("truetype");
   font-weight: normal;
   font-style: monospace;
+}
 
-  @theme {
-    --font-digital: "Digital-7";
-    --font-word-puzzle: "Word-puzzle";
-    --color-white: #ffffff;
-    --color-black: #000000;
-    --color-dark-gray: #1d1b1e;
-    --color-light-gray: #c3c3ca;
-    --color-light-gray-hover: #9898a0;
-    --color-primary-red: #e62200;
-    --color-primary-red-hover: #971701;
-    --color-primary-green: #008a1e;
-    --color-primary-green-hover: #004d11;
-    --color-primary-purple-light: #8b5aff;
-    --color-primary-purple: #9500be;
-    --color-primary-purple-hover: #580075;
-    --color-primary-yellow: #fbbf24;
-    --color-primary-yellow-hover: #f59e0b;
-  }
+@theme {
+  --font-digital: "Digital-7";
+  --font-word-puzzle: "Word-puzzle";
+  --font-chalk: "chalk";
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-dark-gray: #1d1b1e;
+  --color-light-gray: #c3c3ca;
+  --color-light-gray-hover: #9898a0;
+  --color-primary-red: #e62200;
+  --color-primary-red-hover: #971701;
+  --color-primary-green: #008a1e;
+  --color-primary-green-hover: #004d11;
+  --color-primary-purple-light: #8b5aff;
+  --color-primary-purple: #9500be;
+  --color-primary-purple-hover: #580075;
+  --color-primary-yellow: #fbbf24;
+  --color-primary-yellow-hover: #f59e0b;
 }
 
 body {
