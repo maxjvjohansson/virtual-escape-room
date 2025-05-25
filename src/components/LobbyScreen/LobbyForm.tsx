@@ -88,6 +88,7 @@ export default function LobbyForm() {
         <InputField
           id="playerName"
           placeholder="Enter your name"
+          aria-describedby="playerNameHelp"
           value={playerName}
           onChange={(e) => {
             setPlayerName(e.target.value);
@@ -96,6 +97,10 @@ export default function LobbyForm() {
           className="w-full"
           required
         />
+
+        <p id="playerNameHelp" className="sr-only">
+          Choose a nickname to display on the leaderboard.
+        </p>
       </div>
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">

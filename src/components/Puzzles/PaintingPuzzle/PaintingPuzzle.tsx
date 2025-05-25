@@ -66,7 +66,7 @@ export default function PaintingPuzzle() {
             alt="Frame"
             width={720}
             height={720}
-            className="absolute z-20 h-auto w-68 top-4 pointer-events-none"
+            className="absolute z-20 h-auto w-68 top-11 pointer-events-none"
           />
           <div className="text-center w-full flex items-center flex-col justify-center p-5 h-50 bg-[url(/images/paintingPuzzlePaintings/painting-table.png)] bg-cover bg-no-repeat border-2 border-[#3F2915]">
             <p className="bg-green-100 text-green-800 p-3 mb-4 rounded w-full">
