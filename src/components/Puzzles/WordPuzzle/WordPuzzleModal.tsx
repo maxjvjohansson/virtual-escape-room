@@ -187,18 +187,28 @@ export default function WordPuzzleModal({
       <h2 className="text-4xl mb-3 text-center font-word-puzzle w-fit mx-auto px-1 border-b border-black">
           Unscramble the Word
         </h2>
-
-        {!isSolved ? (
           <>
-            <p className="text-center text-2xl mb-10 font-word-puzzle">What word is this?</p>
+            <p className="text-center text-2xl font-word-puzzle">What word is this?</p>
 
             {errorMessage && (
               <p className="bg-red-100 text-red-800 p-3 mb-4 rounded text-center max-w-fit mx-auto">
                 {errorMessage}
               </p>
             )}
+            {isSolved && (
+              <div className="text-center">
+              <p className="bg-green-100 text-green-800 p-3 mb-4 mt-4 rounded max-w-fit mx-auto">
+                Well done! The right word was{" "}
+                <span className="font-bold">{selectedWord}</span>.
+              </p>
+              <p className="text-xl mb-4">
+                You&apos;ve discovered code digit:{" "}
+                <span className="font-bold text-2xl">C{solutionDigit}</span>
+              </p>
+            </div>
+            )}
 
-            <div className="flex flex-wrap justify-center gap-y-1.5 mb-18">
+            <div className="flex flex-wrap justify-center gap-y-1.5 mb-18 mt-10">
               <DropZone
                 index={0}
                 isActive={dropZoneIndex === 0}
@@ -257,18 +267,6 @@ export default function WordPuzzleModal({
               </form>
             )}
           </>
-        ) : (
-          <div className="text-center">
-            <p className="bg-green-100 text-green-800 p-3 mb-4 rounded max-w-fit mx-auto">
-              Well done! The right word was{" "}
-              <span className="font-bold">{selectedWord}</span>.
-            </p>
-            <p className="text-xl mb-4">
-              You&apos;ve discovered code digit:{" "}
-              <span className="font-bold text-2xl">C{solutionDigit}</span>
-            </p>
-          </div>
-        )}
       </section>
     </Modal>
   );
