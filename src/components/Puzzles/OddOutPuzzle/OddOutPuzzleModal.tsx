@@ -61,7 +61,7 @@ export default function OddOutPuzzleModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <section className="p-8 max-w-4xl mx-auto" 
+      <section className="p-3 md:p-8 md:max-w-4xl mx-auto overflow-auto" 
       style={{
         background:
           "linear-gradient(90deg, #111827 0%, #24243B 50%, #18181E 100%)",
@@ -93,7 +93,7 @@ export default function OddOutPuzzleModal({
                 "
                 aria-label={`Select image: ${image.alt}`}
               >
-                <div className="relative w-36 aspect-[465/771] bg-white">
+                <div className="relative w-26 aspect-[465/771] md:relative md:w-36 md:aspect-[465/771] bg-white">
                   <Image
                     src={image.src}
                     alt={image.alt}
