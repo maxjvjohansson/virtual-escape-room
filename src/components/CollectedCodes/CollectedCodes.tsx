@@ -9,7 +9,7 @@ export default function CollectedCodes() {
   const paintingSolved = state.puzzles.painting;
 
   return (
-    <ul className="flex gap-6 text-white text-xl md:text-4xl tracking-wide">
+    <ul className="flex gap-6 text-white text-9xl md:text-4xl tracking-wide font-chalk">
       {computerSolved && <p>A{code.A}</p>}
       {oddoutSolved && <p>B{code.B}</p>}
       {wordSolved && <p>C{code.C}</p>}
