@@ -45,38 +45,38 @@ export const OddOutSets : OddOutImageSet[] = [
                 isOddOne: false
             }
         ]
-    },/* 
+    },
     {
-        theme: 'Nocturnal animals 2',
+        theme: 'Hard objects',
         images: [
             {
-                id: "bat",
-                src: "/images/OddOut/bat.jpeg",
-                alt: "Bat",
+                id: "cauldron",
+                src: "/images/OddOut/cauldron.png",
+                alt: "Cauldron",
                 isOddOne: false
             },
             {
-                id: "hedgehog",
-                src: "/images/OddOut/hedgehog.jpeg",
-                alt: "Hedgehog",
-                isOddOne: false
-            },
-            {
-                id: "crow",
-                src: "/images/OddOut/crow.jpeg",
-                alt: "crow",
+                id: "eyeball",
+                src: "/images/OddOut/eyeball.png",
+                alt: "Eyeball",
                 isOddOne: true
             },
             {
-                id: "fox",
-                src: "/images/OddOut/fox.jpeg",
-                alt: "Fox",
+                id: "scull",
+                src: "/images/OddOut/scull.png",
+                alt: "Scull",
                 isOddOne: false
             },
             {
-                id: "owl",
-                src: "/images/OddOut/owl.jpeg",
-                alt: "Owl",
+                id: "pumpkin",
+                src: "/images/OddOut/pumpkin.png",
+                alt: "Pumpkin",
+                isOddOne: false
+            },
+            {
+                id: "broom",
+                src: "/images/OddOut/broom.png",
+                alt: "Broom",
                 isOddOne: false
             }
         ]
@@ -85,37 +85,37 @@ export const OddOutSets : OddOutImageSet[] = [
         theme: 'Nocturnal animals 3',
         images: [
             {
-                id: "bat",
-                src: "/images/OddOut/bat.jpeg",
-                alt: "Bat",
+                id: "black-hat",
+                src: "/images/OddOut/black-hat.png",
+                alt: "Black hat",
                 isOddOne: false
             },
             {
-                id: "hedgehog",
-                src: "/images/OddOut/hedgehog.jpeg",
-                alt: "Hedgehog",
+                id: "chalice",
+                src: "/images/OddOut/chalice.png",
+                alt: "Chalice",
                 isOddOne: false
             },
             {
-                id: "crow",
-                src: "/images/OddOut/crow.jpeg",
-                alt: "crow",
+                id: "finger",
+                src: "/images/OddOut/finger.png",
+                alt: "Finger",
                 isOddOne: true
             },
             {
-                id: "fox",
-                src: "/images/OddOut/fox.jpeg",
-                alt: "Fox",
+                id: "candle",
+                src: "/images/OddOut/candle.png",
+                alt: "Candle",
                 isOddOne: false
             },
             {
-                id: "owl",
-                src: "/images/OddOut/owl.jpeg",
-                alt: "Owl",
+                id: "gravestone",
+                src: "/images/OddOut/gravestone.png",
+                alt: "Gravestone",
                 isOddOne: false
             }
         ]
-    } */
+    }
 ];
 
 export function getRandomOddOutSet(): OddOutImageSet {
