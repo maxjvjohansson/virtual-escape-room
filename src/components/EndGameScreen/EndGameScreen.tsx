@@ -207,9 +207,9 @@ export default function EndGameScreen() {
             }
           >
             {loading || isChecking ? null : wouldQualify ? (
-              <CheckBoxIcon />
+              <CheckBoxIcon className="w-5 h-5" />
             ) : (
-              <CrossIcon />
+              <CrossIcon className="w-5 h-5" />
             )}
 
             {loading
