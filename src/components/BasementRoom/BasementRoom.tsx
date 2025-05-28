@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { useGameContext } from "@/lib/context/GameContext";
-import useRouteGuard from "@/hooks/useRouteGuard";
 import Image from "next/image";
 import Button from "@/elements/Button";
 import ComputerPuzzleModal from "../Puzzles/ComputerPuzzle/ComputerPuzzleModal";
@@ -15,8 +14,6 @@ import Inventory from "../Inventory/Inventory";
 import clsx from "clsx";
 
 export default function BasementRoom() {
-  useRouteGuard(true);
-
   const { state } = useGameContext();
   const [showComputer, setShowComputer] = useState(false);
   const [showOddOut, setShowOddOut] = useState(false);

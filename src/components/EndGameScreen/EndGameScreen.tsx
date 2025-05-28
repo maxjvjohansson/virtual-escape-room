@@ -12,7 +12,6 @@ import DoorIcon from "@assets/icons/door_white.svg";
 import CheckBoxIcon from "@assets/icons/checkbox_white.svg";
 import CrossIcon from "@assets/icons/close_x_white.svg";
 import StampAward from "../StampAward/StampAward";
-import useRouteGuard from "@/hooks/useRouteGuard";
 
 type Score = {
   player_name: string;
@@ -20,8 +19,6 @@ type Score = {
 };
 
 export default function EndGameScreen() {
-  useRouteGuard(false, true);
-
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
